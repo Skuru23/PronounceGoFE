@@ -23,8 +23,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme.light(),
-      darkTheme: theme.dark(),
-      themeMode: ThemeMode.system,
+      // darkTheme: theme.dark(),
+      // themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );

@@ -14,22 +14,34 @@ import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:pronunceGo/src/date_serializer.dart';
 import 'package:pronunceGo/src/model/date.dart';
 
+import 'package:pronunceGo/src/model/error_response400.dart';
+import 'package:pronunceGo/src/model/error_response401.dart';
+import 'package:pronunceGo/src/model/error_response403.dart';
+import 'package:pronunceGo/src/model/get_me_response.dart';
 import 'package:pronunceGo/src/model/http_validation_error.dart';
 import 'package:pronunceGo/src/model/login_request.dart';
-import 'package:pronunceGo/src/model/login_response.dart';
+import 'package:pronunceGo/src/model/role_code.dart';
 import 'package:pronunceGo/src/model/signup_request.dart';
+import 'package:pronunceGo/src/model/token_response.dart';
 import 'package:pronunceGo/src/model/validation_error.dart';
 import 'package:pronunceGo/src/model/validation_error_loc_inner.dart';
+import 'package:pronunceGo/src/model/word_detail_response.dart';
 
 part 'serializers.g.dart';
 
 @SerializersFor([
+  ErrorResponse400,
+  ErrorResponse401,
+  ErrorResponse403,
+  GetMeResponse,
   HTTPValidationError,
   LoginRequest,
-  LoginResponse,
+  RoleCode,
   SignupRequest,
+  TokenResponse,
   ValidationError,
   ValidationErrorLocInner,
+  WordDetailResponse,
 ])
 Serializers serializers = (_$serializers.toBuilder()
       ..add(const OneOfSerializer())

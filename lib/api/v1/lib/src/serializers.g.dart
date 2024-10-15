@@ -7,12 +7,18 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(ErrorResponse400.serializer)
+      ..add(ErrorResponse401.serializer)
+      ..add(ErrorResponse403.serializer)
+      ..add(GetMeResponse.serializer)
       ..add(HTTPValidationError.serializer)
       ..add(LoginRequest.serializer)
-      ..add(LoginResponse.serializer)
+      ..add(RoleCode.serializer)
       ..add(SignupRequest.serializer)
+      ..add(TokenResponse.serializer)
       ..add(ValidationError.serializer)
       ..add(ValidationErrorLocInner.serializer)
+      ..add(WordDetailResponse.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ValidationError)]),
           () => new ListBuilder<ValidationError>())

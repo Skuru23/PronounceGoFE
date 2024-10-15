@@ -65,22 +65,38 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 [*AuthApi*](doc/AuthApi.md) | [**loginApiV1LoginPost**](doc/AuthApi.md#loginapiv1loginpost) | **POST** /api/v1/login | Login
+[*AuthApi*](doc/AuthApi.md) | [**meApiV1MeGet**](doc/AuthApi.md#meapiv1meget) | **GET** /api/v1/me | Me
+[*AuthApi*](doc/AuthApi.md) | [**refreshTokenApiV1RefreshTokenGet**](doc/AuthApi.md#refreshtokenapiv1refreshtokenget) | **GET** /api/v1/refresh-token | Refresh Token
 [*AuthApi*](doc/AuthApi.md) | [**signupApiV1SignupPost**](doc/AuthApi.md#signupapiv1signuppost) | **POST** /api/v1/signup | Signup
+[*WordsApi*](doc/WordsApi.md) | [**getWordDetailApiV1WordsWordIdGet**](doc/WordsApi.md#getworddetailapiv1wordswordidget) | **GET** /api/v1/words/{word_id} | Get Word Detail
 
 
 ## Documentation For Models
 
+ - [ErrorResponse400](doc/ErrorResponse400.md)
+ - [ErrorResponse401](doc/ErrorResponse401.md)
+ - [ErrorResponse403](doc/ErrorResponse403.md)
+ - [GetMeResponse](doc/GetMeResponse.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [LoginRequest](doc/LoginRequest.md)
- - [LoginResponse](doc/LoginResponse.md)
+ - [RoleCode](doc/RoleCode.md)
  - [SignupRequest](doc/SignupRequest.md)
+ - [TokenResponse](doc/TokenResponse.md)
  - [ValidationError](doc/ValidationError.md)
  - [ValidationErrorLocInner](doc/ValidationErrorLocInner.md)
+ - [WordDetailResponse](doc/WordDetailResponse.md)
 
 
 ## Documentation For Authorization
 
-Endpoints do not require authorization.
+
+Authentication schemes defined for the API:
+### OAuth2PasswordBearer
+
+- **Type**: OAuth
+- **Flow**: password
+- **Authorization URL**: 
+- **Scopes**: N/A
 
 
 ## Author

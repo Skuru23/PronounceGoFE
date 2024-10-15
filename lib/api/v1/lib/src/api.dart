@@ -10,6 +10,7 @@ import 'package:pronunceGo/src/auth/basic_auth.dart';
 import 'package:pronunceGo/src/auth/bearer_auth.dart';
 import 'package:pronunceGo/src/auth/oauth.dart';
 import 'package:pronunceGo/src/api/auth_api.dart';
+import 'package:pronunceGo/src/api/words_api.dart';
 
 class PronunceGo {
   static const String basePath = r'http://localhost';
@@ -80,5 +81,11 @@ class PronunceGo {
   /// by doing that all interceptors will not be executed
   AuthApi getAuthApi() {
     return AuthApi(dio, serializers);
+  }
+
+  /// Get WordsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  WordsApi getWordsApi() {
+    return WordsApi(dio, serializers);
   }
 }

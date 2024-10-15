@@ -1,0 +1,40 @@
+import 'package:test/test.dart';
+import 'package:pronunceGo/pronunceGo.dart';
+
+// tests for WordDetailResponse
+void main() {
+  final instance = WordDetailResponseBuilder();
+  // TODO add properties to the builder and call build()
+
+  group(WordDetailResponse, () {
+    // int id
+    test('to test the property `id`', () async {
+      // TODO
+    });
+
+    // String word
+    test('to test the property `word`', () async {
+      // TODO
+    });
+
+    // String ipa
+    test('to test the property `ipa`', () async {
+      // TODO
+    });
+
+    // String mean
+    test('to test the property `mean`', () async {
+      // TODO
+    });
+
+    // int difficultLevel
+    test('to test the property `difficultLevel`', () async {
+      // TODO
+    });
+
+    // String pathOfSpeech
+    test('to test the property `pathOfSpeech`', () async {
+      // TODO
+    });
+  });
+}

@@ -39,6 +39,7 @@ dependencies:
   build_runner: ^2.0.0
   google_fonts: ^6.2.0
   flutter_native_splash: ^2.2.7
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,7 @@ flutter:
   assets:
     - assets/images/splash_icon.png
     - assets/images/splash_image.png
+    - assets/images/app_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

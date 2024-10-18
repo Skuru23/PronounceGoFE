@@ -15,7 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     startAnimation();
   }
 
@@ -28,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Stack(
             children: [
               AnimatedPositioned(
-                  duration: const Duration(microseconds: 1600),
+                  duration: const Duration(milliseconds: 2000),
                   top: animated ? 0 : -30,
                   left: animated ? 0 : -30,
                   child: const Image(
@@ -83,11 +82,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future startAnimation() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 5000));
     setState(() {
       animated = true;
     });
-    await Future.delayed(Duration(milliseconds: 5000));
+    await Future.delayed(const Duration(milliseconds: 5000));
     // Navigatior.
   }
 }

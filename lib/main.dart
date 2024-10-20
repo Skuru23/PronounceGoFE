@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:test_login/screens/splash_screen/splash_screen.dart';
-import 'package:test_login/screens/welcome_screen/welcome_screen.dart';
-import 'package:test_login/theme/theme.dart';
+import 'package:pronounce_go/screens/welcome_screen/welcome_screen.dart';
+import 'package:pronounce_go/theme/theme.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 

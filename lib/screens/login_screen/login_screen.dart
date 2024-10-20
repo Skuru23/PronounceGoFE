@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test_login/responsive/responsive.dart';
-import 'package:test_login/screens/login_screen/login_form.dart';
-import 'package:test_login/screens/login_screen/login_header.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
+import 'package:pronounce_go/screens/login_screen/login_form.dart';
+import 'package:pronounce_go/screens/login_screen/login_header.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

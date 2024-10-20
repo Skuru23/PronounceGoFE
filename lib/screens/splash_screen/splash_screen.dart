@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_login/constants/size.dart';
-import 'package:test_login/constants/text_strings.dart';
-import 'package:test_login/responsive/responsive.dart';
+import 'package:pronounce_go/constants/size.dart';
+import 'package:pronounce_go/constants/text_strings.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

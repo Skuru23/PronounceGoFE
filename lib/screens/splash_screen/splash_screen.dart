@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pronounce_go/constants/size.dart';
 import 'package:pronounce_go/constants/text_strings.dart';
+import 'package:pronounce_go/screens/welcome_screen/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -86,6 +88,6 @@ class _SplashScreenState extends State<SplashScreen> {
       animated = true;
     });
     await Future.delayed(const Duration(milliseconds: 5000));
-    // Navigatior.
+    Get.to(() => const WelcomeScreen());
   }
 }

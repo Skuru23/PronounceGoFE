@@ -44,6 +44,7 @@ dependencies:
   dio: ^5.7.0
   pronounce_go_api:
     path: api/v1
+  speech_to_text: ^7.0.0
 
 dev_dependencies:
   flutter_test:
@@ -59,13 +60,13 @@ dev_dependencies:
 flutter_native_splash:
   color: "#f7f6f1"
   color_dark: "#272727"
-  image: assets/images/splash_image.png
-  image_dark: assets/images/splash_image.png
+  image: assets/images/app_icon.png
+  image_dark: assets/images/app_icon.png
 
   android_12:
-    image: assets/images/splash_image.png
+    image: assets/images/app_icon.png
     icon_background_color: "#f7f6f1"
-    image_dark: assets/images/splash_image.png
+    image_dark: assets/images/app_icon.png
     icon_background_color_dark: "#272727"
 
 # For information on the generic Dart part of this file, see the

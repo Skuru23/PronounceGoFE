@@ -10,6 +10,8 @@ import 'package:pronounce_go_api/src/auth/basic_auth.dart';
 import 'package:pronounce_go_api/src/auth/bearer_auth.dart';
 import 'package:pronounce_go_api/src/auth/oauth.dart';
 import 'package:pronounce_go_api/src/api/auth_api.dart';
+import 'package:pronounce_go_api/src/api/groups_api.dart';
+import 'package:pronounce_go_api/src/api/lessons_api.dart';
 import 'package:pronounce_go_api/src/api/words_api.dart';
 
 class PronounceGoApi {
@@ -81,6 +83,18 @@ class PronounceGoApi {
   /// by doing that all interceptors will not be executed
   AuthApi getAuthApi() {
     return AuthApi(dio, serializers);
+  }
+
+  /// Get GroupsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  GroupsApi getGroupsApi() {
+    return GroupsApi(dio, serializers);
+  }
+
+  /// Get LessonsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  LessonsApi getLessonsApi() {
+    return LessonsApi(dio, serializers);
   }
 
   /// Get WordsApi instance, base route and serializer can be overridden by a given but be careful,

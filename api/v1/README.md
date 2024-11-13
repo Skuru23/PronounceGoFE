@@ -68,14 +68,24 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**meApiV1MeGet**](doc/AuthApi.md#meapiv1meget) | **GET** /api/v1/me | Me
 [*AuthApi*](doc/AuthApi.md) | [**refreshTokenApiV1RefreshTokenGet**](doc/AuthApi.md#refreshtokenapiv1refreshtokenget) | **GET** /api/v1/refresh-token | Refresh Token
 [*AuthApi*](doc/AuthApi.md) | [**signupApiV1SignupPost**](doc/AuthApi.md#signupapiv1signuppost) | **POST** /api/v1/signup | Signup
+[*GroupsApi*](doc/GroupsApi.md) | [**createGroupApiV1GroupsGet**](doc/GroupsApi.md#creategroupapiv1groupsget) | **GET** /api/v1/groups | Create Group
+[*GroupsApi*](doc/GroupsApi.md) | [**createGroupApiV1GroupsPost**](doc/GroupsApi.md#creategroupapiv1groupspost) | **POST** /api/v1/groups | Create Group
+[*LessonsApi*](doc/LessonsApi.md) | [**createPersonLessonApiV1LessonsPost**](doc/LessonsApi.md#createpersonlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Person Lesson
+[*WordsApi*](doc/WordsApi.md) | [**checkPronounceApiV1WordsCheckPost**](doc/WordsApi.md#checkpronounceapiv1wordscheckpost) | **POST** /api/v1/words/check | Check Pronounce
 [*WordsApi*](doc/WordsApi.md) | [**getWordDetailApiV1WordsWordIdGet**](doc/WordsApi.md#getworddetailapiv1wordswordidget) | **GET** /api/v1/words/{word_id} | Get Word Detail
 
 
 ## Documentation For Models
 
+ - [CheckPronounceRequest](doc/CheckPronounceRequest.md)
+ - [CheckPronounceResponse](doc/CheckPronounceResponse.md)
+ - [CreateGroupRequest](doc/CreateGroupRequest.md)
+ - [CreatePersonLessonRequest](doc/CreatePersonLessonRequest.md)
  - [ErrorResponse400](doc/ErrorResponse400.md)
  - [ErrorResponse401](doc/ErrorResponse401.md)
  - [ErrorResponse403](doc/ErrorResponse403.md)
+ - [GetGroupItem](doc/GetGroupItem.md)
+ - [GetGroupsResponse](doc/GetGroupsResponse.md)
  - [GetMeResponse](doc/GetMeResponse.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [LoginRequest](doc/LoginRequest.md)

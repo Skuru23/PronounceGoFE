@@ -31,7 +31,7 @@ class _LoginFormState extends State<LoginForm> {
     try {
       final AuthRepository authRepository = AuthRepository();
       var response = await authRepository.login(_email, _password);
-      // Get.to(() => HomeScreen(response: response));
+      if (response.statusCode == 200) Get.to(() => const HomeScreen());
     } catch (e) {
       print('Login failed: $e');
     }

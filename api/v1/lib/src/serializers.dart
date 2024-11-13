@@ -14,9 +14,15 @@ import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:pronounce_go_api/src/date_serializer.dart';
 import 'package:pronounce_go_api/src/model/date.dart';
 
+import 'package:pronounce_go_api/src/model/check_pronounce_request.dart';
+import 'package:pronounce_go_api/src/model/check_pronounce_response.dart';
+import 'package:pronounce_go_api/src/model/create_group_request.dart';
+import 'package:pronounce_go_api/src/model/create_person_lesson_request.dart';
 import 'package:pronounce_go_api/src/model/error_response400.dart';
 import 'package:pronounce_go_api/src/model/error_response401.dart';
 import 'package:pronounce_go_api/src/model/error_response403.dart';
+import 'package:pronounce_go_api/src/model/get_group_item.dart';
+import 'package:pronounce_go_api/src/model/get_groups_response.dart';
 import 'package:pronounce_go_api/src/model/get_me_response.dart';
 import 'package:pronounce_go_api/src/model/http_validation_error.dart';
 import 'package:pronounce_go_api/src/model/login_request.dart';
@@ -30,9 +36,15 @@ import 'package:pronounce_go_api/src/model/word_detail_response.dart';
 part 'serializers.g.dart';
 
 @SerializersFor([
+  CheckPronounceRequest,
+  CheckPronounceResponse,
+  CreateGroupRequest,
+  CreatePersonLessonRequest,
   ErrorResponse400,
   ErrorResponse401,
   ErrorResponse403,
+  GetGroupItem,
+  GetGroupsResponse,
   GetMeResponse,
   HTTPValidationError,
   LoginRequest,

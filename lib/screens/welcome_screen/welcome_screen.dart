@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pronounce_go/constants/text_strings.dart';
 import 'package:pronounce_go/screens/login_screen/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -20,14 +21,13 @@ class WelcomeScreen extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "Chao iem",
+                  appName,
                   style: Theme.of(context)
                       .textTheme
                       .headlineSmall
                       ?.copyWith(fontWeight: FontWeight.w700),
                 ),
-                Text("Welcome to silver wolf game",
-                    style: Theme.of(context).textTheme.bodyMedium),
+                Text(appTagLine, style: Theme.of(context).textTheme.bodyMedium),
               ],
             ),
             Row(

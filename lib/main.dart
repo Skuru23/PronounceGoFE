@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:pronounce_go/screens/home_screen/home_screen.dart';
 import 'package:pronounce_go/screens/splash_screen/splash_screen.dart';
 import 'package:pronounce_go/theme/theme.dart';
 
@@ -29,7 +30,7 @@ class App extends StatelessWidget {
       darkTheme: theme.dark(),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const HomeScreen(),
     );
   }
 }

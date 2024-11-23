@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
+import 'package:pronounce_go/screens/group_detail/group_detail.dart';
 import 'package:pronounce_go/screens/group_screen/group_screen.dart';
 
 class GroupCard extends StatelessWidget {
@@ -52,14 +55,26 @@ class GroupCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 8.0),
-                    Row(
-                      children: [
-                        Text('Giáo đồ: ${group.totalMembers}'),
-                        SizedBox(width: 10),
-                        Text('Khóa học: ${group.totalCourses}'),
-                        SizedBox(width: 10),
-                        Text('Lượt thích: ${group.totalLikes}'),
-                      ],
+                    Responsive(
+                      mobile: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Giáo đồ: ${group.totalMembers}'),
+                          SizedBox(height: 10),
+                          Text('Khóa học: ${group.totalCourses}'),
+                          SizedBox(height: 10),
+                          Text('Lượt thích: ${group.totalLikes}'),
+                        ],
+                      ),
+                      desktop: Row(
+                        children: [
+                          Text('Giáo đồ: ${group.totalMembers}'),
+                          SizedBox(width: 10),
+                          Text('Khóa học: ${group.totalCourses}'),
+                          SizedBox(width: 10),
+                          Text('Lượt thích: ${group.totalLikes}'),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -74,9 +89,7 @@ class GroupCard extends StatelessWidget {
                     minimumSize:
                         Size(120, 36), // Set the width and height of the button
                   ),
-                  onPressed: () {
-                    // Handle join button press
-                  },
+                  onPressed: () {},
                   child: Text('Join'),
                 ),
                 SizedBox(height: 8.0),
@@ -87,7 +100,9 @@ class GroupCard extends StatelessWidget {
                     minimumSize:
                         Size(120, 36), // Set the width and height of the button
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(GroupDetail(group: group));
+                  },
                   child: Text('See Group'),
                 ),
               ],

@@ -10,6 +10,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createPersonLessonApiV1LessonsPost**](LessonsApi.md#createpersonlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Person Lesson
+[**listingLessonsApiV1LessonsGet**](LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
 
 
 # **createPersonLessonApiV1LessonsPost**
@@ -50,6 +51,53 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listingLessonsApiV1LessonsGet**
+> ListLessonsResponse listingLessonsApiV1LessonsGet(isPublic, userOwnerId, groupOwnerId, keyword)
+
+Listing Lessons
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+
+final api = PronounceGoApi().getLessonsApi();
+final bool isPublic = true; // bool | 
+final String userOwnerId = userOwnerId_example; // String | 
+final String groupOwnerId = groupOwnerId_example; // String | 
+final String keyword = keyword_example; // String | 
+
+try {
+    final response = api.listingLessonsApiV1LessonsGet(isPublic, userOwnerId, groupOwnerId, keyword);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling LessonsApi->listingLessonsApiV1LessonsGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **isPublic** | **bool**|  | [optional] 
+ **userOwnerId** | **String**|  | [optional] 
+ **groupOwnerId** | **String**|  | [optional] 
+ **keyword** | **String**|  | [optional] 
+
+### Return type
+
+[**ListLessonsResponse**](ListLessonsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

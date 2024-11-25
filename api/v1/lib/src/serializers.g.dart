@@ -18,16 +18,23 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GetGroupsResponse.serializer)
       ..add(GetMeResponse.serializer)
       ..add(HTTPValidationError.serializer)
+      ..add(ListLessonsItem.serializer)
+      ..add(ListLessonsResponse.serializer)
+      ..add(ListingWordResponse.serializer)
       ..add(LoginRequest.serializer)
       ..add(RoleCode.serializer)
       ..add(SignupRequest.serializer)
       ..add(TokenResponse.serializer)
       ..add(ValidationError.serializer)
       ..add(ValidationErrorLocInner.serializer)
+      ..add(WordBase.serializer)
       ..add(WordDetailResponse.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(GetGroupItem)]),
           () => new ListBuilder<GetGroupItem>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(ListLessonsItem)]),
+          () => new ListBuilder<ListLessonsItem>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ValidationError)]),
           () => new ListBuilder<ValidationError>())
@@ -35,6 +42,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               BuiltList, const [const FullType(ValidationErrorLocInner)]),
           () => new ListBuilder<ValidationErrorLocInner>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(WordBase)]),
+          () => new ListBuilder<WordBase>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())

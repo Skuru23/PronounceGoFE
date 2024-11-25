@@ -17,4 +17,31 @@ class WordRepository {
 
     return response;
   }
+
+  Future<Response> getWord(int wordId) async {
+    final WordsApi wordsApi = api.getWordsApi();
+    Response<WordDetailResponse> response =
+        await wordsApi.getWordDetailApiV1WordsWordIdGet(wordId: wordId);
+
+    return response;
+  }
+
+  Future<Response> listWords(
+      {int? total, String? keyword, int? difficultLevel}) async {
+    final WordsApi wordsApi = api.getWordsApi();
+    Map<String, dynamic> queryParams = {
+      if (keyword != null) 'keyword': keyword,
+      if (total != null) 'total': total.toString(),
+      if (difficultLevel != null) 'difficult_level': difficultLevel.toString(),
+    };
+
+    Response<ListingWordResponse> response =
+        await wordsApi.listingWordApiV1WordsGet(
+      keyword: keyword,
+      total: queryParams['total'],
+      difficultLevel: queryParams['difficult_level'],
+    );
+
+    return response;
+  }
 }

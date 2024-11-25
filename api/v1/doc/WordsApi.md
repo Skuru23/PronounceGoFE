@@ -11,6 +11,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**checkPronounceApiV1WordsCheckPost**](WordsApi.md#checkpronounceapiv1wordscheckpost) | **POST** /api/v1/words/check | Check Pronounce
 [**getWordDetailApiV1WordsWordIdGet**](WordsApi.md#getworddetailapiv1wordswordidget) | **GET** /api/v1/words/{word_id} | Get Word Detail
+[**listingWordApiV1WordsGet**](WordsApi.md#listingwordapiv1wordsget) | **GET** /api/v1/words | Listing Word
 
 
 # **checkPronounceApiV1WordsCheckPost**
@@ -91,6 +92,51 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listingWordApiV1WordsGet**
+> ListingWordResponse listingWordApiV1WordsGet(keyword, total, difficultLevel)
+
+Listing Word
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+
+final api = PronounceGoApi().getWordsApi();
+final String keyword = keyword_example; // String | 
+final String total = total_example; // String | 
+final String difficultLevel = difficultLevel_example; // String | 
+
+try {
+    final response = api.listingWordApiV1WordsGet(keyword, total, difficultLevel);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling WordsApi->listingWordApiV1WordsGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **keyword** | **String**|  | [optional] 
+ **total** | **String**|  | [optional] 
+ **difficultLevel** | **String**|  | [optional] 
+
+### Return type
+
+[**ListingWordResponse**](ListingWordResponse.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

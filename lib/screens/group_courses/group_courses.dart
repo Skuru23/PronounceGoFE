@@ -16,7 +16,7 @@ class Course {
 }
 
 class GroupCourses extends StatelessWidget {
-  final List<Course> publicCourses = [
+  static final List<Course> publicCourses = [
     Course(
         name: 'course 1',
         creator: 'abc',
@@ -123,7 +123,7 @@ class GroupCourses extends StatelessWidget {
         totalLikes: 300,
         description: 'For advanced'),
   ];
-  final List<Course> privateCourses = [
+  static final List<Course> privateCourses = [
     Course(
         name: 'course 4',
         creator: 'Dinh Long ga 1',

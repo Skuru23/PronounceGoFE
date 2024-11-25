@@ -14,6 +14,7 @@ import 'package:pronounce_go_api/src/model/error_response400.dart';
 import 'package:pronounce_go_api/src/model/error_response401.dart';
 import 'package:pronounce_go_api/src/model/error_response403.dart';
 import 'package:pronounce_go_api/src/model/http_validation_error.dart';
+import 'package:pronounce_go_api/src/model/listing_word_response.dart';
 import 'package:pronounce_go_api/src/model/word_detail_response.dart';
 
 class WordsApi {
@@ -197,6 +198,96 @@ class WordsApi {
     }
 
     return Response<WordDetailResponse>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Listing Word
+  ///
+  ///
+  /// Parameters:
+  /// * [keyword]
+  /// * [total]
+  /// * [difficultLevel]
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [ListingWordResponse] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<ListingWordResponse>> listingWordApiV1WordsGet({
+    String? keyword,
+    String? total,
+    String? difficultLevel,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/api/v1/words';
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'keyword':
+          encodeQueryParameter(_serializers, keyword, const FullType(String)),
+      r'total':
+          encodeQueryParameter(_serializers, total, const FullType(String)),
+      r'difficult_level': encodeQueryParameter(
+          _serializers, difficultLevel, const FullType(String)),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    ListingWordResponse? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(ListingWordResponse),
+            ) as ListingWordResponse;
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<ListingWordResponse>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

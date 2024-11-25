@@ -25,12 +25,16 @@ import 'package:pronounce_go_api/src/model/get_group_item.dart';
 import 'package:pronounce_go_api/src/model/get_groups_response.dart';
 import 'package:pronounce_go_api/src/model/get_me_response.dart';
 import 'package:pronounce_go_api/src/model/http_validation_error.dart';
+import 'package:pronounce_go_api/src/model/list_lessons_item.dart';
+import 'package:pronounce_go_api/src/model/list_lessons_response.dart';
+import 'package:pronounce_go_api/src/model/listing_word_response.dart';
 import 'package:pronounce_go_api/src/model/login_request.dart';
 import 'package:pronounce_go_api/src/model/role_code.dart';
 import 'package:pronounce_go_api/src/model/signup_request.dart';
 import 'package:pronounce_go_api/src/model/token_response.dart';
 import 'package:pronounce_go_api/src/model/validation_error.dart';
 import 'package:pronounce_go_api/src/model/validation_error_loc_inner.dart';
+import 'package:pronounce_go_api/src/model/word_base.dart';
 import 'package:pronounce_go_api/src/model/word_detail_response.dart';
 
 part 'serializers.g.dart';
@@ -47,12 +51,16 @@ part 'serializers.g.dart';
   GetGroupsResponse,
   GetMeResponse,
   HTTPValidationError,
+  ListLessonsItem,
+  ListLessonsResponse,
+  ListingWordResponse,
   LoginRequest,
   RoleCode,
   SignupRequest,
   TokenResponse,
   ValidationError,
   ValidationErrorLocInner,
+  WordBase,
   WordDetailResponse,
 ])
 Serializers serializers = (_$serializers.toBuilder()

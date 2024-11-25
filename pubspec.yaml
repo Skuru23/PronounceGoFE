@@ -45,6 +45,8 @@ dependencies:
   pronounce_go_api:
     path: api/v1
   speech_to_text: ^7.0.0
+  dropdown_search: ^6.0.1
+  fluttertoast: ^8.2.8
 
 dev_dependencies:
   flutter_test:

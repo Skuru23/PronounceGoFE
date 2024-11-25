@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/constants/text_strings.dart';
 import 'package:pronounce_go/screens/login_screen/login_screen.dart';
+import 'package:pronounce_go/screens/signup_screen/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -48,7 +49,9 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 Expanded(
                     child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => SignUpScreen());
+                  },
                   child: Text("Signup"),
                   style: OutlinedButton.styleFrom(
                       elevation: 0,

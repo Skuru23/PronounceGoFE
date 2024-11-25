@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 TextTheme createTextTheme(
     BuildContext context, String bodyFontString, String displayFontString) {
   TextTheme baseTextTheme = Theme.of(context).textTheme;
-  TextTheme bodyTextTheme = GoogleFonts.getTextTheme(bodyFontString, baseTextTheme);
+  TextTheme bodyTextTheme =
+      GoogleFonts.getTextTheme(bodyFontString, baseTextTheme);
   TextTheme displayTextTheme =
       GoogleFonts.getTextTheme(displayFontString, baseTextTheme);
   TextTheme textTheme = displayTextTheme.copyWith(
@@ -16,4 +18,34 @@ TextTheme createTextTheme(
     labelSmall: bodyTextTheme.labelSmall,
   );
   return textTheme;
+}
+
+void showToast(String msg, String type) {
+  Color backgroundColor;
+  switch (type) {
+    case 'success':
+      backgroundColor = Colors.green;
+      break;
+    case 'error':
+      backgroundColor = Colors.red;
+      break;
+    case 'warning':
+      backgroundColor = Colors.orange;
+      break;
+    default:
+      backgroundColor = Colors.grey;
+  }
+
+  try {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: backgroundColor,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  } catch (e) {
+    print("Error showing toast: $e");
+  }
 }

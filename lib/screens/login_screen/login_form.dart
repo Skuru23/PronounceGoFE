@@ -16,6 +16,7 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   String _email = 'truong@gmail.com';
   String _password = '123456';
+  bool _isPasswordVisible = false;
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
@@ -74,8 +75,16 @@ class _LoginFormState extends State<LoginForm> {
                     hintText: "Password",
                     border: OutlineInputBorder(),
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.remove_red_eye_sharp),
-                      onPressed: () {},
+                      icon: Icon(
+                        _isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
                     )),
                 initialValue: _password,
                 validator: (value) {
@@ -84,7 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                   }
                   return null;
                 },
-                obscureText: true,
+                obscureText: !_isPasswordVisible,
                 onSaved: (value) {
                   _password = value ?? '';
                 },

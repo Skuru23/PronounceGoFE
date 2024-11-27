@@ -15,6 +15,7 @@ part 'get_group_item.g.dart';
 /// * [name]
 /// * [description]
 /// * [ownerId]
+/// * [creator]
 /// * [totalMember]
 /// * [totalLesson]
 /// * [totalLike]
@@ -32,6 +33,9 @@ abstract class GetGroupItem
 
   @BuiltValueField(wireName: r'owner_id')
   int? get ownerId;
+
+  @BuiltValueField(wireName: r'creator')
+  String get creator;
 
   @BuiltValueField(wireName: r'total_member')
   int? get totalMember;
@@ -96,6 +100,11 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
             object.ownerId,
             specifiedType: const FullType.nullable(int),
           );
+    yield r'creator';
+    yield serializers.serialize(
+      object.creator,
+      specifiedType: const FullType(String),
+    );
     if (object.totalMember != null) {
       yield r'total_member';
       yield serializers.serialize(
@@ -173,6 +182,13 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
           ) as int?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
+          break;
+        case r'creator':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.creator = valueDes;
           break;
         case r'total_member':
           final valueDes = serializers.deserialize(

@@ -44,16 +44,14 @@ class _CourseScreenState extends State<CourseScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Courses'),
-      ),
       body: Column(
         children: [
+          SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Search courses...',
+                hintText: 'Tìm kiếm bài học',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -80,7 +78,13 @@ class _CourseScreenState extends State<CourseScreen> {
                   MaterialPageRoute(builder: (context) => MyCourseScreen()),
                 );
               },
-              child: Text('Go to My Courses'),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'Bài học của tôi',
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           ),
         ],

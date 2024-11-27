@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:pronounce_go/screens/group_courses/group_courses.dart';
 import 'package:pronounce_go/screens/group_members/group_members.dart';
 import 'package:pronounce_go/screens/group_screen/group_screen.dart';
+import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class GroupDetail extends StatelessWidget {
-  final Group group;
+  final GetGroupItem group;
 
   const GroupDetail({super.key, required this.group});
 
@@ -15,7 +16,7 @@ class GroupDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(group.name),
+        title: Text(group.name ?? 'No Name'),
       ),
       body: Column(
         children: [
@@ -35,8 +36,8 @@ class GroupDetail extends StatelessWidget {
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: NetworkImage(group
-                              .groupImageUrl), // Assuming group has an imageUrl property
+                          image: NetworkImage(
+                              "https://i.redd.it/14gnqv8rtl9b1.jpg"), // Assuming group has an imageUrl property
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -44,7 +45,7 @@ class GroupDetail extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0),
                   Text(
-                    group.name,
+                    group.name ?? 'No Name',
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
@@ -52,7 +53,7 @@ class GroupDetail extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Giáo chủ: ${group.owner}',
+                    'Giáo chủ: ${group.creator ?? 'Unknown Owner'}',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w400,
@@ -60,21 +61,21 @@ class GroupDetail extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Giáo đồ: ${group.totalMembers}',
+                    'Giáo đồ: ${group.totalMember}',
                     style: TextStyle(
                       fontSize: 16.0,
                     ),
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Khóa học: ${group.totalCourses}',
+                    'Khóa học: ${group.totalLesson}',
                     style: TextStyle(
                       fontSize: 16.0,
                     ),
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Lượt thích: ${group.totalLikes}',
+                    'Lượt thích: ${group.totalLike}',
                     style: TextStyle(
                       fontSize: 16.0,
                     ),

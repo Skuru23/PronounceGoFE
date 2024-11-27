@@ -24,12 +24,11 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: theme.secondaryContainer,
           indicatorColor: theme.surface,
           destinations: [
-            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.book), label: "Training"),
-            NavigationDestination(icon: Icon(Icons.group), label: "Group"),
-            NavigationDestination(
-                icon: Icon(Icons.person), label: "My progress"),
-            NavigationDestination(icon: Icon(Icons.settings), label: "Settings")
+            NavigationDestination(icon: Icon(Icons.home), label: "Trang chủ"),
+            NavigationDestination(icon: Icon(Icons.book), label: "Bài học"),
+            NavigationDestination(icon: Icon(Icons.group), label: "Nhóm"),
+            NavigationDestination(icon: Icon(Icons.person), label: "Đang học"),
+            NavigationDestination(icon: Icon(Icons.settings), label: "Cá nhân")
           ],
         ),
       ),

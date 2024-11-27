@@ -27,16 +27,16 @@ class CourseCard extends StatelessWidget {
         subtitle: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Likes: ${course.totalLike}'),
+            Text('Số likes: ${course.totalLike}'),
             SizedBox(width: 16.0),
-            Text('Creator: ${course.creator}'),
+            Text('Tác giả: ${course.creator}'),
           ],
         ),
         trailing: ElevatedButton(
           onPressed: () {
             Get.to(() => CourseDetail());
           },
-          child: Text('See details'),
+          child: Text('Xem chi tiết'),
         ),
       ),
     );

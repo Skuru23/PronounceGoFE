@@ -16,6 +16,8 @@ class _$GetGroupItem extends GetGroupItem {
   @override
   final int? ownerId;
   @override
+  final String creator;
+  @override
   final int? totalMember;
   @override
   final int? totalLesson;
@@ -30,10 +32,13 @@ class _$GetGroupItem extends GetGroupItem {
       this.name,
       this.description,
       this.ownerId,
+      required this.creator,
       this.totalMember,
       this.totalLesson,
       this.totalLike})
-      : super._();
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(creator, r'GetGroupItem', 'creator');
+  }
 
   @override
   GetGroupItem rebuild(void Function(GetGroupItemBuilder) updates) =>
@@ -50,6 +55,7 @@ class _$GetGroupItem extends GetGroupItem {
         name == other.name &&
         description == other.description &&
         ownerId == other.ownerId &&
+        creator == other.creator &&
         totalMember == other.totalMember &&
         totalLesson == other.totalLesson &&
         totalLike == other.totalLike;
@@ -62,6 +68,7 @@ class _$GetGroupItem extends GetGroupItem {
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, ownerId.hashCode);
+    _$hash = $jc(_$hash, creator.hashCode);
     _$hash = $jc(_$hash, totalMember.hashCode);
     _$hash = $jc(_$hash, totalLesson.hashCode);
     _$hash = $jc(_$hash, totalLike.hashCode);
@@ -76,6 +83,7 @@ class _$GetGroupItem extends GetGroupItem {
           ..add('name', name)
           ..add('description', description)
           ..add('ownerId', ownerId)
+          ..add('creator', creator)
           ..add('totalMember', totalMember)
           ..add('totalLesson', totalLesson)
           ..add('totalLike', totalLike))
@@ -103,6 +111,10 @@ class GetGroupItemBuilder
   int? get ownerId => _$this._ownerId;
   set ownerId(int? ownerId) => _$this._ownerId = ownerId;
 
+  String? _creator;
+  String? get creator => _$this._creator;
+  set creator(String? creator) => _$this._creator = creator;
+
   int? _totalMember;
   int? get totalMember => _$this._totalMember;
   set totalMember(int? totalMember) => _$this._totalMember = totalMember;
@@ -126,6 +138,7 @@ class GetGroupItemBuilder
       _name = $v.name;
       _description = $v.description;
       _ownerId = $v.ownerId;
+      _creator = $v.creator;
       _totalMember = $v.totalMember;
       _totalLesson = $v.totalLesson;
       _totalLike = $v.totalLike;
@@ -155,6 +168,8 @@ class GetGroupItemBuilder
             name: name,
             description: description,
             ownerId: ownerId,
+            creator: BuiltValueNullFieldError.checkNotNull(
+                creator, r'GetGroupItem', 'creator'),
             totalMember: totalMember,
             totalLesson: totalLesson,
             totalLike: totalLike);

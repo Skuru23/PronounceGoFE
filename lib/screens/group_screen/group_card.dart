@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/screens/group_detail/group_detail.dart';
 import 'package:pronounce_go/screens/group_screen/group_screen.dart';
+import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class GroupCard extends StatelessWidget {
-  final Group group;
+  final GetGroupItem group;
 
   GroupCard({required this.group});
 
@@ -29,8 +30,8 @@ class GroupCard extends StatelessWidget {
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
-                      image: NetworkImage(group
-                          .groupImageUrl), // Assuming group has an imageUrl property
+                      image: NetworkImage(
+                          "https://i.redd.it/14gnqv8rtl9b1.jpg"), // Assuming group has an imageUrl property
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -40,7 +41,7 @@ class GroupCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      group.name,
+                      group.name ?? 'Unknown Group',
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
@@ -48,7 +49,7 @@ class GroupCard extends StatelessWidget {
                     ),
                     SizedBox(height: 8.0),
                     Text(
-                      'Giáo chủ ${group.owner}',
+                      'Giáo chủ ${group.creator ?? 'Unknown Owner'}',
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w400,
@@ -59,20 +60,20 @@ class GroupCard extends StatelessWidget {
                       mobile: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Giáo đồ: ${group.totalMembers}'),
+                          Text('Giáo đồ: ${group.totalMember}'),
                           SizedBox(height: 10),
-                          Text('Khóa học: ${group.totalCourses}'),
+                          Text('Khóa học: ${group.totalLesson}'),
                           SizedBox(height: 10),
-                          Text('Lượt thích: ${group.totalLikes}'),
+                          Text('Lượt thích: ${group.totalLike}'),
                         ],
                       ),
                       desktop: Row(
                         children: [
-                          Text('Giáo đồ: ${group.totalMembers}'),
+                          Text('Giáo đồ: ${group.totalMember}'),
                           SizedBox(width: 10),
-                          Text('Khóa học: ${group.totalCourses}'),
+                          Text('Khóa học: ${group.totalLesson}'),
                           SizedBox(width: 10),
-                          Text('Lượt thích: ${group.totalLikes}'),
+                          Text('Lượt thích: ${group.totalLike}'),
                         ],
                       ),
                     ),

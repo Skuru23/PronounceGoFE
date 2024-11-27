@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | 
 **description** | **String** |  | 
 **ownerId** | **int** |  | 
+**creator** | **String** |  | 
 **totalMember** | **int** |  | [optional] [default to 0]
 **totalLesson** | **int** |  | [optional] [default to 0]
 **totalLike** | **int** |  | [optional] [default to 0]

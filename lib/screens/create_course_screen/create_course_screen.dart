@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pronounce_go/api/lesson_respository.dart';
+import 'package:pronounce_go/api/lesson_repository.dart';
 import 'package:pronounce_go/api/word_repository.dart';
 import 'package:pronounce_go/screens/create_course_screen/sentence_input.dart';
 import 'package:pronounce_go/screens/create_course_screen/words_input.dart';
@@ -18,7 +18,7 @@ class CreateCourseScreen extends StatefulWidget {
 
 class _CreateCourseScreenState extends State<CreateCourseScreen> {
   final _formKey = GlobalKey<FormState>();
-  final LessonRespository _lessonRespository = LessonRespository();
+  final LessonRepository _lessonRespository = LessonRepository();
   final WordRepository _wordRepository = WordRepository();
 
   final TextEditingController _titleController = TextEditingController();

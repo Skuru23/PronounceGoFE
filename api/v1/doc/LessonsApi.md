@@ -10,6 +10,8 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createPersonLessonApiV1LessonsPost**](LessonsApi.md#createpersonlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Person Lesson
+[**getLessonDetailApiV1LessonsLessonIdGet**](LessonsApi.md#getlessondetailapiv1lessonslessonidget) | **GET** /api/v1/lessons/{lesson_id} | Get Lesson Detail
+[**learnLessonApiV1LessonsLessonIdLearnPost**](LessonsApi.md#learnlessonapiv1lessonslessonidlearnpost) | **POST** /api/v1/lessons/{lesson_id}/learn | Learn Lesson
 [**listingLessonsApiV1LessonsGet**](LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
 
 
@@ -51,6 +53,91 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getLessonDetailApiV1LessonsLessonIdGet**
+> GetLessonDetailResponse getLessonDetailApiV1LessonsLessonIdGet(lessonId)
+
+Get Lesson Detail
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = PronounceGoApi().getLessonsApi();
+final int lessonId = 56; // int | 
+
+try {
+    final response = api.getLessonDetailApiV1LessonsLessonIdGet(lessonId);
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling LessonsApi->getLessonDetailApiV1LessonsLessonIdGet: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **lessonId** | **int**|  | 
+
+### Return type
+
+[**GetLessonDetailResponse**](GetLessonDetailResponse.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **learnLessonApiV1LessonsLessonIdLearnPost**
+> learnLessonApiV1LessonsLessonIdLearnPost(lessonId)
+
+Learn Lesson
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = PronounceGoApi().getLessonsApi();
+final int lessonId = 56; // int | 
+
+try {
+    api.learnLessonApiV1LessonsLessonIdLearnPost(lessonId);
+} catch on DioException (e) {
+    print('Exception when calling LessonsApi->learnLessonApiV1LessonsLessonIdLearnPost: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **lessonId** | **int**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

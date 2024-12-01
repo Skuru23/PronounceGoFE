@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/auth_repository.dart';
-import 'package:pronounce_go/api/lesson_respository.dart';
+import 'package:pronounce_go/api/lesson_repository.dart';
 import 'package:pronounce_go/screens/create_course_screen/create_course_screen.dart';
 import 'package:pronounce_go/screens/group_courses/group_course_card.dart';
 import 'package:pronounce_go/screens/group_courses/group_courses.dart';
@@ -14,7 +14,7 @@ class MyCourseScreen extends StatefulWidget {
 }
 
 class _MyCourseScreenState extends State<MyCourseScreen> {
-  final LessonRespository lessonRespository = LessonRespository();
+  final LessonRepository lessonRespository = LessonRepository();
   final AuthRepository authRepository = AuthRepository();
   List<ListLessonsItem> publicCourses = [];
   List<ListLessonsItem> privateCourses = [];

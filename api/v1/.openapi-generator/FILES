@@ -11,14 +11,17 @@ doc/ErrorResponse401.md
 doc/ErrorResponse403.md
 doc/GetGroupItem.md
 doc/GetGroupsResponse.md
+doc/GetLessonDetailResponse.md
 doc/GetMeResponse.md
 doc/GroupsApi.md
 doc/HTTPValidationError.md
+doc/LessonSentenceBase.md
 doc/LessonsApi.md
 doc/ListLessonsItem.md
 doc/ListLessonsResponse.md
 doc/ListingWordResponse.md
 doc/LoginRequest.md
+doc/ProgressApi.md
 doc/RoleCode.md
 doc/SignupRequest.md
 doc/TokenResponse.md
@@ -32,6 +35,7 @@ lib/src/api.dart
 lib/src/api/auth_api.dart
 lib/src/api/groups_api.dart
 lib/src/api/lessons_api.dart
+lib/src/api/progress_api.dart
 lib/src/api/words_api.dart
 lib/src/api_util.dart
 lib/src/auth/api_key_auth.dart
@@ -50,8 +54,10 @@ lib/src/model/error_response401.dart
 lib/src/model/error_response403.dart
 lib/src/model/get_group_item.dart
 lib/src/model/get_groups_response.dart
+lib/src/model/get_lesson_detail_response.dart
 lib/src/model/get_me_response.dart
 lib/src/model/http_validation_error.dart
+lib/src/model/lesson_sentence_base.dart
 lib/src/model/list_lessons_item.dart
 lib/src/model/list_lessons_response.dart
 lib/src/model/listing_word_response.dart

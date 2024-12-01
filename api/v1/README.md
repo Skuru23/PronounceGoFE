@@ -71,7 +71,11 @@ Class | Method | HTTP request | Description
 [*GroupsApi*](doc/GroupsApi.md) | [**createGroupApiV1GroupsPost**](doc/GroupsApi.md#creategroupapiv1groupspost) | **POST** /api/v1/groups | Create Group
 [*GroupsApi*](doc/GroupsApi.md) | [**listingGroupApiV1GroupsGet**](doc/GroupsApi.md#listinggroupapiv1groupsget) | **GET** /api/v1/groups | Listing Group
 [*LessonsApi*](doc/LessonsApi.md) | [**createPersonLessonApiV1LessonsPost**](doc/LessonsApi.md#createpersonlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Person Lesson
+[*LessonsApi*](doc/LessonsApi.md) | [**getLessonDetailApiV1LessonsLessonIdGet**](doc/LessonsApi.md#getlessondetailapiv1lessonslessonidget) | **GET** /api/v1/lessons/{lesson_id} | Get Lesson Detail
+[*LessonsApi*](doc/LessonsApi.md) | [**learnLessonApiV1LessonsLessonIdLearnPost**](doc/LessonsApi.md#learnlessonapiv1lessonslessonidlearnpost) | **POST** /api/v1/lessons/{lesson_id}/learn | Learn Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**listingLessonsApiV1LessonsGet**](doc/LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
+[*ProgressApi*](doc/ProgressApi.md) | [**createGroupApiV1ProgressesPost**](doc/ProgressApi.md#creategroupapiv1progressespost) | **POST** /api/v1/progresses | Create Group
+[*ProgressApi*](doc/ProgressApi.md) | [**listingGroupApiV1ProgressesGet**](doc/ProgressApi.md#listinggroupapiv1progressesget) | **GET** /api/v1/progresses | Listing Group
 [*WordsApi*](doc/WordsApi.md) | [**checkPronounceApiV1WordsCheckPost**](doc/WordsApi.md#checkpronounceapiv1wordscheckpost) | **POST** /api/v1/words/check | Check Pronounce
 [*WordsApi*](doc/WordsApi.md) | [**getWordDetailApiV1WordsWordIdGet**](doc/WordsApi.md#getworddetailapiv1wordswordidget) | **GET** /api/v1/words/{word_id} | Get Word Detail
 [*WordsApi*](doc/WordsApi.md) | [**listingWordApiV1WordsGet**](doc/WordsApi.md#listingwordapiv1wordsget) | **GET** /api/v1/words | Listing Word
@@ -88,8 +92,10 @@ Class | Method | HTTP request | Description
  - [ErrorResponse403](doc/ErrorResponse403.md)
  - [GetGroupItem](doc/GetGroupItem.md)
  - [GetGroupsResponse](doc/GetGroupsResponse.md)
+ - [GetLessonDetailResponse](doc/GetLessonDetailResponse.md)
  - [GetMeResponse](doc/GetMeResponse.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
+ - [LessonSentenceBase](doc/LessonSentenceBase.md)
  - [ListLessonsItem](doc/ListLessonsItem.md)
  - [ListLessonsResponse](doc/ListLessonsResponse.md)
  - [ListingWordResponse](doc/ListingWordResponse.md)

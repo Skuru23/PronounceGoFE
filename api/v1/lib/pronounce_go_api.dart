@@ -12,6 +12,7 @@ export 'package:pronounce_go_api/src/model/date.dart';
 export 'package:pronounce_go_api/src/api/auth_api.dart';
 export 'package:pronounce_go_api/src/api/groups_api.dart';
 export 'package:pronounce_go_api/src/api/lessons_api.dart';
+export 'package:pronounce_go_api/src/api/progress_api.dart';
 export 'package:pronounce_go_api/src/api/words_api.dart';
 
 export 'package:pronounce_go_api/src/model/check_pronounce_request.dart';
@@ -23,8 +24,10 @@ export 'package:pronounce_go_api/src/model/error_response401.dart';
 export 'package:pronounce_go_api/src/model/error_response403.dart';
 export 'package:pronounce_go_api/src/model/get_group_item.dart';
 export 'package:pronounce_go_api/src/model/get_groups_response.dart';
+export 'package:pronounce_go_api/src/model/get_lesson_detail_response.dart';
 export 'package:pronounce_go_api/src/model/get_me_response.dart';
 export 'package:pronounce_go_api/src/model/http_validation_error.dart';
+export 'package:pronounce_go_api/src/model/lesson_sentence_base.dart';
 export 'package:pronounce_go_api/src/model/list_lessons_item.dart';
 export 'package:pronounce_go_api/src/model/list_lessons_response.dart';
 export 'package:pronounce_go_api/src/model/listing_word_response.dart';

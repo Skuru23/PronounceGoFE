@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pronounce_go/screens/course_screen/course_screen.dart';
 import 'package:pronounce_go/screens/group_screen/group_screen.dart';
 import 'package:pronounce_go/screens/profile_screen/profile_screen.dart';
+import 'package:pronounce_go/screens/progress_screen/progress_screen.dart';
 import 'package:pronounce_go/screens/training_screen/training_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,7 +45,7 @@ class NavigationController extends GetxController {
     Container(color: Colors.green),
     CourseScreen(),
     GroupScreen(),
-    Container(color: Colors.blue),
+    ProgressScreen(),
     const ProfileScreen(),
   ];
 }

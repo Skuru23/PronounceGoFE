@@ -33,7 +33,7 @@ class App extends StatelessWidget {
       darkTheme: theme.dark(),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: const WelcomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

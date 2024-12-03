@@ -47,6 +47,10 @@ dependencies:
   speech_to_text: ^7.0.0
   dropdown_search: ^6.0.1
   fluttertoast: ^8.2.8
+  liquid_progress_indicator_v2: ^0.5.0
+  liquid_progress_indicator: ^0.4.0
+  carousel_slider: ^5.0.0
+  flip_card: ^0.7.0
 
 dev_dependencies:
   flutter_test:

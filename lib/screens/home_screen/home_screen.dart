@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/screens/course_screen/course_screen.dart';
 import 'package:pronounce_go/screens/group_screen/group_screen.dart';
+import 'package:pronounce_go/screens/home_screen/user_detail.dart';
 import 'package:pronounce_go/screens/profile_screen/profile_screen.dart';
 import 'package:pronounce_go/screens/training_screen/training_screen.dart';
 
@@ -47,4 +48,17 @@ class NavigationController extends GetxController {
     Container(color: Colors.blue),
     const ProfileScreen(),
   ];
+}
+
+class HomeContent extends StatelessWidget {
+  const HomeContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        UserDetail(),
+      ],
+    );
+  }
 }

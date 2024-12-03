@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 import 'package:pronounce_go/screens/word_detail/word_detail_screen.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
-class FrontWordCard extends StatelessWidget {
-  const FrontWordCard(
+class FrontSentenceCard extends StatelessWidget {
+  const FrontSentenceCard(
       {super.key,
-      required this.word,
+      required this.sentence,
       required this.onFlip,
       required this.isLearned,
       required this.isListening});
-  final WordBase word;
+  final LessonSentenceBase sentence;
   final VoidCallback onFlip;
   final bool isLearned;
   final bool isListening;
@@ -36,26 +36,15 @@ class FrontWordCard extends StatelessWidget {
                 color: isLearned ? Colors.green : Colors.grey,
               ),
             ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(() => WordDetailScreen(wordId: word.id ?? 0));
-                },
-                child: Icon(
-                  Icons.question_mark,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
             Container(
+              padding: const EdgeInsets.all(16),
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    word.word ?? 'Unknown',
+                    sentence.sentence ?? 'Unknown',
+                    textAlign: TextAlign.center,
                     style:
                         textTheme.headlineLarge!.copyWith(color: theme.primary),
                   ),

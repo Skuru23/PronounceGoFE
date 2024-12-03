@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pronounce_go/screens/learn_sentence/learn_sentence_screen.dart';
 import 'package:pronounce_go/screens/progress_detail_screen/progress_detail_screen.dart';
 
 class ProgressSentenceCard extends StatelessWidget {
@@ -20,14 +22,11 @@ class ProgressSentenceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      
       elevation: 4.0,
       margin: EdgeInsets.all(8.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(12.0),
-        onTap: () => {
-          print('Sentence card tapped'),
-        },
+        onTap: () => {Get.to(() => LearnSentenceScreen())},
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(

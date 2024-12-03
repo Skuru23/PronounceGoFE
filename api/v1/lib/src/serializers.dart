@@ -23,8 +23,10 @@ import 'package:pronounce_go_api/src/model/error_response401.dart';
 import 'package:pronounce_go_api/src/model/error_response403.dart';
 import 'package:pronounce_go_api/src/model/get_group_item.dart';
 import 'package:pronounce_go_api/src/model/get_groups_response.dart';
+import 'package:pronounce_go_api/src/model/get_lesson_detail_response.dart';
 import 'package:pronounce_go_api/src/model/get_me_response.dart';
 import 'package:pronounce_go_api/src/model/http_validation_error.dart';
+import 'package:pronounce_go_api/src/model/lesson_sentence_base.dart';
 import 'package:pronounce_go_api/src/model/list_lessons_item.dart';
 import 'package:pronounce_go_api/src/model/list_lessons_response.dart';
 import 'package:pronounce_go_api/src/model/listing_word_response.dart';
@@ -49,8 +51,10 @@ part 'serializers.g.dart';
   ErrorResponse403,
   GetGroupItem,
   GetGroupsResponse,
+  GetLessonDetailResponse,
   GetMeResponse,
   HTTPValidationError,
+  LessonSentenceBase,
   ListLessonsItem,
   ListLessonsResponse,
   ListingWordResponse,

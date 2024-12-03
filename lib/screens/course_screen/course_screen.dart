@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pronounce_go/api/auth_repository.dart';
-import 'package:pronounce_go/api/lesson_respository.dart';
+import 'package:pronounce_go/api/lesson_repository.dart';
 import 'package:pronounce_go/screens/group_courses/group_courses.dart';
 import 'package:pronounce_go/screens/group_courses/group_course_card.dart';
 import 'package:pronounce_go/screens/my_course_screen/my_course_screen.dart';
@@ -13,7 +13,7 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
-  final LessonRespository lessonRespository = LessonRespository();
+  final LessonRepository lessonRespository = LessonRepository();
   final AuthRepository authRepository = AuthRepository();
   List<ListLessonsItem> courses = [];
   List<ListLessonsItem> filteredCourses = [];
@@ -71,18 +71,24 @@ class _CourseScreenState extends State<CourseScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
+            child: ElevatedButton.icon(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyCourseScreen()),
                 );
               },
-              child: SizedBox(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: theme.primary,
+                foregroundColor: theme.onPrimary,
+              ),
+              icon: Icon(Icons.book, size: 24.0),
+              label: SizedBox(
                 width: double.infinity,
                 child: Text(
                   'Bài học của tôi',
                   textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
                 ),
               ),
             ),

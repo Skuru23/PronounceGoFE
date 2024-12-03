@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:pronounce_go/api/base_api.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
-class LessonRespository {
-  LessonRespository._privateConstructor();
-  static final LessonRespository _instance =
-      LessonRespository._privateConstructor();
-  factory LessonRespository() {
+class LessonRepository {
+  LessonRepository._privateConstructor();
+  static final LessonRepository _instance =
+      LessonRepository._privateConstructor();
+  factory LessonRepository() {
     return _instance;
   }
 
@@ -30,6 +30,13 @@ class LessonRespository {
   Future<Response> createPersonLesson(CreatePersonLessonRequest request) async {
     Response response = await lessonApi.createPersonLessonApiV1LessonsPost(
         createPersonLessonRequest: request);
+
+    return response;
+  }
+
+  Future<Response> getLessonDetail(int lessonId) async {
+    Response response = await lessonApi.getLessonDetailApiV1LessonsLessonIdGet(
+        lessonId: lessonId);
 
     return response;
   }

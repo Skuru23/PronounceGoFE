@@ -34,7 +34,9 @@ class CourseCard extends StatelessWidget {
         ),
         trailing: ElevatedButton(
           onPressed: () {
-            Get.to(() => CourseDetail());
+            Get.to(() => CourseDetail(
+                  courseId: course.id,
+                ));
           },
           child: Text('Xem chi tiết'),
         ),

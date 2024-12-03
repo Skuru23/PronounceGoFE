@@ -6,6 +6,7 @@ import 'package:pronounce_go/screens/home_screen/home_screen.dart';
 import 'package:pronounce_go/screens/splash_screen/splash_screen.dart';
 import 'package:pronounce_go/screens/welcome_screen/welcome_screen.dart';
 import 'package:pronounce_go/theme/theme.dart';
+import 'package:pronounce_go/util.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -22,16 +23,17 @@ Future main() async {
 class App extends StatelessWidget {
   const App({super.key});
 
-  final MaterialTheme theme = const MaterialTheme(TextTheme());
-
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = createTextTheme(context, "Baloo 2", "Coiny");
+    MaterialTheme theme = MaterialTheme(textTheme);
+
     return GetMaterialApp(
       theme: theme.light(),
       darkTheme: theme.dark(),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: const WelcomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

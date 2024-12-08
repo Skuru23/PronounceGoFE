@@ -15,8 +15,10 @@ part 'create_person_lesson_request.g.dart';
 /// * [name]
 /// * [isPublic]
 /// * [description]
+/// * [groupOwnerId]
 /// * [wordIds]
 /// * [sentenceList]
+/// * [imagePath]
 @BuiltValue()
 abstract class CreatePersonLessonRequest
     implements
@@ -30,11 +32,17 @@ abstract class CreatePersonLessonRequest
   @BuiltValueField(wireName: r'description')
   String? get description;
 
+  @BuiltValueField(wireName: r'group_owner_id')
+  int? get groupOwnerId;
+
   @BuiltValueField(wireName: r'word_ids')
   BuiltList<int>? get wordIds;
 
   @BuiltValueField(wireName: r'sentence_list')
   BuiltList<String>? get sentenceList;
+
+  @BuiltValueField(wireName: r'image_path')
+  String? get imagePath;
 
   CreatePersonLessonRequest._();
 
@@ -85,6 +93,13 @@ class _$CreatePersonLessonRequestSerializer
         specifiedType: const FullType.nullable(String),
       );
     }
+    if (object.groupOwnerId != null) {
+      yield r'group_owner_id';
+      yield serializers.serialize(
+        object.groupOwnerId,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
     if (object.wordIds != null) {
       yield r'word_ids';
       yield serializers.serialize(
@@ -97,6 +112,13 @@ class _$CreatePersonLessonRequestSerializer
       yield serializers.serialize(
         object.sentenceList,
         specifiedType: const FullType(BuiltList, [FullType(String)]),
+      );
+    }
+    if (object.imagePath != null) {
+      yield r'image_path';
+      yield serializers.serialize(
+        object.imagePath,
+        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -146,6 +168,14 @@ class _$CreatePersonLessonRequestSerializer
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
+        case r'group_owner_id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
+          result.groupOwnerId = valueDes;
+          break;
         case r'word_ids':
           final valueDes = serializers.deserialize(
             value,
@@ -159,6 +189,14 @@ class _$CreatePersonLessonRequestSerializer
             specifiedType: const FullType(BuiltList, [FullType(String)]),
           ) as BuiltList<String>;
           result.sentenceList.replace(valueDes);
+          break;
+        case r'image_path':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.imagePath = valueDes;
           break;
         default:
           unhandled.add(key);

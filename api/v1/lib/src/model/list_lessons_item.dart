@@ -17,7 +17,8 @@ part 'list_lessons_item.g.dart';
 /// * [userOwnerId]
 /// * [groupOwnerId]
 /// * [isPublic]
-/// * [totalLike]
+/// * [totalLikes]
+/// * [totalLearners]
 /// * [creator]
 @BuiltValue()
 abstract class ListLessonsItem
@@ -40,8 +41,11 @@ abstract class ListLessonsItem
   @BuiltValueField(wireName: r'is_public')
   bool? get isPublic;
 
-  @BuiltValueField(wireName: r'total_like')
-  int? get totalLike;
+  @BuiltValueField(wireName: r'total_likes')
+  int? get totalLikes;
+
+  @BuiltValueField(wireName: r'total_learners')
+  int? get totalLearners;
 
   @BuiltValueField(wireName: r'creator')
   String? get creator;
@@ -112,11 +116,18 @@ class _$ListLessonsItemSerializer
             object.isPublic,
             specifiedType: const FullType.nullable(bool),
           );
-    yield r'total_like';
-    yield object.totalLike == null
+    yield r'total_likes';
+    yield object.totalLikes == null
         ? null
         : serializers.serialize(
-            object.totalLike,
+            object.totalLikes,
+            specifiedType: const FullType.nullable(int),
+          );
+    yield r'total_learners';
+    yield object.totalLearners == null
+        ? null
+        : serializers.serialize(
+            object.totalLearners,
             specifiedType: const FullType.nullable(int),
           );
     yield r'creator';
@@ -198,13 +209,21 @@ class _$ListLessonsItemSerializer
           if (valueDes == null) continue;
           result.isPublic = valueDes;
           break;
-        case r'total_like':
+        case r'total_likes':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType.nullable(int),
           ) as int?;
           if (valueDes == null) continue;
-          result.totalLike = valueDes;
+          result.totalLikes = valueDes;
+          break;
+        case r'total_learners':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
+          result.totalLearners = valueDes;
           break;
         case r'creator':
           final valueDes = serializers.deserialize(

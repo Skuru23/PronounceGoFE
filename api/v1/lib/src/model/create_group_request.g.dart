@@ -11,12 +11,15 @@ class _$CreateGroupRequest extends CreateGroupRequest {
   final String name;
   @override
   final String description;
+  @override
+  final String? imagePath;
 
   factory _$CreateGroupRequest(
           [void Function(CreateGroupRequestBuilder)? updates]) =>
       (new CreateGroupRequestBuilder()..update(updates))._build();
 
-  _$CreateGroupRequest._({required this.name, required this.description})
+  _$CreateGroupRequest._(
+      {required this.name, required this.description, this.imagePath})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'CreateGroupRequest', 'name');
     BuiltValueNullFieldError.checkNotNull(
@@ -37,7 +40,8 @@ class _$CreateGroupRequest extends CreateGroupRequest {
     if (identical(other, this)) return true;
     return other is CreateGroupRequest &&
         name == other.name &&
-        description == other.description;
+        description == other.description &&
+        imagePath == other.imagePath;
   }
 
   @override
@@ -45,6 +49,7 @@ class _$CreateGroupRequest extends CreateGroupRequest {
     var _$hash = 0;
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -53,7 +58,8 @@ class _$CreateGroupRequest extends CreateGroupRequest {
   String toString() {
     return (newBuiltValueToStringHelper(r'CreateGroupRequest')
           ..add('name', name)
-          ..add('description', description))
+          ..add('description', description)
+          ..add('imagePath', imagePath))
         .toString();
   }
 }
@@ -70,6 +76,10 @@ class CreateGroupRequestBuilder
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
+
   CreateGroupRequestBuilder() {
     CreateGroupRequest._defaults(this);
   }
@@ -79,6 +89,7 @@ class CreateGroupRequestBuilder
     if ($v != null) {
       _name = $v.name;
       _description = $v.description;
+      _imagePath = $v.imagePath;
       _$v = null;
     }
     return this;
@@ -104,7 +115,8 @@ class CreateGroupRequestBuilder
             name: BuiltValueNullFieldError.checkNotNull(
                 name, r'CreateGroupRequest', 'name'),
             description: BuiltValueNullFieldError.checkNotNull(
-                description, r'CreateGroupRequest', 'description'));
+                description, r'CreateGroupRequest', 'description'),
+            imagePath: imagePath);
     replace(_$result);
     return _$result;
   }

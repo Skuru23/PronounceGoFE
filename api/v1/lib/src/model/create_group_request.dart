@@ -13,6 +13,7 @@ part 'create_group_request.g.dart';
 /// Properties:
 /// * [name]
 /// * [description]
+/// * [imagePath]
 @BuiltValue()
 abstract class CreateGroupRequest
     implements Built<CreateGroupRequest, CreateGroupRequestBuilder> {
@@ -21,6 +22,9 @@ abstract class CreateGroupRequest
 
   @BuiltValueField(wireName: r'description')
   String get description;
+
+  @BuiltValueField(wireName: r'image_path')
+  String? get imagePath;
 
   CreateGroupRequest._();
 
@@ -58,6 +62,13 @@ class _$CreateGroupRequestSerializer
       object.description,
       specifiedType: const FullType(String),
     );
+    if (object.imagePath != null) {
+      yield r'image_path';
+      yield serializers.serialize(
+        object.imagePath,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
   }
 
   @override
@@ -96,6 +107,14 @@ class _$CreateGroupRequestSerializer
             specifiedType: const FullType(String),
           ) as String;
           result.description = valueDes;
+          break;
+        case r'image_path':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.imagePath = valueDes;
           break;
         default:
           unhandled.add(key);

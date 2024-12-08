@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:pronounce_go/api/base_api.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
-class GroupRespository {
-  GroupRespository._privateConstructor();
-  static final GroupRespository _instance =
-      GroupRespository._privateConstructor();
-  factory GroupRespository() {
+class GroupRepository {
+  GroupRepository._privateConstructor();
+  static final GroupRepository _instance =
+      GroupRepository._privateConstructor();
+  factory GroupRepository() {
     return _instance;
   }
 
@@ -16,11 +16,13 @@ class GroupRespository {
     return await lessonApi.listingGroupApiV1GroupsGet();
   }
 
-  Future<Response> createGroup(String name, String description) async {
+  Future<Response> createGroup(String name, String description,
+      {String? imageUrl}) async {
     return await lessonApi.createGroupApiV1GroupsPost(
       createGroupRequest: CreateGroupRequest((b) => b
         ..name = name
-        ..description = description),
+        ..description = description
+        ..imagePath = imageUrl),
     );
   }
 }

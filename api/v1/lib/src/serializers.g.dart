@@ -19,14 +19,24 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GetLessonDetailResponse.serializer)
       ..add(GetMeResponse.serializer)
       ..add(HTTPValidationError.serializer)
+      ..add(LearnSentenceRequest.serializer)
+      ..add(LearnSentenceResponse.serializer)
+      ..add(LearnWordRequest.serializer)
+      ..add(LearnWordResponse.serializer)
       ..add(LessonSentenceBase.serializer)
       ..add(ListLessonsItem.serializer)
       ..add(ListLessonsResponse.serializer)
+      ..add(ListingProgressItem.serializer)
+      ..add(ListingProgressResponse.serializer)
       ..add(ListingWordResponse.serializer)
       ..add(LoginRequest.serializer)
+      ..add(ProgressDetailResponse.serializer)
       ..add(RoleCode.serializer)
       ..add(SignupRequest.serializer)
       ..add(TokenResponse.serializer)
+      ..add(UpdateLessonRequest.serializer)
+      ..add(UpdateUserRequest.serializer)
+      ..add(UploadImageResponse.serializer)
       ..add(ValidationError.serializer)
       ..add(ValidationErrorLocInner.serializer)
       ..add(WordBase.serializer)
@@ -37,6 +47,10 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ListLessonsItem)]),
           () => new ListBuilder<ListLessonsItem>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(ListingProgressItem)]),
+          () => new ListBuilder<ListingProgressItem>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ValidationError)]),
           () => new ListBuilder<ValidationError>())
@@ -56,6 +70,18 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => new ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => new ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => new ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(int)]),
           () => new ListBuilder<int>())

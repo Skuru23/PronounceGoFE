@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/screens/group_detail/group_detail.dart';
@@ -30,8 +31,12 @@ class GroupCard extends StatelessWidget {
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://i.redd.it/14gnqv8rtl9b1.jpg"), // Assuming group has an imageUrl property
+                      image: NetworkImage(group.imagePath != null
+                          ? ((dotenv.env["API_BASE_URL"] ??
+                                  'http://localhost:8000') +
+                              "api/v1/" +
+                              group.imagePath!)
+                          : "https://i.redd.it/14gnqv8rtl9b1.jpg"), // Assuming group has an imageUrl property
                       fit: BoxFit.cover,
                     ),
                   ),

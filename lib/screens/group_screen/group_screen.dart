@@ -34,12 +34,12 @@ class _GroupScreenState extends State<GroupScreen> {
   final List<GetGroupItem> groups = [];
 
   String searchQuery = '';
-  GroupRespository groupRespository = GroupRespository();
+  GroupRepository groupRepository = GroupRepository();
 
   @override
   void initState() {
     super.initState();
-    groupRespository.getGroups().then((response) {
+    groupRepository.getGroups().then((response) {
       setState(() {
         groups.addAll(response.data?.data ?? []);
       });

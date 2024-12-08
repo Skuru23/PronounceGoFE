@@ -17,6 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    super.initState();
     startAnimation();
   }
 
@@ -74,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       opacity: animated ? 1 : 0,
                       child: Center(
                         child: Image(
-                          image: AssetImage("assets/images/app_icon.png"),
+                          image: const AssetImage("assets/images/app_icon.png"),
                           width: Responsive.isDesktop(context)
                               ? MediaQuery.sizeOf(context).height * 0.7
                               : MediaQuery.sizeOf(context).height,

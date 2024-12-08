@@ -18,6 +18,7 @@ part 'get_me_response.g.dart';
 /// * [name]
 /// * [phone]
 /// * [address]
+/// * [imagePath]
 @BuiltValue()
 abstract class GetMeResponse
     implements Built<GetMeResponse, GetMeResponseBuilder> {
@@ -39,6 +40,9 @@ abstract class GetMeResponse
 
   @BuiltValueField(wireName: r'address')
   String? get address;
+
+  @BuiltValueField(wireName: r'image_path')
+  String? get imagePath;
 
   GetMeResponse._();
 
@@ -107,6 +111,13 @@ class _$GetMeResponseSerializer implements PrimitiveSerializer<GetMeResponse> {
             object.address,
             specifiedType: const FullType.nullable(String),
           );
+    if (object.imagePath != null) {
+      yield r'image_path';
+      yield serializers.serialize(
+        object.imagePath,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
   }
 
   @override
@@ -179,6 +190,14 @@ class _$GetMeResponseSerializer implements PrimitiveSerializer<GetMeResponse> {
           ) as String?;
           if (valueDes == null) continue;
           result.address = valueDes;
+          break;
+        case r'image_path':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.imagePath = valueDes;
           break;
         default:
           unhandled.add(key);

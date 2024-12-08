@@ -9,14 +9,14 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createGroupApiV1ProgressesPost**](ProgressApi.md#creategroupapiv1progressespost) | **POST** /api/v1/progresses | Create Group
-[**listingGroupApiV1ProgressesGet**](ProgressApi.md#listinggroupapiv1progressesget) | **GET** /api/v1/progresses | Listing Group
+[**getProgressDetailApiV1ProgressesProgressIdGet**](ProgressApi.md#getprogressdetailapiv1progressesprogressidget) | **GET** /api/v1/progresses/{progress_id} | Get Progress Detail
+[**listingProgressApiV1ProgressesGet**](ProgressApi.md#listingprogressapiv1progressesget) | **GET** /api/v1/progresses | Listing Progress
 
 
-# **createGroupApiV1ProgressesPost**
-> createGroupApiV1ProgressesPost(createGroupRequest)
+# **getProgressDetailApiV1ProgressesProgressIdGet**
+> ProgressDetailResponse getProgressDetailApiV1ProgressesProgressIdGet(progressId)
 
-Create Group
+Get Progress Detail
 
 ### Example
 ```dart
@@ -25,12 +25,13 @@ import 'package:pronounce_go_api/api.dart';
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
 final api = PronounceGoApi().getProgressApi();
-final CreateGroupRequest createGroupRequest = ; // CreateGroupRequest | 
+final int progressId = 56; // int | 
 
 try {
-    api.createGroupApiV1ProgressesPost(createGroupRequest);
+    final response = api.getProgressDetailApiV1ProgressesProgressIdGet(progressId);
+    print(response);
 } catch on DioException (e) {
-    print('Exception when calling ProgressApi->createGroupApiV1ProgressesPost: $e\n');
+    print('Exception when calling ProgressApi->getProgressDetailApiV1ProgressesProgressIdGet: $e\n');
 }
 ```
 
@@ -38,11 +39,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createGroupRequest** | [**CreateGroupRequest**](CreateGroupRequest.md)|  | 
+ **progressId** | **int**|  | 
 
 ### Return type
 
-void (empty response body)
+[**ProgressDetailResponse**](ProgressDetailResponse.md)
 
 ### Authorization
 
@@ -50,15 +51,15 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **listingGroupApiV1ProgressesGet**
-> GetGroupsResponse listingGroupApiV1ProgressesGet(name, sortBy)
+# **listingProgressApiV1ProgressesGet**
+> ListingProgressResponse listingProgressApiV1ProgressesGet()
 
-Listing Group
+Listing Progress
 
 ### Example
 ```dart
@@ -67,27 +68,21 @@ import 'package:pronounce_go_api/api.dart';
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
 final api = PronounceGoApi().getProgressApi();
-final String name = name_example; // String | 
-final String sortBy = sortBy_example; // String | 
 
 try {
-    final response = api.listingGroupApiV1ProgressesGet(name, sortBy);
+    final response = api.listingProgressApiV1ProgressesGet();
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling ProgressApi->listingGroupApiV1ProgressesGet: $e\n');
+    print('Exception when calling ProgressApi->listingProgressApiV1ProgressesGet: $e\n');
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **String**|  | [optional] 
- **sortBy** | **String**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**GetGroupsResponse**](GetGroupsResponse.md)
+[**ListingProgressResponse**](ListingProgressResponse.md)
 
 ### Authorization
 

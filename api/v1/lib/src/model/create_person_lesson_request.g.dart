@@ -14,9 +14,13 @@ class _$CreatePersonLessonRequest extends CreatePersonLessonRequest {
   @override
   final String? description;
   @override
+  final int? groupOwnerId;
+  @override
   final BuiltList<int>? wordIds;
   @override
   final BuiltList<String>? sentenceList;
+  @override
+  final String? imagePath;
 
   factory _$CreatePersonLessonRequest(
           [void Function(CreatePersonLessonRequestBuilder)? updates]) =>
@@ -26,8 +30,10 @@ class _$CreatePersonLessonRequest extends CreatePersonLessonRequest {
       {required this.name,
       required this.isPublic,
       this.description,
+      this.groupOwnerId,
       this.wordIds,
-      this.sentenceList})
+      this.sentenceList,
+      this.imagePath})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         name, r'CreatePersonLessonRequest', 'name');
@@ -51,8 +57,10 @@ class _$CreatePersonLessonRequest extends CreatePersonLessonRequest {
         name == other.name &&
         isPublic == other.isPublic &&
         description == other.description &&
+        groupOwnerId == other.groupOwnerId &&
         wordIds == other.wordIds &&
-        sentenceList == other.sentenceList;
+        sentenceList == other.sentenceList &&
+        imagePath == other.imagePath;
   }
 
   @override
@@ -61,8 +69,10 @@ class _$CreatePersonLessonRequest extends CreatePersonLessonRequest {
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, isPublic.hashCode);
     _$hash = $jc(_$hash, description.hashCode);
+    _$hash = $jc(_$hash, groupOwnerId.hashCode);
     _$hash = $jc(_$hash, wordIds.hashCode);
     _$hash = $jc(_$hash, sentenceList.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -73,8 +83,10 @@ class _$CreatePersonLessonRequest extends CreatePersonLessonRequest {
           ..add('name', name)
           ..add('isPublic', isPublic)
           ..add('description', description)
+          ..add('groupOwnerId', groupOwnerId)
           ..add('wordIds', wordIds)
-          ..add('sentenceList', sentenceList))
+          ..add('sentenceList', sentenceList)
+          ..add('imagePath', imagePath))
         .toString();
   }
 }
@@ -96,6 +108,10 @@ class CreatePersonLessonRequestBuilder
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
+  int? _groupOwnerId;
+  int? get groupOwnerId => _$this._groupOwnerId;
+  set groupOwnerId(int? groupOwnerId) => _$this._groupOwnerId = groupOwnerId;
+
   ListBuilder<int>? _wordIds;
   ListBuilder<int> get wordIds => _$this._wordIds ??= new ListBuilder<int>();
   set wordIds(ListBuilder<int>? wordIds) => _$this._wordIds = wordIds;
@@ -105,6 +121,10 @@ class CreatePersonLessonRequestBuilder
       _$this._sentenceList ??= new ListBuilder<String>();
   set sentenceList(ListBuilder<String>? sentenceList) =>
       _$this._sentenceList = sentenceList;
+
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
 
   CreatePersonLessonRequestBuilder() {
     CreatePersonLessonRequest._defaults(this);
@@ -116,8 +136,10 @@ class CreatePersonLessonRequestBuilder
       _name = $v.name;
       _isPublic = $v.isPublic;
       _description = $v.description;
+      _groupOwnerId = $v.groupOwnerId;
       _wordIds = $v.wordIds?.toBuilder();
       _sentenceList = $v.sentenceList?.toBuilder();
+      _imagePath = $v.imagePath;
       _$v = null;
     }
     return this;
@@ -147,8 +169,10 @@ class CreatePersonLessonRequestBuilder
               isPublic: BuiltValueNullFieldError.checkNotNull(
                   isPublic, r'CreatePersonLessonRequest', 'isPublic'),
               description: description,
+              groupOwnerId: groupOwnerId,
               wordIds: _wordIds?.build(),
-              sentenceList: _sentenceList?.build());
+              sentenceList: _sentenceList?.build(),
+              imagePath: imagePath);
     } catch (_) {
       late String _$failedField;
       try {

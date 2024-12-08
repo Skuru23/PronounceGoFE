@@ -167,7 +167,8 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
         ..description = _descriptionController.text
         ..isPublic = _isPublic
         ..wordIds = ListBuilder<int>(_selectedWordIds)
-        ..sentenceList = ListBuilder<String>(_sentences),
+        ..sentenceList = ListBuilder<String>(_sentences)
+        ..groupOwnerId = null,
     ));
 
     if (response.statusCode == 204) {

@@ -19,12 +19,20 @@ class _$GetMeResponse extends GetMeResponse {
   final String? phone;
   @override
   final String? address;
+  @override
+  final String? imagePath;
 
   factory _$GetMeResponse([void Function(GetMeResponseBuilder)? updates]) =>
       (new GetMeResponseBuilder()..update(updates))._build();
 
   _$GetMeResponse._(
-      {this.id, this.roleCode, this.email, this.name, this.phone, this.address})
+      {this.id,
+      this.roleCode,
+      this.email,
+      this.name,
+      this.phone,
+      this.address,
+      this.imagePath})
       : super._();
 
   @override
@@ -43,7 +51,8 @@ class _$GetMeResponse extends GetMeResponse {
         email == other.email &&
         name == other.name &&
         phone == other.phone &&
-        address == other.address;
+        address == other.address &&
+        imagePath == other.imagePath;
   }
 
   @override
@@ -55,6 +64,7 @@ class _$GetMeResponse extends GetMeResponse {
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, phone.hashCode);
     _$hash = $jc(_$hash, address.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -67,7 +77,8 @@ class _$GetMeResponse extends GetMeResponse {
           ..add('email', email)
           ..add('name', name)
           ..add('phone', phone)
-          ..add('address', address))
+          ..add('address', address)
+          ..add('imagePath', imagePath))
         .toString();
   }
 }
@@ -100,6 +111,10 @@ class GetMeResponseBuilder
   String? get address => _$this._address;
   set address(String? address) => _$this._address = address;
 
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
+
   GetMeResponseBuilder() {
     GetMeResponse._defaults(this);
   }
@@ -113,6 +128,7 @@ class GetMeResponseBuilder
       _name = $v.name;
       _phone = $v.phone;
       _address = $v.address;
+      _imagePath = $v.imagePath;
       _$v = null;
     }
     return this;
@@ -140,7 +156,8 @@ class GetMeResponseBuilder
             email: email,
             name: name,
             phone: phone,
-            address: address);
+            address: address,
+            imagePath: imagePath);
     replace(_$result);
     return _$result;
   }

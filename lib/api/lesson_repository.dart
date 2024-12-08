@@ -1,6 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:pronounce_go/api/base_api.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final lessonRepositoryProvider = Provider<LessonRepository>((ref) {
+  return LessonRepository();
+});
 
 class LessonRepository {
   LessonRepository._privateConstructor();
@@ -28,7 +33,7 @@ class LessonRepository {
   }
 
   Future<Response> createPersonLesson(CreatePersonLessonRequest request) async {
-    Response response = await lessonApi.createPersonLessonApiV1LessonsPost(
+    Response response = await lessonApi.createLessonApiV1LessonsPost(
         createPersonLessonRequest: request);
 
     return response;

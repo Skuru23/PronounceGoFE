@@ -27,7 +27,7 @@ class CourseCard extends StatelessWidget {
         subtitle: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Số likes: ${course.totalLike}'),
+            Text('Số likes: ${course.totalLikes}'),
             SizedBox(width: 16.0),
             Text('Tác giả: ${course.creator}'),
           ],

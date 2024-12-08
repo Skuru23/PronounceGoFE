@@ -15,11 +15,11 @@ class LoginHeader extends StatelessWidget {
           height: size.height * 0.3,
         ),
         Text(
-          "Welcome",
+          "Chào bạn",
           style: textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700),
         ),
         Text(
-          "Login to chanlenge the champion of pronunciation",
+          "Hãy đăng nhập và trải nghiệm app học phát âm nào",
           style: textTheme.bodyMedium,
         ),
       ],

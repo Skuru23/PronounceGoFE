@@ -23,6 +23,8 @@ class _$GetGroupItem extends GetGroupItem {
   final int? totalLesson;
   @override
   final int? totalLike;
+  @override
+  final String? imagePath;
 
   factory _$GetGroupItem([void Function(GetGroupItemBuilder)? updates]) =>
       (new GetGroupItemBuilder()..update(updates))._build();
@@ -35,7 +37,8 @@ class _$GetGroupItem extends GetGroupItem {
       required this.creator,
       this.totalMember,
       this.totalLesson,
-      this.totalLike})
+      this.totalLike,
+      this.imagePath})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(creator, r'GetGroupItem', 'creator');
   }
@@ -58,7 +61,8 @@ class _$GetGroupItem extends GetGroupItem {
         creator == other.creator &&
         totalMember == other.totalMember &&
         totalLesson == other.totalLesson &&
-        totalLike == other.totalLike;
+        totalLike == other.totalLike &&
+        imagePath == other.imagePath;
   }
 
   @override
@@ -72,6 +76,7 @@ class _$GetGroupItem extends GetGroupItem {
     _$hash = $jc(_$hash, totalMember.hashCode);
     _$hash = $jc(_$hash, totalLesson.hashCode);
     _$hash = $jc(_$hash, totalLike.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -86,7 +91,8 @@ class _$GetGroupItem extends GetGroupItem {
           ..add('creator', creator)
           ..add('totalMember', totalMember)
           ..add('totalLesson', totalLesson)
-          ..add('totalLike', totalLike))
+          ..add('totalLike', totalLike)
+          ..add('imagePath', imagePath))
         .toString();
   }
 }
@@ -127,6 +133,10 @@ class GetGroupItemBuilder
   int? get totalLike => _$this._totalLike;
   set totalLike(int? totalLike) => _$this._totalLike = totalLike;
 
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
+
   GetGroupItemBuilder() {
     GetGroupItem._defaults(this);
   }
@@ -142,6 +152,7 @@ class GetGroupItemBuilder
       _totalMember = $v.totalMember;
       _totalLesson = $v.totalLesson;
       _totalLike = $v.totalLike;
+      _imagePath = $v.imagePath;
       _$v = null;
     }
     return this;
@@ -172,7 +183,8 @@ class GetGroupItemBuilder
                 creator, r'GetGroupItem', 'creator'),
             totalMember: totalMember,
             totalLesson: totalLesson,
-            totalLike: totalLike);
+            totalLike: totalLike,
+            imagePath: imagePath);
     replace(_$result);
     return _$result;
   }

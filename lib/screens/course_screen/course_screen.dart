@@ -4,30 +4,47 @@ import 'package:pronounce_go/api/lesson_repository.dart';
 import 'package:pronounce_go/screens/group_courses/group_courses.dart';
 import 'package:pronounce_go/screens/group_courses/group_course_card.dart';
 import 'package:pronounce_go/screens/my_course_screen/my_course_screen.dart';
+import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/course_card.dart';
-import 'package:pronounce_go_api/pronounce_go_api.dart'; // Add this import
+import 'package:pronounce_go_api/pronounce_go_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class CourseScreen extends StatefulWidget {
+class CourseScreen extends ConsumerStatefulWidget {
   @override
   _CourseScreenState createState() => _CourseScreenState();
 }
 
-class _CourseScreenState extends State<CourseScreen> {
-  final LessonRepository lessonRespository = LessonRepository();
-  final AuthRepository authRepository = AuthRepository();
+class _CourseScreenState extends ConsumerState<CourseScreen> {
   List<ListLessonsItem> courses = [];
   List<ListLessonsItem> filteredCourses = [];
   String searchQuery = '';
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    lessonRespository.getLesson().then((response) {
+    fetchLessons();
+  }
+
+  void fetchLessons() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final lessonRepository = ref.read(lessonRepositoryProvider);
+      final response = await lessonRepository.getLesson();
       setState(() {
         courses = List<ListLessonsItem>.from(response.data.data ?? []);
       });
       updateSearchQuery(searchQuery);
-    });
+    } catch (e) {
+      showToast("Error fetching lessons: $e", 'error');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   void updateSearchQuery(String query) {
@@ -60,15 +77,21 @@ class _CourseScreenState extends State<CourseScreen> {
               onChanged: updateSearchQuery,
             ),
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: filteredCourses.map((course) {
-                  return CourseCard(course: course);
-                }).toList(),
-              ),
-            ),
+          ElevatedButton(
+            onPressed: fetchLessons,
+            child: Text('Refetch Data'),
           ),
+          isLoading
+              ? Center(child: CircularProgressIndicator())
+              : Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: filteredCourses.map((course) {
+                        return CourseCard(course: course);
+                      }).toList(),
+                    ),
+                  ),
+                ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton.icon(

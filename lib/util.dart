@@ -35,7 +35,6 @@ void showToast(String msg, String type) {
     default:
       backgroundColor = Colors.grey;
   }
-
   try {
     Fluttertoast.showToast(
         msg: msg,
@@ -43,6 +42,7 @@ void showToast(String msg, String type) {
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: backgroundColor,
+        webBgColor: "#${backgroundColor.value.toRadixString(16).substring(2)}",
         textColor: Colors.white,
         fontSize: 16.0);
   } catch (e) {

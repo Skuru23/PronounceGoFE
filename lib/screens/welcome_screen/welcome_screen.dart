@@ -11,12 +11,12 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image(
-              image: AssetImage("assets/images/app_icon.png"),
+              image: const AssetImage("assets/images/app_icon.png"),
               height: MediaQuery.sizeOf(context).height * 0.6,
             ),
             Column(
@@ -36,13 +36,13 @@ class WelcomeScreen extends StatelessWidget {
                 Expanded(
                     child: OutlinedButton(
                   onPressed: () => Get.to(() => const LoginScreen()),
-                  child: Text("Login"),
                   style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(),
+                      shape: const RoundedRectangleBorder(),
                       foregroundColor: Theme.of(context).colorScheme.secondary,
                       side: BorderSide(
                           color: Theme.of(context).colorScheme.secondary),
-                      padding: EdgeInsets.symmetric(vertical: 20)),
+                      padding: const EdgeInsets.symmetric(vertical: 20)),
+                  child: const Text("Đăng nhập"),
                 )),
                 const SizedBox(
                   width: 10,
@@ -52,14 +52,14 @@ class WelcomeScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => SignUpScreen());
                   },
-                  child: Text("Signup"),
                   style: OutlinedButton.styleFrom(
                       elevation: 0,
-                      shape: RoundedRectangleBorder(),
+                      shape: const RoundedRectangleBorder(),
                       foregroundColor: Theme.of(context).colorScheme.secondary,
                       side: BorderSide(
                           color: Theme.of(context).colorScheme.secondary),
-                      padding: EdgeInsets.symmetric(vertical: 20)),
+                      padding: const EdgeInsets.symmetric(vertical: 20)),
+                  child: const Text("Đăng ký"),
                 ))
               ],
             )

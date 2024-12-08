@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/auth_repository.dart';
+import 'package:pronounce_go/util.dart';
 
 import '../home_screen/home_screen.dart';
 
@@ -25,16 +26,22 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
-  final Dio _dio = Dio(); // Khởi tạo Dio
-  // final _serializers = serializers;
-
   void _loginUser() async {
     try {
       final AuthRepository authRepository = AuthRepository();
       var response = await authRepository.login(_email, _password);
       if (response.statusCode == 200) Get.to(() => const HomeScreen());
     } catch (e) {
-      print('Login failed: $e');
+      if (e is DioException) {
+        if (e.response?.data['error_code'] == "ERR_UNAUTHORIZED") {
+          showToast(
+              "Đăng nhập thất bại, kiểm tra lại email hoặc mật khẩu", 'error');
+        } else {
+          showToast(e.response?.data['message'], 'error');
+        }
+      } else {
+        print('Login failed: $e');
+      }
     }
   }
 
@@ -56,7 +63,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
+                    return 'Hãy nhập email';
                   }
                   return null;
                 },
@@ -65,15 +72,15 @@ class _LoginFormState extends State<LoginForm> {
                   _email = value ?? '';
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.fingerprint),
-                    labelText: "Password",
-                    hintText: "Password",
-                    border: OutlineInputBorder(),
+                    prefixIcon: const Icon(Icons.fingerprint),
+                    labelText: "Mật khẩu",
+                    hintText: "Mật khẩu",
+                    border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
                         _isPasswordVisible
@@ -89,7 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                 initialValue: _password,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
+                    return 'Hãy nhập mật khẩu';
                   }
                   return null;
                 },
@@ -103,15 +110,15 @@ class _LoginFormState extends State<LoginForm> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {},
-                  child: Text("Forgot password?"),
+                  child: const Text("Quên mật khẩu?"),
                 ),
               ),
               const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  child: Text("LOGIN"),
                   onPressed: _submitForm,
+                  child: const Text("ĐĂNG NHẬP"),
                 ),
               )
             ],

@@ -26,14 +26,24 @@ import 'package:pronounce_go_api/src/model/get_groups_response.dart';
 import 'package:pronounce_go_api/src/model/get_lesson_detail_response.dart';
 import 'package:pronounce_go_api/src/model/get_me_response.dart';
 import 'package:pronounce_go_api/src/model/http_validation_error.dart';
+import 'package:pronounce_go_api/src/model/learn_sentence_request.dart';
+import 'package:pronounce_go_api/src/model/learn_sentence_response.dart';
+import 'package:pronounce_go_api/src/model/learn_word_request.dart';
+import 'package:pronounce_go_api/src/model/learn_word_response.dart';
 import 'package:pronounce_go_api/src/model/lesson_sentence_base.dart';
 import 'package:pronounce_go_api/src/model/list_lessons_item.dart';
 import 'package:pronounce_go_api/src/model/list_lessons_response.dart';
+import 'package:pronounce_go_api/src/model/listing_progress_item.dart';
+import 'package:pronounce_go_api/src/model/listing_progress_response.dart';
 import 'package:pronounce_go_api/src/model/listing_word_response.dart';
 import 'package:pronounce_go_api/src/model/login_request.dart';
+import 'package:pronounce_go_api/src/model/progress_detail_response.dart';
 import 'package:pronounce_go_api/src/model/role_code.dart';
 import 'package:pronounce_go_api/src/model/signup_request.dart';
 import 'package:pronounce_go_api/src/model/token_response.dart';
+import 'package:pronounce_go_api/src/model/update_lesson_request.dart';
+import 'package:pronounce_go_api/src/model/update_user_request.dart';
+import 'package:pronounce_go_api/src/model/upload_image_response.dart';
 import 'package:pronounce_go_api/src/model/validation_error.dart';
 import 'package:pronounce_go_api/src/model/validation_error_loc_inner.dart';
 import 'package:pronounce_go_api/src/model/word_base.dart';
@@ -54,14 +64,24 @@ part 'serializers.g.dart';
   GetLessonDetailResponse,
   GetMeResponse,
   HTTPValidationError,
+  LearnSentenceRequest,
+  LearnSentenceResponse,
+  LearnWordRequest,
+  LearnWordResponse,
   LessonSentenceBase,
   ListLessonsItem,
   ListLessonsResponse,
+  ListingProgressItem,
+  ListingProgressResponse,
   ListingWordResponse,
   LoginRequest,
+  ProgressDetailResponse,
   RoleCode,
   SignupRequest,
   TokenResponse,
+  UpdateLessonRequest,
+  UpdateUserRequest,
+  UploadImageResponse,
   ValidationError,
   ValidationErrorLocInner,
   WordBase,

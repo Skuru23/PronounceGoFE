@@ -51,6 +51,8 @@ dependencies:
   liquid_progress_indicator: ^0.4.0
   carousel_slider: ^5.0.0
   flip_card: ^0.7.0
+  file_picker: ^8.1.4
+  flutter_riverpod: ^2.6.1
 
 dev_dependencies:
   flutter_test:

@@ -20,7 +20,9 @@ class _$ListLessonsItem extends ListLessonsItem {
   @override
   final bool? isPublic;
   @override
-  final int? totalLike;
+  final int? totalLikes;
+  @override
+  final int? totalLearners;
   @override
   final String? creator;
 
@@ -34,7 +36,8 @@ class _$ListLessonsItem extends ListLessonsItem {
       this.userOwnerId,
       this.groupOwnerId,
       this.isPublic,
-      this.totalLike,
+      this.totalLikes,
+      this.totalLearners,
       this.creator})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'ListLessonsItem', 'id');
@@ -58,7 +61,8 @@ class _$ListLessonsItem extends ListLessonsItem {
         userOwnerId == other.userOwnerId &&
         groupOwnerId == other.groupOwnerId &&
         isPublic == other.isPublic &&
-        totalLike == other.totalLike &&
+        totalLikes == other.totalLikes &&
+        totalLearners == other.totalLearners &&
         creator == other.creator;
   }
 
@@ -71,7 +75,8 @@ class _$ListLessonsItem extends ListLessonsItem {
     _$hash = $jc(_$hash, userOwnerId.hashCode);
     _$hash = $jc(_$hash, groupOwnerId.hashCode);
     _$hash = $jc(_$hash, isPublic.hashCode);
-    _$hash = $jc(_$hash, totalLike.hashCode);
+    _$hash = $jc(_$hash, totalLikes.hashCode);
+    _$hash = $jc(_$hash, totalLearners.hashCode);
     _$hash = $jc(_$hash, creator.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -86,7 +91,8 @@ class _$ListLessonsItem extends ListLessonsItem {
           ..add('userOwnerId', userOwnerId)
           ..add('groupOwnerId', groupOwnerId)
           ..add('isPublic', isPublic)
-          ..add('totalLike', totalLike)
+          ..add('totalLikes', totalLikes)
+          ..add('totalLearners', totalLearners)
           ..add('creator', creator))
         .toString();
   }
@@ -120,9 +126,14 @@ class ListLessonsItemBuilder
   bool? get isPublic => _$this._isPublic;
   set isPublic(bool? isPublic) => _$this._isPublic = isPublic;
 
-  int? _totalLike;
-  int? get totalLike => _$this._totalLike;
-  set totalLike(int? totalLike) => _$this._totalLike = totalLike;
+  int? _totalLikes;
+  int? get totalLikes => _$this._totalLikes;
+  set totalLikes(int? totalLikes) => _$this._totalLikes = totalLikes;
+
+  int? _totalLearners;
+  int? get totalLearners => _$this._totalLearners;
+  set totalLearners(int? totalLearners) =>
+      _$this._totalLearners = totalLearners;
 
   String? _creator;
   String? get creator => _$this._creator;
@@ -141,7 +152,8 @@ class ListLessonsItemBuilder
       _userOwnerId = $v.userOwnerId;
       _groupOwnerId = $v.groupOwnerId;
       _isPublic = $v.isPublic;
-      _totalLike = $v.totalLike;
+      _totalLikes = $v.totalLikes;
+      _totalLearners = $v.totalLearners;
       _creator = $v.creator;
       _$v = null;
     }
@@ -172,7 +184,8 @@ class ListLessonsItemBuilder
             userOwnerId: userOwnerId,
             groupOwnerId: groupOwnerId,
             isPublic: isPublic,
-            totalLike: totalLike,
+            totalLikes: totalLikes,
+            totalLearners: totalLearners,
             creator: creator);
     replace(_$result);
     return _$result;

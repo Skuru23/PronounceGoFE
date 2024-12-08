@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | 
 **phone** | **String** |  | 
 **address** | **String** |  | 
+**imagePath** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

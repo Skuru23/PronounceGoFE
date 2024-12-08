@@ -70,12 +70,17 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**signupApiV1SignupPost**](doc/AuthApi.md#signupapiv1signuppost) | **POST** /api/v1/signup | Signup
 [*GroupsApi*](doc/GroupsApi.md) | [**createGroupApiV1GroupsPost**](doc/GroupsApi.md#creategroupapiv1groupspost) | **POST** /api/v1/groups | Create Group
 [*GroupsApi*](doc/GroupsApi.md) | [**listingGroupApiV1GroupsGet**](doc/GroupsApi.md#listinggroupapiv1groupsget) | **GET** /api/v1/groups | Listing Group
-[*LessonsApi*](doc/LessonsApi.md) | [**createPersonLessonApiV1LessonsPost**](doc/LessonsApi.md#createpersonlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Person Lesson
+[*ImagesApi*](doc/ImagesApi.md) | [**uploadImageApiV1ImagesUploadPost**](doc/ImagesApi.md#uploadimageapiv1imagesuploadpost) | **POST** /api/v1/images/upload | Upload Image
+[*LearnApi*](doc/LearnApi.md) | [**learnSentenceApiV1LearnSentencesProgressSentenceIdPost**](doc/LearnApi.md#learnsentenceapiv1learnsentencesprogresssentenceidpost) | **POST** /api/v1/learn/sentences/{progress_sentence_id} | Learn Sentence
+[*LearnApi*](doc/LearnApi.md) | [**learnWordApiV1LearnWordsProgressWordIdPost**](doc/LearnApi.md#learnwordapiv1learnwordsprogresswordidpost) | **POST** /api/v1/learn/words/{progress_word_id} | Learn Word
+[*LessonsApi*](doc/LessonsApi.md) | [**createLessonApiV1LessonsPost**](doc/LessonsApi.md#createlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**getLessonDetailApiV1LessonsLessonIdGet**](doc/LessonsApi.md#getlessondetailapiv1lessonslessonidget) | **GET** /api/v1/lessons/{lesson_id} | Get Lesson Detail
 [*LessonsApi*](doc/LessonsApi.md) | [**learnLessonApiV1LessonsLessonIdLearnPost**](doc/LessonsApi.md#learnlessonapiv1lessonslessonidlearnpost) | **POST** /api/v1/lessons/{lesson_id}/learn | Learn Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**listingLessonsApiV1LessonsGet**](doc/LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
-[*ProgressApi*](doc/ProgressApi.md) | [**createGroupApiV1ProgressesPost**](doc/ProgressApi.md#creategroupapiv1progressespost) | **POST** /api/v1/progresses | Create Group
-[*ProgressApi*](doc/ProgressApi.md) | [**listingGroupApiV1ProgressesGet**](doc/ProgressApi.md#listinggroupapiv1progressesget) | **GET** /api/v1/progresses | Listing Group
+[*LessonsApi*](doc/LessonsApi.md) | [**updateLessonApiV1LessonsLessonIdPut**](doc/LessonsApi.md#updatelessonapiv1lessonslessonidput) | **PUT** /api/v1/lessons/{lesson_id} | Update Lesson
+[*ProgressApi*](doc/ProgressApi.md) | [**getProgressDetailApiV1ProgressesProgressIdGet**](doc/ProgressApi.md#getprogressdetailapiv1progressesprogressidget) | **GET** /api/v1/progresses/{progress_id} | Get Progress Detail
+[*ProgressApi*](doc/ProgressApi.md) | [**listingProgressApiV1ProgressesGet**](doc/ProgressApi.md#listingprogressapiv1progressesget) | **GET** /api/v1/progresses | Listing Progress
+[*UsersApi*](doc/UsersApi.md) | [**updateUserApiV1UsersPut**](doc/UsersApi.md#updateuserapiv1usersput) | **PUT** /api/v1/users | Update User
 [*WordsApi*](doc/WordsApi.md) | [**checkPronounceApiV1WordsCheckPost**](doc/WordsApi.md#checkpronounceapiv1wordscheckpost) | **POST** /api/v1/words/check | Check Pronounce
 [*WordsApi*](doc/WordsApi.md) | [**getWordDetailApiV1WordsWordIdGet**](doc/WordsApi.md#getworddetailapiv1wordswordidget) | **GET** /api/v1/words/{word_id} | Get Word Detail
 [*WordsApi*](doc/WordsApi.md) | [**listingWordApiV1WordsGet**](doc/WordsApi.md#listingwordapiv1wordsget) | **GET** /api/v1/words | Listing Word
@@ -95,14 +100,24 @@ Class | Method | HTTP request | Description
  - [GetLessonDetailResponse](doc/GetLessonDetailResponse.md)
  - [GetMeResponse](doc/GetMeResponse.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
+ - [LearnSentenceRequest](doc/LearnSentenceRequest.md)
+ - [LearnSentenceResponse](doc/LearnSentenceResponse.md)
+ - [LearnWordRequest](doc/LearnWordRequest.md)
+ - [LearnWordResponse](doc/LearnWordResponse.md)
  - [LessonSentenceBase](doc/LessonSentenceBase.md)
  - [ListLessonsItem](doc/ListLessonsItem.md)
  - [ListLessonsResponse](doc/ListLessonsResponse.md)
+ - [ListingProgressItem](doc/ListingProgressItem.md)
+ - [ListingProgressResponse](doc/ListingProgressResponse.md)
  - [ListingWordResponse](doc/ListingWordResponse.md)
  - [LoginRequest](doc/LoginRequest.md)
+ - [ProgressDetailResponse](doc/ProgressDetailResponse.md)
  - [RoleCode](doc/RoleCode.md)
  - [SignupRequest](doc/SignupRequest.md)
  - [TokenResponse](doc/TokenResponse.md)
+ - [UpdateLessonRequest](doc/UpdateLessonRequest.md)
+ - [UpdateUserRequest](doc/UpdateUserRequest.md)
+ - [UploadImageResponse](doc/UploadImageResponse.md)
  - [ValidationError](doc/ValidationError.md)
  - [ValidationErrorLocInner](doc/ValidationErrorLocInner.md)
  - [WordBase](doc/WordBase.md)

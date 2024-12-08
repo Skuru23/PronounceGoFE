@@ -19,6 +19,7 @@ part 'get_group_item.g.dart';
 /// * [totalMember]
 /// * [totalLesson]
 /// * [totalLike]
+/// * [imagePath]
 @BuiltValue()
 abstract class GetGroupItem
     implements Built<GetGroupItem, GetGroupItemBuilder> {
@@ -45,6 +46,9 @@ abstract class GetGroupItem
 
   @BuiltValueField(wireName: r'total_like')
   int? get totalLike;
+
+  @BuiltValueField(wireName: r'image_path')
+  String? get imagePath;
 
   GetGroupItem._();
 
@@ -124,6 +128,13 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
       yield serializers.serialize(
         object.totalLike,
         specifiedType: const FullType(int),
+      );
+    }
+    if (object.imagePath != null) {
+      yield r'image_path';
+      yield serializers.serialize(
+        object.imagePath,
+        specifiedType: const FullType.nullable(String),
       );
     }
   }
@@ -210,6 +221,14 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
             specifiedType: const FullType(int),
           ) as int;
           result.totalLike = valueDes;
+          break;
+        case r'image_path':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.imagePath = valueDes;
           break;
         default:
           unhandled.add(key);

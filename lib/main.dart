@@ -7,6 +7,8 @@ import 'package:pronounce_go/screens/splash_screen/splash_screen.dart';
 import 'package:pronounce_go/screens/welcome_screen/welcome_screen.dart';
 import 'package:pronounce_go/theme/theme.dart';
 import 'package:pronounce_go/util.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pronounce_go/screens/course_screen/course_screen.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -17,7 +19,7 @@ Future main() async {
     FlutterNativeSplash.remove(); // Remove splash screen after initialization
   });
 
-  runApp(const App());
+  runApp(const ProviderScope(child: App()));
 }
 
 class App extends StatelessWidget {
@@ -33,18 +35,7 @@ class App extends StatelessWidget {
       darkTheme: theme.dark(),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
-    );
-  }
-}
-
-class AppHome extends StatelessWidget {
-  const AppHome({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Vo dich roi"),
+      home: const SplashScreen(),
     );
   }
 }

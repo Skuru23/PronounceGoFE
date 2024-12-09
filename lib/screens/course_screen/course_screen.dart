@@ -25,7 +25,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
     fetchLessons();
   }
 
-  void fetchLessons() async {
+  Future<void> fetchLessons() async {
     setState(() {
       isLoading = true;
     });
@@ -84,7 +84,10 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
                     },
                     child: ListView(
                       children: filteredCourses.map((course) {
-                        return CourseCard(course: course);
+                        return CourseCard(
+                          course: course,
+                          refetch: fetchLessons,
+                        );
                       }).toList(),
                     ),
                   ),

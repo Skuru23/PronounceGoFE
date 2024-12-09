@@ -54,4 +54,21 @@ class LessonRepository {
 
     return response;
   }
+
+  Future<Response> likeLesson(int lessonId) async {
+    Response response = await lessonApi.likeLessonApiV1LessonsLessonIdLikePatch(
+      lessonId: lessonId,
+    );
+
+    return response;
+  }
+
+  Future<Response> unlikeLesson(int lessonId) async {
+    Response response =
+        await lessonApi.unlikeLessonApiV1LessonsLessonIdUnlikePatch(
+      lessonId: lessonId,
+    );
+
+    return response;
+  }
 }

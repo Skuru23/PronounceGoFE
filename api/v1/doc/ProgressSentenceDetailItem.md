@@ -1,4 +1,4 @@
-# pronounce_go_api.model.ListLessonsItem
+# pronounce_go_api.model.ProgressSentenceDetailItem
 
 ## Load the model package
 ```dart
@@ -9,16 +9,10 @@ import 'package:pronounce_go_api/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
-**name** | **String** |  | 
-**description** | **String** |  | 
-**userOwnerId** | **int** |  | 
-**groupOwnerId** | **int** |  | 
-**imagePath** | **String** |  | 
-**isPublic** | **bool** |  | 
-**isLiked** | **bool** |  | 
-**totalLikes** | **int** |  | 
-**totalLearners** | **int** |  | 
-**creator** | **String** |  | 
+**progressId** | **int** |  | 
+**itemId** | **int** |  | 
+**status** | [**ItemStatus**](ItemStatus.md) |  | 
+**sentence** | **String** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

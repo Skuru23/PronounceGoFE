@@ -23,6 +23,7 @@ part 'get_lesson_detail_response.g.dart';
 /// * [imagePath]
 /// * [creatorName]
 /// * [isInProgress]
+/// * [isLiked]
 /// * [groupOwnerName]
 /// * [words] - List of words in the lesson
 /// * [sentences] - List of sentences in the lesson
@@ -55,6 +56,9 @@ abstract class GetLessonDetailResponse
 
   @BuiltValueField(wireName: r'is_in_progress')
   bool? get isInProgress;
+
+  @BuiltValueField(wireName: r'is_liked')
+  bool? get isLiked;
 
   @BuiltValueField(wireName: r'group_owner_name')
   String? get groupOwnerName;
@@ -159,6 +163,13 @@ class _$GetLessonDetailResponseSerializer
       yield r'is_in_progress';
       yield serializers.serialize(
         object.isInProgress,
+        specifiedType: const FullType.nullable(bool),
+      );
+    }
+    if (object.isLiked != null) {
+      yield r'is_liked';
+      yield serializers.serialize(
+        object.isLiked,
         specifiedType: const FullType.nullable(bool),
       );
     }
@@ -280,6 +291,14 @@ class _$GetLessonDetailResponseSerializer
           ) as bool?;
           if (valueDes == null) continue;
           result.isInProgress = valueDes;
+          break;
+        case r'is_liked':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.isLiked = valueDes;
           break;
         case r'group_owner_name':
           final valueDes = serializers.deserialize(

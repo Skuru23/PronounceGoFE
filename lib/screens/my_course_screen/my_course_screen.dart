@@ -55,6 +55,8 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bài học của tôi'),
@@ -75,10 +77,16 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                     color: theme.secondaryContainer,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: const Text('Chia sẻ với mọi người'),
+                  child: Text(
+                    'Chia sẻ với mọi người',
+                    style: textTheme.headlineSmall,
+                  ),
                 ),
                 children: publicCourses.map((course) {
-                  return CourseCard(course: course);
+                  return CourseCard(
+                    course: course,
+                    refetch: fetchLessons,
+                  );
                 }).toList(),
               ),
             ),
@@ -95,10 +103,16 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
                     color: theme.secondaryContainer,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: const Text('Riêng tôi'),
+                  child: Text(
+                    'Riêng tôi',
+                    style: textTheme.headlineSmall,
+                  ),
                 ),
                 children: privateCourses.map((course) {
-                  return CourseCard(course: course);
+                  return CourseCard(
+                    course: course,
+                    refetch: fetchLessons,
+                  );
                 }).toList(),
               ),
             ),
@@ -112,7 +126,6 @@ class _MyCourseScreenState extends State<MyCourseScreen> {
             Get.to(() => CreateCourseScreen());
           },
           icon: const Icon(Icons.add),
-          tooltip: 'Create Course',
           label: const Text('Tạo bài học mới'),
         ),
       ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:pronounce_go/screens/word_detail/word_detail_screen.dart';
@@ -11,11 +9,9 @@ class FrontWordCard extends StatelessWidget {
       {super.key,
       required this.word,
       required this.onFlip,
-      required this.isLearned,
       required this.isListening});
-  final WordBase word;
+  final ProgressWordDetailItem word;
   final VoidCallback onFlip;
-  final bool isLearned;
   final bool isListening;
 
   @override
@@ -24,7 +20,7 @@ class FrontWordCard extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Card(
       color: theme.onPrimary,
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Stack(
           children: [
@@ -32,8 +28,11 @@ class FrontWordCard extends StatelessWidget {
               top: 8,
               left: 8,
               child: Icon(
-                isLearned ? Icons.check_circle : Icons.circle,
-                color: isLearned ? Colors.green : Colors.grey,
+                word.status == ItemStatus.DONE
+                    ? Icons.check_circle
+                    : Icons.circle,
+                color:
+                    word.status == ItemStatus.DONE ? Colors.green : Colors.grey,
               ),
             ),
             Positioned(
@@ -41,25 +40,25 @@ class FrontWordCard extends StatelessWidget {
               right: 8,
               child: GestureDetector(
                 onTap: () {
-                  Get.to(() => WordDetailScreen(wordId: word.id ?? 0));
+                  Get.to(() => WordDetailScreen(wordId: word.wordId));
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.question_mark,
                   color: Colors.grey,
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    word.word ?? 'Unknown',
+                    word.word,
                     style:
                         textTheme.headlineLarge!.copyWith(color: theme.primary),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   IconButton(
                     onPressed: isListening ? () {} : onFlip,
                     icon: const Icon(Icons.mic),

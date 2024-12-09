@@ -18,6 +18,7 @@ part 'list_lessons_item.g.dart';
 /// * [groupOwnerId]
 /// * [imagePath]
 /// * [isPublic]
+/// * [isLiked]
 /// * [totalLikes]
 /// * [totalLearners]
 /// * [creator]
@@ -44,6 +45,9 @@ abstract class ListLessonsItem
 
   @BuiltValueField(wireName: r'is_public')
   bool? get isPublic;
+
+  @BuiltValueField(wireName: r'is_liked')
+  bool? get isLiked;
 
   @BuiltValueField(wireName: r'total_likes')
   int? get totalLikes;
@@ -125,6 +129,13 @@ class _$ListLessonsItemSerializer
         ? null
         : serializers.serialize(
             object.isPublic,
+            specifiedType: const FullType.nullable(bool),
+          );
+    yield r'is_liked';
+    yield object.isLiked == null
+        ? null
+        : serializers.serialize(
+            object.isLiked,
             specifiedType: const FullType.nullable(bool),
           );
     yield r'total_likes';
@@ -227,6 +238,14 @@ class _$ListLessonsItemSerializer
           ) as bool?;
           if (valueDes == null) continue;
           result.isPublic = valueDes;
+          break;
+        case r'is_liked':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.isLiked = valueDes;
           break;
         case r'total_likes':
           final valueDes = serializers.deserialize(

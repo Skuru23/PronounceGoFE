@@ -76,7 +76,9 @@ Class | Method | HTTP request | Description
 [*LessonsApi*](doc/LessonsApi.md) | [**createLessonApiV1LessonsPost**](doc/LessonsApi.md#createlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**getLessonDetailApiV1LessonsLessonIdGet**](doc/LessonsApi.md#getlessondetailapiv1lessonslessonidget) | **GET** /api/v1/lessons/{lesson_id} | Get Lesson Detail
 [*LessonsApi*](doc/LessonsApi.md) | [**learnLessonApiV1LessonsLessonIdLearnPost**](doc/LessonsApi.md#learnlessonapiv1lessonslessonidlearnpost) | **POST** /api/v1/lessons/{lesson_id}/learn | Learn Lesson
+[*LessonsApi*](doc/LessonsApi.md) | [**likeLessonApiV1LessonsLessonIdLikePatch**](doc/LessonsApi.md#likelessonapiv1lessonslessonidlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/like | Like Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**listingLessonsApiV1LessonsGet**](doc/LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
+[*LessonsApi*](doc/LessonsApi.md) | [**unlikeLessonApiV1LessonsLessonIdUnlikePatch**](doc/LessonsApi.md#unlikelessonapiv1lessonslessonidunlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/unlike | Unlike Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**updateLessonApiV1LessonsLessonIdPut**](doc/LessonsApi.md#updatelessonapiv1lessonslessonidput) | **PUT** /api/v1/lessons/{lesson_id} | Update Lesson
 [*ProgressApi*](doc/ProgressApi.md) | [**getProgressDetailApiV1ProgressesProgressIdGet**](doc/ProgressApi.md#getprogressdetailapiv1progressesprogressidget) | **GET** /api/v1/progresses/{progress_id} | Get Progress Detail
 [*ProgressApi*](doc/ProgressApi.md) | [**listingProgressApiV1ProgressesGet**](doc/ProgressApi.md#listingprogressapiv1progressesget) | **GET** /api/v1/progresses | Listing Progress
@@ -100,6 +102,7 @@ Class | Method | HTTP request | Description
  - [GetLessonDetailResponse](doc/GetLessonDetailResponse.md)
  - [GetMeResponse](doc/GetMeResponse.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
+ - [ItemStatus](doc/ItemStatus.md)
  - [LearnSentenceRequest](doc/LearnSentenceRequest.md)
  - [LearnSentenceResponse](doc/LearnSentenceResponse.md)
  - [LearnWordRequest](doc/LearnWordRequest.md)
@@ -112,6 +115,8 @@ Class | Method | HTTP request | Description
  - [ListingWordResponse](doc/ListingWordResponse.md)
  - [LoginRequest](doc/LoginRequest.md)
  - [ProgressDetailResponse](doc/ProgressDetailResponse.md)
+ - [ProgressSentenceDetailItem](doc/ProgressSentenceDetailItem.md)
+ - [ProgressWordDetailItem](doc/ProgressWordDetailItem.md)
  - [RoleCode](doc/RoleCode.md)
  - [SignupRequest](doc/SignupRequest.md)
  - [TokenResponse](doc/TokenResponse.md)

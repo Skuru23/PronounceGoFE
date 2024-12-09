@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **totalSentence** | **int** |  | [optional] 
 **remainSentence** | **int** |  | [optional] 
 **finishPercent** | **int** |  | [optional] 
+**words** | [**BuiltList&lt;ProgressWordDetailItem&gt;**](ProgressWordDetailItem.md) | List of words in the lesson | [optional] [default to ListBuilder()]
+**sentences** | [**BuiltList&lt;ProgressSentenceDetailItem&gt;**](ProgressSentenceDetailItem.md) | List of sentences in the lesson | [optional] [default to ListBuilder()]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

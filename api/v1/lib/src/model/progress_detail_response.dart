@@ -3,6 +3,9 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:pronounce_go_api/src/model/progress_sentence_detail_item.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:pronounce_go_api/src/model/progress_word_detail_item.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -21,6 +24,8 @@ part 'progress_detail_response.g.dart';
 /// * [totalSentence]
 /// * [remainSentence]
 /// * [finishPercent]
+/// * [words] - List of words in the lesson
+/// * [sentences] - List of sentences in the lesson
 @BuiltValue()
 abstract class ProgressDetailResponse
     implements Built<ProgressDetailResponse, ProgressDetailResponseBuilder> {
@@ -54,6 +59,14 @@ abstract class ProgressDetailResponse
   @BuiltValueField(wireName: r'finish_percent')
   int? get finishPercent;
 
+  /// List of words in the lesson
+  @BuiltValueField(wireName: r'words')
+  BuiltList<ProgressWordDetailItem>? get words;
+
+  /// List of sentences in the lesson
+  @BuiltValueField(wireName: r'sentences')
+  BuiltList<ProgressSentenceDetailItem>? get sentences;
+
   ProgressDetailResponse._();
 
   factory ProgressDetailResponse(
@@ -61,7 +74,9 @@ abstract class ProgressDetailResponse
       _$ProgressDetailResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ProgressDetailResponseBuilder b) => b;
+  static void _defaults(ProgressDetailResponseBuilder b) => b
+    ..words = ListBuilder()
+    ..sentences = ListBuilder();
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ProgressDetailResponse> get serializer =>
@@ -148,6 +163,22 @@ class _$ProgressDetailResponseSerializer
       yield serializers.serialize(
         object.finishPercent,
         specifiedType: const FullType.nullable(int),
+      );
+    }
+    if (object.words != null) {
+      yield r'words';
+      yield serializers.serialize(
+        object.words,
+        specifiedType:
+            const FullType(BuiltList, [FullType(ProgressWordDetailItem)]),
+      );
+    }
+    if (object.sentences != null) {
+      yield r'sentences';
+      yield serializers.serialize(
+        object.sentences,
+        specifiedType:
+            const FullType(BuiltList, [FullType(ProgressSentenceDetailItem)]),
       );
     }
   }
@@ -252,6 +283,22 @@ class _$ProgressDetailResponseSerializer
           ) as int?;
           if (valueDes == null) continue;
           result.finishPercent = valueDes;
+          break;
+        case r'words':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(BuiltList, [FullType(ProgressWordDetailItem)]),
+          ) as BuiltList<ProgressWordDetailItem>;
+          result.words.replace(valueDes);
+          break;
+        case r'sentences':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(
+                BuiltList, [FullType(ProgressSentenceDetailItem)]),
+          ) as BuiltList<ProgressSentenceDetailItem>;
+          result.sentences.replace(valueDes);
           break;
         default:
           unhandled.add(key);

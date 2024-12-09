@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'dart:async';
 
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class BackWordCard extends StatelessWidget {
   const BackWordCard(
       {super.key, required this.word, this.point, required this.error});
-  final WordBase word;
+  final ProgressWordDetailItem word;
   final int? point;
   final List<int> error;
 
@@ -16,24 +14,24 @@ class BackWordCard extends StatelessWidget {
     final theme = Theme.of(context);
     return Card(
       color: theme.colorScheme.onPrimary,
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              word.word ?? 'Unknown',
+              word.word,
               style: theme.textTheme.displayMedium!.copyWith(
                 color: theme.colorScheme.primary,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             RichText(
               text: TextSpan(
                 children: _buildIpaTextSpans(word.ipa ?? 'Unknown', theme),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (point != null)
               if (point == 100)
                 Text(

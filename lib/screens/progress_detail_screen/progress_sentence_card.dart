@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/screens/learn_sentence/learn_sentence_screen.dart';
-import 'package:pronounce_go/screens/progress_detail_screen/progress_detail_screen.dart';
+import 'package:pronounce_go/util.dart';
+import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class ProgressSentenceCard extends StatelessWidget {
-  final Sentence word;
+  final ProgressSentenceDetailItem sentence;
 
-  const ProgressSentenceCard({super.key, required this.word});
-
-  Icon _getStatusIcon(WordStatus status) {
-    switch (status) {
-      case WordStatus.DONE:
-        return Icon(Icons.check_circle, color: Colors.green);
-      case WordStatus.REMAIN:
-        return Icon(Icons.autorenew, color: Colors.orange);
-      default:
-        return Icon(Icons.help, color: Colors.grey);
-    }
-  }
+  const ProgressSentenceCard({super.key, required this.sentence});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4.0,
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(12.0),
         onTap: () => {Get.to(() => LearnSentenceScreen())},
@@ -34,12 +24,12 @@ class ProgressSentenceCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                word.name,
-                style: TextStyle(
+                sentence.sentence,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              _getStatusIcon(word.status),
+              getStatusIcon(sentence.status ?? ItemStatus.NOT_STARTED),
             ],
           ),
         ),

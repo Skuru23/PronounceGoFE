@@ -22,6 +22,8 @@ class _$ListLessonsItem extends ListLessonsItem {
   @override
   final bool? isPublic;
   @override
+  final bool? isLiked;
+  @override
   final int? totalLikes;
   @override
   final int? totalLearners;
@@ -39,6 +41,7 @@ class _$ListLessonsItem extends ListLessonsItem {
       this.groupOwnerId,
       this.imagePath,
       this.isPublic,
+      this.isLiked,
       this.totalLikes,
       this.totalLearners,
       this.creator})
@@ -65,6 +68,7 @@ class _$ListLessonsItem extends ListLessonsItem {
         groupOwnerId == other.groupOwnerId &&
         imagePath == other.imagePath &&
         isPublic == other.isPublic &&
+        isLiked == other.isLiked &&
         totalLikes == other.totalLikes &&
         totalLearners == other.totalLearners &&
         creator == other.creator;
@@ -80,6 +84,7 @@ class _$ListLessonsItem extends ListLessonsItem {
     _$hash = $jc(_$hash, groupOwnerId.hashCode);
     _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, isPublic.hashCode);
+    _$hash = $jc(_$hash, isLiked.hashCode);
     _$hash = $jc(_$hash, totalLikes.hashCode);
     _$hash = $jc(_$hash, totalLearners.hashCode);
     _$hash = $jc(_$hash, creator.hashCode);
@@ -97,6 +102,7 @@ class _$ListLessonsItem extends ListLessonsItem {
           ..add('groupOwnerId', groupOwnerId)
           ..add('imagePath', imagePath)
           ..add('isPublic', isPublic)
+          ..add('isLiked', isLiked)
           ..add('totalLikes', totalLikes)
           ..add('totalLearners', totalLearners)
           ..add('creator', creator))
@@ -136,6 +142,10 @@ class ListLessonsItemBuilder
   bool? get isPublic => _$this._isPublic;
   set isPublic(bool? isPublic) => _$this._isPublic = isPublic;
 
+  bool? _isLiked;
+  bool? get isLiked => _$this._isLiked;
+  set isLiked(bool? isLiked) => _$this._isLiked = isLiked;
+
   int? _totalLikes;
   int? get totalLikes => _$this._totalLikes;
   set totalLikes(int? totalLikes) => _$this._totalLikes = totalLikes;
@@ -163,6 +173,7 @@ class ListLessonsItemBuilder
       _groupOwnerId = $v.groupOwnerId;
       _imagePath = $v.imagePath;
       _isPublic = $v.isPublic;
+      _isLiked = $v.isLiked;
       _totalLikes = $v.totalLikes;
       _totalLearners = $v.totalLearners;
       _creator = $v.creator;
@@ -196,6 +207,7 @@ class ListLessonsItemBuilder
             groupOwnerId: groupOwnerId,
             imagePath: imagePath,
             isPublic: isPublic,
+            isLiked: isLiked,
             totalLikes: totalLikes,
             totalLearners: totalLearners,
             creator: creator);

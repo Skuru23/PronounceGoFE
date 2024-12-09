@@ -26,6 +26,8 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
   @override
   final bool? isInProgress;
   @override
+  final bool? isLiked;
+  @override
   final String? groupOwnerName;
   @override
   final BuiltList<WordBase>? words;
@@ -46,6 +48,7 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
       this.imagePath,
       this.creatorName,
       this.isInProgress,
+      this.isLiked,
       this.groupOwnerName,
       this.words,
       this.sentences})
@@ -73,6 +76,7 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
         imagePath == other.imagePath &&
         creatorName == other.creatorName &&
         isInProgress == other.isInProgress &&
+        isLiked == other.isLiked &&
         groupOwnerName == other.groupOwnerName &&
         words == other.words &&
         sentences == other.sentences;
@@ -90,6 +94,7 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
     _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, creatorName.hashCode);
     _$hash = $jc(_$hash, isInProgress.hashCode);
+    _$hash = $jc(_$hash, isLiked.hashCode);
     _$hash = $jc(_$hash, groupOwnerName.hashCode);
     _$hash = $jc(_$hash, words.hashCode);
     _$hash = $jc(_$hash, sentences.hashCode);
@@ -109,6 +114,7 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
           ..add('imagePath', imagePath)
           ..add('creatorName', creatorName)
           ..add('isInProgress', isInProgress)
+          ..add('isLiked', isLiked)
           ..add('groupOwnerName', groupOwnerName)
           ..add('words', words)
           ..add('sentences', sentences))
@@ -157,6 +163,10 @@ class GetLessonDetailResponseBuilder
   bool? get isInProgress => _$this._isInProgress;
   set isInProgress(bool? isInProgress) => _$this._isInProgress = isInProgress;
 
+  bool? _isLiked;
+  bool? get isLiked => _$this._isLiked;
+  set isLiked(bool? isLiked) => _$this._isLiked = isLiked;
+
   String? _groupOwnerName;
   String? get groupOwnerName => _$this._groupOwnerName;
   set groupOwnerName(String? groupOwnerName) =>
@@ -189,6 +199,7 @@ class GetLessonDetailResponseBuilder
       _imagePath = $v.imagePath;
       _creatorName = $v.creatorName;
       _isInProgress = $v.isInProgress;
+      _isLiked = $v.isLiked;
       _groupOwnerName = $v.groupOwnerName;
       _words = $v.words?.toBuilder();
       _sentences = $v.sentences?.toBuilder();
@@ -225,6 +236,7 @@ class GetLessonDetailResponseBuilder
               imagePath: imagePath,
               creatorName: creatorName,
               isInProgress: isInProgress,
+              isLiked: isLiked,
               groupOwnerName: groupOwnerName,
               words: _words?.build(),
               sentences: _sentences?.build());

@@ -16,6 +16,7 @@ doc/GetMeResponse.md
 doc/GroupsApi.md
 doc/HTTPValidationError.md
 doc/ImagesApi.md
+doc/ItemStatus.md
 doc/LearnApi.md
 doc/LearnSentenceRequest.md
 doc/LearnSentenceResponse.md
@@ -31,6 +32,8 @@ doc/ListingWordResponse.md
 doc/LoginRequest.md
 doc/ProgressApi.md
 doc/ProgressDetailResponse.md
+doc/ProgressSentenceDetailItem.md
+doc/ProgressWordDetailItem.md
 doc/RoleCode.md
 doc/SignupRequest.md
 doc/TokenResponse.md
@@ -73,6 +76,7 @@ lib/src/model/get_groups_response.dart
 lib/src/model/get_lesson_detail_response.dart
 lib/src/model/get_me_response.dart
 lib/src/model/http_validation_error.dart
+lib/src/model/item_status.dart
 lib/src/model/learn_sentence_request.dart
 lib/src/model/learn_sentence_response.dart
 lib/src/model/learn_word_request.dart
@@ -85,6 +89,8 @@ lib/src/model/listing_progress_response.dart
 lib/src/model/listing_word_response.dart
 lib/src/model/login_request.dart
 lib/src/model/progress_detail_response.dart
+lib/src/model/progress_sentence_detail_item.dart
+lib/src/model/progress_word_detail_item.dart
 lib/src/model/role_code.dart
 lib/src/model/signup_request.dart
 lib/src/model/token_response.dart

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 TextTheme createTextTheme(
     BuildContext context, String bodyFontString, String displayFontString) {
@@ -47,5 +48,16 @@ void showToast(String msg, String type) {
         fontSize: 16.0);
   } catch (e) {
     print("Error showing toast: $e");
+  }
+}
+
+Icon getStatusIcon(ItemStatus status) {
+  switch (status) {
+    case ItemStatus.DONE:
+      return const Icon(Icons.check_circle, color: Colors.green);
+    case ItemStatus.IN_PROGRESS:
+      return const Icon(Icons.autorenew, color: Colors.orange);
+    default:
+      return const Icon(Icons.circle, color: Colors.grey);
   }
 }

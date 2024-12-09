@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **imagePath** | **String** |  | 
 **creatorName** | **String** |  | [optional] 
 **isInProgress** | **bool** |  | [optional] 
+**isLiked** | **bool** |  | [optional] 
 **groupOwnerName** | **String** |  | [optional] 
 **words** | [**BuiltList&lt;WordBase&gt;**](WordBase.md) | List of words in the lesson | [optional] [default to ListBuilder()]
 **sentences** | [**BuiltList&lt;LessonSentenceBase&gt;**](LessonSentenceBase.md) | List of sentences in the lesson | [optional] [default to ListBuilder()]

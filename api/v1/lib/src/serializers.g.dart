@@ -19,6 +19,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GetLessonDetailResponse.serializer)
       ..add(GetMeResponse.serializer)
       ..add(HTTPValidationError.serializer)
+      ..add(ItemStatus.serializer)
       ..add(LearnSentenceRequest.serializer)
       ..add(LearnSentenceResponse.serializer)
       ..add(LearnWordRequest.serializer)
@@ -31,6 +32,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ListingWordResponse.serializer)
       ..add(LoginRequest.serializer)
       ..add(ProgressDetailResponse.serializer)
+      ..add(ProgressSentenceDetailItem.serializer)
+      ..add(ProgressWordDetailItem.serializer)
       ..add(RoleCode.serializer)
       ..add(SignupRequest.serializer)
       ..add(TokenResponse.serializer)
@@ -51,6 +54,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(
               BuiltList, const [const FullType(ListingProgressItem)]),
           () => new ListBuilder<ListingProgressItem>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(ProgressWordDetailItem)]),
+          () => new ListBuilder<ProgressWordDetailItem>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(ProgressSentenceDetailItem)]),
+          () => new ListBuilder<ProgressSentenceDetailItem>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ValidationError)]),
           () => new ListBuilder<ValidationError>())

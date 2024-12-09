@@ -27,6 +27,10 @@ class _$ProgressDetailResponse extends ProgressDetailResponse {
   final int? remainSentence;
   @override
   final int? finishPercent;
+  @override
+  final BuiltList<ProgressWordDetailItem>? words;
+  @override
+  final BuiltList<ProgressSentenceDetailItem>? sentences;
 
   factory _$ProgressDetailResponse(
           [void Function(ProgressDetailResponseBuilder)? updates]) =>
@@ -42,7 +46,9 @@ class _$ProgressDetailResponse extends ProgressDetailResponse {
       this.remainWord,
       this.totalSentence,
       this.remainSentence,
-      this.finishPercent})
+      this.finishPercent,
+      this.words,
+      this.sentences})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'ProgressDetailResponse', 'id');
     BuiltValueNullFieldError.checkNotNull(
@@ -71,7 +77,9 @@ class _$ProgressDetailResponse extends ProgressDetailResponse {
         remainWord == other.remainWord &&
         totalSentence == other.totalSentence &&
         remainSentence == other.remainSentence &&
-        finishPercent == other.finishPercent;
+        finishPercent == other.finishPercent &&
+        words == other.words &&
+        sentences == other.sentences;
   }
 
   @override
@@ -87,6 +95,8 @@ class _$ProgressDetailResponse extends ProgressDetailResponse {
     _$hash = $jc(_$hash, totalSentence.hashCode);
     _$hash = $jc(_$hash, remainSentence.hashCode);
     _$hash = $jc(_$hash, finishPercent.hashCode);
+    _$hash = $jc(_$hash, words.hashCode);
+    _$hash = $jc(_$hash, sentences.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -103,7 +113,9 @@ class _$ProgressDetailResponse extends ProgressDetailResponse {
           ..add('remainWord', remainWord)
           ..add('totalSentence', totalSentence)
           ..add('remainSentence', remainSentence)
-          ..add('finishPercent', finishPercent))
+          ..add('finishPercent', finishPercent)
+          ..add('words', words)
+          ..add('sentences', sentences))
         .toString();
   }
 }
@@ -156,6 +168,18 @@ class ProgressDetailResponseBuilder
   set finishPercent(int? finishPercent) =>
       _$this._finishPercent = finishPercent;
 
+  ListBuilder<ProgressWordDetailItem>? _words;
+  ListBuilder<ProgressWordDetailItem> get words =>
+      _$this._words ??= new ListBuilder<ProgressWordDetailItem>();
+  set words(ListBuilder<ProgressWordDetailItem>? words) =>
+      _$this._words = words;
+
+  ListBuilder<ProgressSentenceDetailItem>? _sentences;
+  ListBuilder<ProgressSentenceDetailItem> get sentences =>
+      _$this._sentences ??= new ListBuilder<ProgressSentenceDetailItem>();
+  set sentences(ListBuilder<ProgressSentenceDetailItem>? sentences) =>
+      _$this._sentences = sentences;
+
   ProgressDetailResponseBuilder() {
     ProgressDetailResponse._defaults(this);
   }
@@ -173,6 +197,8 @@ class ProgressDetailResponseBuilder
       _totalSentence = $v.totalSentence;
       _remainSentence = $v.remainSentence;
       _finishPercent = $v.finishPercent;
+      _words = $v.words?.toBuilder();
+      _sentences = $v.sentences?.toBuilder();
       _$v = null;
     }
     return this;
@@ -193,20 +219,37 @@ class ProgressDetailResponseBuilder
   ProgressDetailResponse build() => _build();
 
   _$ProgressDetailResponse _build() {
-    final _$result = _$v ??
-        new _$ProgressDetailResponse._(
-            id: BuiltValueNullFieldError.checkNotNull(
-                id, r'ProgressDetailResponse', 'id'),
-            lessonId: BuiltValueNullFieldError.checkNotNull(
-                lessonId, r'ProgressDetailResponse', 'lessonId'),
-            lessonName: lessonName,
-            creatorName: creatorName,
-            groupOwnerName: groupOwnerName,
-            totalWord: totalWord,
-            remainWord: remainWord,
-            totalSentence: totalSentence,
-            remainSentence: remainSentence,
-            finishPercent: finishPercent);
+    _$ProgressDetailResponse _$result;
+    try {
+      _$result = _$v ??
+          new _$ProgressDetailResponse._(
+              id: BuiltValueNullFieldError.checkNotNull(
+                  id, r'ProgressDetailResponse', 'id'),
+              lessonId: BuiltValueNullFieldError.checkNotNull(
+                  lessonId, r'ProgressDetailResponse', 'lessonId'),
+              lessonName: lessonName,
+              creatorName: creatorName,
+              groupOwnerName: groupOwnerName,
+              totalWord: totalWord,
+              remainWord: remainWord,
+              totalSentence: totalSentence,
+              remainSentence: remainSentence,
+              finishPercent: finishPercent,
+              words: _words?.build(),
+              sentences: _sentences?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'words';
+        _words?.build();
+        _$failedField = 'sentences';
+        _sentences?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'ProgressDetailResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

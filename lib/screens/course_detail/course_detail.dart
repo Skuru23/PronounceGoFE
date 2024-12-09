@@ -61,20 +61,20 @@ class _CourseDetailState extends State<CourseDetail> {
     });
   }
 
-  void learnLesson() {
+  void learnLesson() async {
     if (lessonDetail?.isInProgress == true) {
       showToast('Bài học này đã được bắt đầu', 'success');
       Get.back();
     } else {
       try {
-        lessonRepository.learnLesson(widget.courseId).then((response) {
-          if (response.statusCode == 204) {
-            showToast('Bắt đầu học bài này', 'success');
-          }
-        });
-      } on Exception catch (e) {
+        final response = await lessonRepository.learnLesson(widget.courseId);
+        if (response.statusCode == 204) {
+          showToast('Bắt đầu học bài này', 'success');
+        }
+      } catch (e) {
         if (e is DioException) {
-          showToast(e.response?.data['message'], 'error');
+          print(e.response?.data);
+          showToast(e.response?.data['message'] ?? "Error: $e", 'error');
         } else {
           showToast("Error: $e", 'error');
         }

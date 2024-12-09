@@ -8,7 +8,7 @@ import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class LearnWordCard extends StatefulWidget {
   const LearnWordCard({super.key, required this.word});
-  final WordBase word;
+  final ProgressWordDetailItem word;
 
   @override
   State<LearnWordCard> createState() => _LearnWordCardState();
@@ -27,13 +27,12 @@ class _LearnWordCardState extends State<LearnWordCard> {
       direction: FlipDirection.HORIZONTAL,
       front: FrontWordCard(
         word: widget.word,
-        isLearned: widget.word.id! % 2 == 0 ? true : false,
         isListening: isListening,
         onFlip: () {
           setState(() {
             isListening = true;
           });
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             final random = Random();
             final randomNumber = random.nextInt(5);
             cardKey.currentState?.toggleCard();
@@ -42,7 +41,7 @@ class _LearnWordCardState extends State<LearnWordCard> {
             setState(() {
               error = error;
               isListening = false;
-              point = widget.word.id! % 2 == 0 ? 100 : 0;
+              point = widget.word.id % 2 == 0 ? 100 : 0;
             });
           });
         },

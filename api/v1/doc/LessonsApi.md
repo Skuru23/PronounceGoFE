@@ -12,7 +12,9 @@ Method | HTTP request | Description
 [**createLessonApiV1LessonsPost**](LessonsApi.md#createlessonapiv1lessonspost) | **POST** /api/v1/lessons | Create Lesson
 [**getLessonDetailApiV1LessonsLessonIdGet**](LessonsApi.md#getlessondetailapiv1lessonslessonidget) | **GET** /api/v1/lessons/{lesson_id} | Get Lesson Detail
 [**learnLessonApiV1LessonsLessonIdLearnPost**](LessonsApi.md#learnlessonapiv1lessonslessonidlearnpost) | **POST** /api/v1/lessons/{lesson_id}/learn | Learn Lesson
+[**likeLessonApiV1LessonsLessonIdLikePatch**](LessonsApi.md#likelessonapiv1lessonslessonidlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/like | Like Lesson
 [**listingLessonsApiV1LessonsGet**](LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
+[**unlikeLessonApiV1LessonsLessonIdUnlikePatch**](LessonsApi.md#unlikelessonapiv1lessonslessonidunlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/unlike | Unlike Lesson
 [**updateLessonApiV1LessonsLessonIdPut**](LessonsApi.md#updatelessonapiv1lessonslessonidput) | **PUT** /api/v1/lessons/{lesson_id} | Update Lesson
 
 
@@ -143,6 +145,48 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **likeLessonApiV1LessonsLessonIdLikePatch**
+> likeLessonApiV1LessonsLessonIdLikePatch(lessonId)
+
+Like Lesson
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = PronounceGoApi().getLessonsApi();
+final int lessonId = 56; // int | 
+
+try {
+    api.likeLessonApiV1LessonsLessonIdLikePatch(lessonId);
+} catch on DioException (e) {
+    print('Exception when calling LessonsApi->likeLessonApiV1LessonsLessonIdLikePatch: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **lessonId** | **int**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **listingLessonsApiV1LessonsGet**
 > ListLessonsResponse listingLessonsApiV1LessonsGet(isPublic, userOwnerId, groupOwnerId, keyword)
 
@@ -151,6 +195,8 @@ Listing Lessons
 ### Example
 ```dart
 import 'package:pronounce_go_api/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
 final api = PronounceGoApi().getLessonsApi();
 final bool isPublic = true; // bool | 
@@ -181,7 +227,49 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **unlikeLessonApiV1LessonsLessonIdUnlikePatch**
+> unlikeLessonApiV1LessonsLessonIdUnlikePatch(lessonId)
+
+Unlike Lesson
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = PronounceGoApi().getLessonsApi();
+final int lessonId = 56; // int | 
+
+try {
+    api.unlikeLessonApiV1LessonsLessonIdUnlikePatch(lessonId);
+} catch on DioException (e) {
+    print('Exception when calling LessonsApi->unlikeLessonApiV1LessonsLessonIdUnlikePatch: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **lessonId** | **int**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 

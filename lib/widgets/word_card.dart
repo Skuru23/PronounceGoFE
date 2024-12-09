@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pronounce_go/screens/course_detail/course_detail.dart';
-import 'package:pronounce_go/screens/group_courses/group_courses.dart';
 import 'package:pronounce_go/screens/word_detail/word_detail_screen.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
@@ -18,7 +16,7 @@ class WordCard extends StatelessWidget {
         Get.to(() => WordDetailScreen(wordId: word.id ?? 0));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         decoration: BoxDecoration(
           color: theme.inversePrimary,
           borderRadius: BorderRadius.circular(8.0),
@@ -26,7 +24,7 @@ class WordCard extends StatelessWidget {
         child: ListTile(
           title: Text(
             word.word ?? 'No word',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
           subtitle: Row(
             crossAxisAlignment: CrossAxisAlignment.start,

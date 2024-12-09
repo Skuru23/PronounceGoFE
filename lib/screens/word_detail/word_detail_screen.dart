@@ -31,62 +31,64 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chi tiết từ vựng'),
+        title: const Text('Chi tiết từ vựng'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              word?.word ?? 'Unknown',
-              style: textTheme.headlineLarge?.copyWith(color: theme.primary),
-            ),
-            SizedBox(height: 8),
-            Text(
-              word?.ipa ?? 'Unknown',
-              style: textTheme.labelLarge,
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Loại từ:',
-              style: textTheme.labelLarge
-                  ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            Text(
-              word?.pathOfSpeech ?? 'Unknown',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Nghĩa:',
-              style: textTheme.labelLarge
-                  ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            ...?word?.mean?.split('|=').expand((meaningGroup) {
-              final parts = meaningGroup.split('|&');
-              return [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 8.0, left: 8.0, top: 8.0),
-                  child: Text(
-                    ' * ${parts[0].trim()}',
-                    style: TextStyle(fontSize: 18, color: theme.tertiary),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                word?.word ?? 'Unknown',
+                style: textTheme.headlineLarge?.copyWith(color: theme.primary),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                word?.ipa ?? 'Unknown',
+                style: textTheme.labelLarge,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Loại từ:',
+                style: textTheme.labelLarge
+                    ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Text(
+                word?.pathOfSpeech ?? 'Unknown',
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Nghĩa:',
+                style: textTheme.labelLarge
+                    ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              ...?word?.mean?.split('|=').expand((meaningGroup) {
+                final parts = meaningGroup.split('|&');
+                return [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(bottom: 8.0, left: 8.0, top: 8.0),
+                    child: Text(
+                      ' * ${parts[0].trim()}',
+                      style: TextStyle(fontSize: 18, color: theme.tertiary),
+                    ),
                   ),
-                ),
-                ...parts.skip(1).expand((meaning) =>
-                    meaning.split('|-').map((subMeaning) => Padding(
-                          padding:
-                              const EdgeInsets.only(bottom: 8.0, left: 16.0),
-                          child: Text(
-                            '${subMeaning.trim()}',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ))),
-              ];
-            }),
-            SizedBox(height: 16),
-          ],
+                  ...parts.skip(1).expand((meaning) =>
+                      meaning.split('|-').map((subMeaning) => Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 8.0, left: 16.0),
+                            child: Text(
+                              subMeaning.trim(),
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ))),
+                ];
+              }),
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );

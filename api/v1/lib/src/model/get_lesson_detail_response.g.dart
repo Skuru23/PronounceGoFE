@@ -20,7 +20,11 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
   @override
   final bool? isPublic;
   @override
+  final String? imagePath;
+  @override
   final String? creatorName;
+  @override
+  final bool? isInProgress;
   @override
   final String? groupOwnerName;
   @override
@@ -39,7 +43,9 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
       this.userOwnerId,
       this.groupOwnerId,
       this.isPublic,
+      this.imagePath,
       this.creatorName,
+      this.isInProgress,
       this.groupOwnerName,
       this.words,
       this.sentences})
@@ -64,7 +70,9 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
         userOwnerId == other.userOwnerId &&
         groupOwnerId == other.groupOwnerId &&
         isPublic == other.isPublic &&
+        imagePath == other.imagePath &&
         creatorName == other.creatorName &&
+        isInProgress == other.isInProgress &&
         groupOwnerName == other.groupOwnerName &&
         words == other.words &&
         sentences == other.sentences;
@@ -79,7 +87,9 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
     _$hash = $jc(_$hash, userOwnerId.hashCode);
     _$hash = $jc(_$hash, groupOwnerId.hashCode);
     _$hash = $jc(_$hash, isPublic.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, creatorName.hashCode);
+    _$hash = $jc(_$hash, isInProgress.hashCode);
     _$hash = $jc(_$hash, groupOwnerName.hashCode);
     _$hash = $jc(_$hash, words.hashCode);
     _$hash = $jc(_$hash, sentences.hashCode);
@@ -96,7 +106,9 @@ class _$GetLessonDetailResponse extends GetLessonDetailResponse {
           ..add('userOwnerId', userOwnerId)
           ..add('groupOwnerId', groupOwnerId)
           ..add('isPublic', isPublic)
+          ..add('imagePath', imagePath)
           ..add('creatorName', creatorName)
+          ..add('isInProgress', isInProgress)
           ..add('groupOwnerName', groupOwnerName)
           ..add('words', words)
           ..add('sentences', sentences))
@@ -133,9 +145,17 @@ class GetLessonDetailResponseBuilder
   bool? get isPublic => _$this._isPublic;
   set isPublic(bool? isPublic) => _$this._isPublic = isPublic;
 
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
+
   String? _creatorName;
   String? get creatorName => _$this._creatorName;
   set creatorName(String? creatorName) => _$this._creatorName = creatorName;
+
+  bool? _isInProgress;
+  bool? get isInProgress => _$this._isInProgress;
+  set isInProgress(bool? isInProgress) => _$this._isInProgress = isInProgress;
 
   String? _groupOwnerName;
   String? get groupOwnerName => _$this._groupOwnerName;
@@ -166,7 +186,9 @@ class GetLessonDetailResponseBuilder
       _userOwnerId = $v.userOwnerId;
       _groupOwnerId = $v.groupOwnerId;
       _isPublic = $v.isPublic;
+      _imagePath = $v.imagePath;
       _creatorName = $v.creatorName;
+      _isInProgress = $v.isInProgress;
       _groupOwnerName = $v.groupOwnerName;
       _words = $v.words?.toBuilder();
       _sentences = $v.sentences?.toBuilder();
@@ -200,7 +222,9 @@ class GetLessonDetailResponseBuilder
               userOwnerId: userOwnerId,
               groupOwnerId: groupOwnerId,
               isPublic: isPublic,
+              imagePath: imagePath,
               creatorName: creatorName,
+              isInProgress: isInProgress,
               groupOwnerName: groupOwnerName,
               words: _words?.build(),
               sentences: _sentences?.build());

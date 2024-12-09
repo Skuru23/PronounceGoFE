@@ -37,6 +37,7 @@ class _LoginFormState extends State<LoginForm> {
           showToast(
               "Đăng nhập thất bại, kiểm tra lại email hoặc mật khẩu", 'error');
         } else {
+          print('Login failed: $e');
           showToast(e.response?.data['message'], 'error');
         }
       } else {

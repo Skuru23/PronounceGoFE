@@ -16,6 +16,7 @@ part 'list_lessons_item.g.dart';
 /// * [description]
 /// * [userOwnerId]
 /// * [groupOwnerId]
+/// * [imagePath]
 /// * [isPublic]
 /// * [totalLikes]
 /// * [totalLearners]
@@ -37,6 +38,9 @@ abstract class ListLessonsItem
 
   @BuiltValueField(wireName: r'group_owner_id')
   int? get groupOwnerId;
+
+  @BuiltValueField(wireName: r'image_path')
+  String? get imagePath;
 
   @BuiltValueField(wireName: r'is_public')
   bool? get isPublic;
@@ -108,6 +112,13 @@ class _$ListLessonsItemSerializer
         : serializers.serialize(
             object.groupOwnerId,
             specifiedType: const FullType.nullable(int),
+          );
+    yield r'image_path';
+    yield object.imagePath == null
+        ? null
+        : serializers.serialize(
+            object.imagePath,
+            specifiedType: const FullType.nullable(String),
           );
     yield r'is_public';
     yield object.isPublic == null
@@ -200,6 +211,14 @@ class _$ListLessonsItemSerializer
           ) as int?;
           if (valueDes == null) continue;
           result.groupOwnerId = valueDes;
+          break;
+        case r'image_path':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.imagePath = valueDes;
           break;
         case r'is_public':
           final valueDes = serializers.deserialize(

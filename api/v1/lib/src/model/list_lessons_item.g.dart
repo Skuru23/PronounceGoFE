@@ -18,6 +18,8 @@ class _$ListLessonsItem extends ListLessonsItem {
   @override
   final int? groupOwnerId;
   @override
+  final String? imagePath;
+  @override
   final bool? isPublic;
   @override
   final int? totalLikes;
@@ -35,6 +37,7 @@ class _$ListLessonsItem extends ListLessonsItem {
       this.description,
       this.userOwnerId,
       this.groupOwnerId,
+      this.imagePath,
       this.isPublic,
       this.totalLikes,
       this.totalLearners,
@@ -60,6 +63,7 @@ class _$ListLessonsItem extends ListLessonsItem {
         description == other.description &&
         userOwnerId == other.userOwnerId &&
         groupOwnerId == other.groupOwnerId &&
+        imagePath == other.imagePath &&
         isPublic == other.isPublic &&
         totalLikes == other.totalLikes &&
         totalLearners == other.totalLearners &&
@@ -74,6 +78,7 @@ class _$ListLessonsItem extends ListLessonsItem {
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, userOwnerId.hashCode);
     _$hash = $jc(_$hash, groupOwnerId.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, isPublic.hashCode);
     _$hash = $jc(_$hash, totalLikes.hashCode);
     _$hash = $jc(_$hash, totalLearners.hashCode);
@@ -90,6 +95,7 @@ class _$ListLessonsItem extends ListLessonsItem {
           ..add('description', description)
           ..add('userOwnerId', userOwnerId)
           ..add('groupOwnerId', groupOwnerId)
+          ..add('imagePath', imagePath)
           ..add('isPublic', isPublic)
           ..add('totalLikes', totalLikes)
           ..add('totalLearners', totalLearners)
@@ -122,6 +128,10 @@ class ListLessonsItemBuilder
   int? get groupOwnerId => _$this._groupOwnerId;
   set groupOwnerId(int? groupOwnerId) => _$this._groupOwnerId = groupOwnerId;
 
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
+
   bool? _isPublic;
   bool? get isPublic => _$this._isPublic;
   set isPublic(bool? isPublic) => _$this._isPublic = isPublic;
@@ -151,6 +161,7 @@ class ListLessonsItemBuilder
       _description = $v.description;
       _userOwnerId = $v.userOwnerId;
       _groupOwnerId = $v.groupOwnerId;
+      _imagePath = $v.imagePath;
       _isPublic = $v.isPublic;
       _totalLikes = $v.totalLikes;
       _totalLearners = $v.totalLearners;
@@ -183,6 +194,7 @@ class ListLessonsItemBuilder
             description: description,
             userOwnerId: userOwnerId,
             groupOwnerId: groupOwnerId,
+            imagePath: imagePath,
             isPublic: isPublic,
             totalLikes: totalLikes,
             totalLearners: totalLearners,

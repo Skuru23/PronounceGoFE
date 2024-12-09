@@ -130,7 +130,12 @@ class LessonsApi {
         ...?headers,
       },
       extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
+        'secure': <Map<String, String>>[
+          {
+            'type': 'oauth2',
+            'name': 'OAuth2PasswordBearer',
+          },
+        ],
         ...?extra,
       },
       validateStatus: validateStatus,

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/auth_repository.dart';
@@ -18,6 +19,30 @@ class _SignUpFormState extends State<SignUpForm> {
   final _addressController = TextEditingController();
   bool _isPasswordVisible = false;
 
+  void signUpSubmit() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        final response = await AuthRepository().register(
+          _emailController.text,
+          _passwordController.text,
+          _nameController.text,
+          _phoneController.text,
+          _addressController.text,
+        );
+        if (response.statusCode == 204) {
+          showToast("Đăng ký thành công", "success");
+          Get.to(() => const LoginScreen());
+        }
+      } catch (e) {
+        if (e is DioException) {
+          showToast(e.response?.data['message'], 'error');
+        } else {
+          showToast("Đã có lỗi xảy ra ", "error");
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,7 +54,7 @@ class _SignUpFormState extends State<SignUpForm> {
             children: <Widget>[
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.person_outline_outlined),
                   labelText: "Email",
                   hintText: "abc@gmail.com",
@@ -42,16 +67,16 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.fingerprint),
+                    prefixIcon: const Icon(Icons.fingerprint),
                     labelText: "Password",
                     hintText: "Password",
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
                         _isPasswordVisible
@@ -72,10 +97,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.person),
                   labelText: "Tên",
                   hintText: "Nguyen Van A",
@@ -88,10 +113,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _phoneController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.phone),
                   labelText: "Số điện thoại",
                   hintText: "0123456789",
@@ -104,10 +129,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _addressController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.pin_drop),
                   labelText: "Đia chỉ",
                   hintText: "Hanoi, Vietnam",
@@ -120,28 +145,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  child: Text("Đăng ký"),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      final response = await AuthRepository().register(
-                        _emailController.text,
-                        _passwordController.text,
-                        _nameController.text,
-                        _phoneController.text,
-                        _addressController.text,
-                      );
-                      if (response.statusCode == 204) {
-                        showToast("Đăng ký thành công", "success");
-                        Get.to(() => LoginScreen());
-                      } else {
-                        showToast("Đăng ký thất bại", "error");
-                      }
-                    }
-                  },
+                  onPressed: signUpSubmit,
+                  child: const Text("Đăng ký"),
                 ),
               )
             ],

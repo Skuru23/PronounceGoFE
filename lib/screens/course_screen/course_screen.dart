@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pronounce_go/api/auth_repository.dart';
 import 'package:pronounce_go/api/lesson_repository.dart';
-import 'package:pronounce_go/screens/group_courses/group_courses.dart';
-import 'package:pronounce_go/screens/group_courses/group_course_card.dart';
 import 'package:pronounce_go/screens/my_course_screen/my_course_screen.dart';
 import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/course_card.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class CourseScreen extends ConsumerStatefulWidget {
+  const CourseScreen({super.key});
+
   @override
   _CourseScreenState createState() => _CourseScreenState();
 }
@@ -63,13 +61,13 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Tìm kiếm bài học',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -77,15 +75,14 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
               onChanged: updateSearchQuery,
             ),
           ),
-          ElevatedButton(
-            onPressed: fetchLessons,
-            child: Text('Refetch Data'),
-          ),
           isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      fetchLessons();
+                    },
+                    child: ListView(
                       children: filteredCourses.map((course) {
                         return CourseCard(course: course);
                       }).toList(),
@@ -98,15 +95,16 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyCourseScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const MyCourseScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.primary,
                 foregroundColor: theme.onPrimary,
               ),
-              icon: Icon(Icons.book, size: 24.0),
-              label: SizedBox(
+              icon: const Icon(Icons.book, size: 24.0),
+              label: const SizedBox(
                 width: double.infinity,
                 child: Text(
                   'Bài học của tôi',

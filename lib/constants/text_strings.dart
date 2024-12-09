@@ -1,2 +1,2 @@
 const String appName = "PronounceGo";
-const String appTagLine = "Let your pronunciation take you further.";
+const String appTagLine = "Hãy để phát âm của bạn trở nên hoàn hảo hơn!";

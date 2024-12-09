@@ -1,5 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 import 'package:pronounce_go/api/lesson_repository.dart';
+import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/sentence_card.dart';
 import 'package:pronounce_go/widgets/word_card.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
@@ -21,14 +25,14 @@ class Sentence {
 class CourseDetail extends StatefulWidget {
   final int courseId;
 
-  CourseDetail({super.key, required this.courseId});
+  const CourseDetail({super.key, required this.courseId});
 
   @override
   State<CourseDetail> createState() => _CourseDetailState();
 }
 
 class _CourseDetailState extends State<CourseDetail> {
-  final LessonRepository lessonRespository = LessonRepository();
+  final LessonRepository lessonRepository = LessonRepository();
   GetLessonDetailResponse? lessonDetail;
   final List<Word> words = [
     Word(word: 'Hello', meaning: 'A greeting'),
@@ -50,11 +54,32 @@ class _CourseDetailState extends State<CourseDetail> {
   @override
   void initState() {
     super.initState();
-    lessonRespository.getLessonDetail(widget.courseId).then((response) {
+    lessonRepository.getLessonDetail(widget.courseId).then((response) {
       setState(() {
         lessonDetail = response.data;
       });
     });
+  }
+
+  void learnLesson() {
+    if (lessonDetail?.isInProgress == true) {
+      showToast('Bài học này đã được bắt đầu', 'success');
+      Get.back();
+    } else {
+      try {
+        lessonRepository.learnLesson(widget.courseId).then((response) {
+          if (response.statusCode == 204) {
+            showToast('Bắt đầu học bài này', 'success');
+          }
+        });
+      } on Exception catch (e) {
+        if (e is DioException) {
+          showToast(e.response?.data['message'], 'error');
+        } else {
+          showToast("Error: $e", 'error');
+        }
+      }
+    }
   }
 
   @override
@@ -75,31 +100,50 @@ class _CourseDetailState extends State<CourseDetail> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(
-                      lessonDetail?.name ?? 'Unknown',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
-                    ),
-                    SizedBox(height: 16.0),
-                    Text(
-                      lessonDetail?.description ?? 'No description',
-                    ),
-                    if (lessonDetail?.userOwnerId != null)
-                      Text(
-                        'Người tạo: ${lessonDetail?.creatorName ?? 'Unknown'}',
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: theme.primary, width: 2),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                    if (lessonDetail?.groupOwnerId != null)
-                      Text(
-                        'Nhóm: ${lessonDetail?.groupOwnerName ?? 'Unknown'}',
-                      )
+                      child: Image.network(
+                        lessonDetail?.imagePath != null
+                            ? "${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${lessonDetail?.imagePath!}"
+                            : 'https://i.pinimg.com/736x/c9/16/3f/c9163f1c1ca4e1c92630047686b6b581.jpg',
+                        width: 70,
+                        height: 70,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 16.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          lessonDetail?.name ?? 'Unknown',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 24),
+                        ),
+                        const SizedBox(height: 16.0),
+                        Text(
+                          lessonDetail?.description ?? 'No description',
+                        ),
+                        if (lessonDetail?.userOwnerId != null)
+                          Text(
+                            'Người tạo: ${lessonDetail?.creatorName ?? 'Unknown'}',
+                          ),
+                        if (lessonDetail?.groupOwnerId != null)
+                          Text(
+                            'Nhóm: ${lessonDetail?.groupOwnerName ?? 'Unknown'}',
+                          )
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Container(
               decoration: BoxDecoration(
                 color: theme.secondaryContainer,
@@ -107,12 +151,12 @@ class _CourseDetailState extends State<CourseDetail> {
               ),
               child: ExpansionTile(
                 title: Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     color: theme.secondaryContainer,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Danh sách từ',
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
                   ),
@@ -123,7 +167,7 @@ class _CourseDetailState extends State<CourseDetail> {
                     [],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Container(
               decoration: BoxDecoration(
                 color: theme.secondaryContainer,
@@ -131,12 +175,12 @@ class _CourseDetailState extends State<CourseDetail> {
               ),
               child: ExpansionTile(
                 title: Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     color: theme.secondaryContainer,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Danh sách câu',
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
                   ),
@@ -147,14 +191,14 @@ class _CourseDetailState extends State<CourseDetail> {
                     [],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             const SizedBox(height: 16.0),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.5 > 400
                   ? 400
                   : MediaQuery.of(context).size.width * 0.5,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: learnLesson,
                 style: ElevatedButton.styleFrom(
                   foregroundColor: theme.onPrimary,
                   backgroundColor:
@@ -165,7 +209,7 @@ class _CourseDetailState extends State<CourseDetail> {
                       horizontal: 32.0, vertical: 16.0),
                 ),
                 child: Text(
-                  'Học',
+                  lessonDetail?.isInProgress == true ? 'Tiếp tục học' : 'Học',
                   style: TextStyle(color: theme.onPrimary),
                 ),
               ),

@@ -20,7 +20,9 @@ part 'get_lesson_detail_response.g.dart';
 /// * [userOwnerId]
 /// * [groupOwnerId]
 /// * [isPublic]
+/// * [imagePath]
 /// * [creatorName]
+/// * [isInProgress]
 /// * [groupOwnerName]
 /// * [words] - List of words in the lesson
 /// * [sentences] - List of sentences in the lesson
@@ -45,8 +47,14 @@ abstract class GetLessonDetailResponse
   @BuiltValueField(wireName: r'is_public')
   bool? get isPublic;
 
+  @BuiltValueField(wireName: r'image_path')
+  String? get imagePath;
+
   @BuiltValueField(wireName: r'creator_name')
   String? get creatorName;
+
+  @BuiltValueField(wireName: r'is_in_progress')
+  bool? get isInProgress;
 
   @BuiltValueField(wireName: r'group_owner_name')
   String? get groupOwnerName;
@@ -133,11 +141,25 @@ class _$GetLessonDetailResponseSerializer
             object.isPublic,
             specifiedType: const FullType.nullable(bool),
           );
+    yield r'image_path';
+    yield object.imagePath == null
+        ? null
+        : serializers.serialize(
+            object.imagePath,
+            specifiedType: const FullType.nullable(String),
+          );
     if (object.creatorName != null) {
       yield r'creator_name';
       yield serializers.serialize(
         object.creatorName,
         specifiedType: const FullType.nullable(String),
+      );
+    }
+    if (object.isInProgress != null) {
+      yield r'is_in_progress';
+      yield serializers.serialize(
+        object.isInProgress,
+        specifiedType: const FullType.nullable(bool),
       );
     }
     if (object.groupOwnerName != null) {
@@ -235,6 +257,14 @@ class _$GetLessonDetailResponseSerializer
           if (valueDes == null) continue;
           result.isPublic = valueDes;
           break;
+        case r'image_path':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.imagePath = valueDes;
+          break;
         case r'creator_name':
           final valueDes = serializers.deserialize(
             value,
@@ -242,6 +272,14 @@ class _$GetLessonDetailResponseSerializer
           ) as String?;
           if (valueDes == null) continue;
           result.creatorName = valueDes;
+          break;
+        case r'is_in_progress':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.isInProgress = valueDes;
           break;
         case r'group_owner_name':
           final valueDes = serializers.deserialize(

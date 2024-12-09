@@ -14,7 +14,9 @@ Name | Type | Description | Notes
 **userOwnerId** | **int** |  | 
 **groupOwnerId** | **int** |  | 
 **isPublic** | **bool** |  | 
+**imagePath** | **String** |  | 
 **creatorName** | **String** |  | [optional] 
+**isInProgress** | **bool** |  | [optional] 
 **groupOwnerName** | **String** |  | [optional] 
 **words** | [**BuiltList&lt;WordBase&gt;**](WordBase.md) | List of words in the lesson | [optional] [default to ListBuilder()]
 **sentences** | [**BuiltList&lt;LessonSentenceBase&gt;**](LessonSentenceBase.md) | List of sentences in the lesson | [optional] [default to ListBuilder()]

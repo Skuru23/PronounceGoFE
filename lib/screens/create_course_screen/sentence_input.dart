@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class SentencesInput extends StatefulWidget {
   final ValueChanged<List<String>> onChanged;
 
-  SentencesInput({required this.onChanged});
+  const SentencesInput({super.key, required this.onChanged});
 
   @override
-  _SentencesInputState createState() => _SentencesInputState();
+  SentencesInputState createState() => SentencesInputState();
 }
 
-class _SentencesInputState extends State<SentencesInput> {
+class SentencesInputState extends State<SentencesInput> {
   final List<TextEditingController> _controllers = [];
 
   void _addSentenceField() {
@@ -32,32 +32,44 @@ class _SentencesInputState extends State<SentencesInput> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Column(
       children: [
         ..._controllers.asMap().entries.map((entry) {
           int index = entry.key;
           TextEditingController controller = entry.value;
-          return Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  controller: controller,
-                  decoration:
-                      InputDecoration(labelText: 'Sentence ${index + 1}'),
-                  onChanged: (value) => _notifyParent(),
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                        labelText: 'Sentence ${index + 1}',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0))),
+                    onChanged: (value) => _notifyParent(),
+                  ),
                 ),
-              ),
-              IconButton(
-                icon: Icon(Icons.remove_circle),
-                onPressed: () => _removeSentenceField(index),
-              ),
-            ],
+                IconButton(
+                  icon: const Icon(Icons.remove_circle),
+                  onPressed: () => _removeSentenceField(index),
+                ),
+              ],
+            ),
           );
         }).toList(),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: theme.primary,
+            foregroundColor: theme.onPrimary,
+          ),
           onPressed: _addSentenceField,
-          child: Text('Add Sentence'),
+          child: Text(
+            'Thêm câu',
+          ),
         ),
       ],
     );

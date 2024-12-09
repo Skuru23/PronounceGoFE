@@ -53,6 +53,7 @@ dependencies:
   flip_card: ^0.7.0
   file_picker: ^8.1.4
   flutter_riverpod: ^2.6.1
+  built_collection: ^5.1.1
 
 dev_dependencies:
   flutter_test:

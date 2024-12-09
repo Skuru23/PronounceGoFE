@@ -45,4 +45,13 @@ class LessonRepository {
 
     return response;
   }
+
+  Future<Response> learnLesson(int lessonId) async {
+    Response response =
+        await lessonApi.learnLessonApiV1LessonsLessonIdLearnPost(
+      lessonId: lessonId,
+    );
+
+    return response;
+  }
 }

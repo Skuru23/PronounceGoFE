@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **description** | **String** |  | 
 **userOwnerId** | **int** |  | 
 **groupOwnerId** | **int** |  | 
+**imagePath** | **String** |  | 
 **isPublic** | **bool** |  | 
 **totalLikes** | **int** |  | 
 **totalLearners** | **int** |  | 

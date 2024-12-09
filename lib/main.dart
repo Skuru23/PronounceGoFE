@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:pronounce_go/screens/home_screen/home_screen.dart';
 import 'package:pronounce_go/screens/splash_screen/splash_screen.dart';
-import 'package:pronounce_go/screens/welcome_screen/welcome_screen.dart';
 import 'package:pronounce_go/theme/theme.dart';
 import 'package:pronounce_go/util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pronounce_go/screens/course_screen/course_screen.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");

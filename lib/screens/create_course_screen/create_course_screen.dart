@@ -1,37 +1,104 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:pronounce_go/api/image_repository.dart';
 import 'package:pronounce_go/api/lesson_repository.dart';
 import 'package:pronounce_go/api/word_repository.dart';
 import 'package:pronounce_go/screens/create_course_screen/sentence_input.dart';
-import 'package:pronounce_go/screens/create_course_screen/words_input.dart';
+import 'package:pronounce_go/util.dart';
+import 'package:pronounce_go/widgets/image_picker.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:built_collection/built_collection.dart';
 
 class CreateCourseScreen extends StatefulWidget {
+  const CreateCourseScreen({super.key});
+
   @override
-  _CreateCourseScreenState createState() => _CreateCourseScreenState();
+  CreateCourseScreenState createState() => CreateCourseScreenState();
 }
 
-class _CreateCourseScreenState extends State<CreateCourseScreen> {
+class CreateCourseScreenState extends State<CreateCourseScreen> {
   final _formKey = GlobalKey<FormState>();
-  final LessonRepository _lessonRespository = LessonRepository();
+  final LessonRepository _lessonRepository = LessonRepository();
   final WordRepository _wordRepository = WordRepository();
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final ImageRepository imageRepository = ImageRepository();
   bool _isPublic = false;
   final List<int> _selectedWordIds = [];
   List<String> _sentences = [];
   Timer? _debounce;
+  String? _imageUrl;
 
   @override
   void initState() {
     super.initState();
     _fetchWords();
+  }
+
+  Future<void> _pickImageAndroid() async {
+    try {
+      final result = await FilePicker.platform.pickFiles(type: FileType.any);
+      if (result != null) {
+        final file = result.files.single;
+
+        final imageResponse = await imageRepository.uploadImageAndroid(
+          file,
+        );
+        setState(() {
+          _imageUrl = imageResponse.data.path;
+        });
+      }
+    } catch (e) {
+      if (e is MissingPluginException) {
+        showToast(
+            'File picker plugin not found. Please ensure it is properly configured.',
+            'error');
+      } else {
+        showToast('Error: $e', 'error');
+      }
+    }
+  }
+
+  Future<void> _pickImageWeb() async {
+    try {
+      final result = await FilePicker.platform.pickFiles(type: FileType.any);
+      if (result != null) {
+        final file = result.files.single;
+        if (file.bytes != null) {
+          final imageResponse = await imageRepository.uploadImage(
+              file.bytes!, file.extension ?? 'png');
+          setState(() {
+            _imageUrl = imageResponse.data.path;
+          });
+        } else {
+          showToast('Failed to read file bytes', 'error');
+        }
+      }
+    } catch (e) {
+      if (e is MissingPluginException) {
+        showToast(
+            'File picker plugin not found. Please ensure it is properly configured.',
+            'error');
+      } else {
+        showToast('Error: $e', 'error');
+      }
+    }
+  }
+
+  Future<void> _pickImage() async {
+    if (kIsWeb) {
+      await _pickImageWeb();
+    } else {
+      await _pickImageAndroid();
+    }
   }
 
   Future<List<Map<String, String>>> _fetchWords([String? keyword]) async {
@@ -45,7 +112,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
           [];
       return wordMap;
     } catch (e) {
-      print(e.toString());
+      showToast("Error: $e", 'error');
       return [];
     }
   }
@@ -60,7 +127,7 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tạo 1 bài học mới'),
+        title: const Text('Tạo 1 bài học mới'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -71,20 +138,37 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
               Expanded(
                 child: ListView(
                   children: [
-                    TextFormField(
-                      controller: _titleController,
-                      decoration: InputDecoration(labelText: 'Tên bài học'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Hãy nhập tên bài học';
-                        }
-                        return null;
-                      },
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: _titleController,
+                            decoration: InputDecoration(
+                                labelText: 'Tên bài học',
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.0))),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Hãy nhập tên bài học';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        ImagePicker(
+                          imageUrl: _imageUrl,
+                          pickImage: _pickImage,
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     TextFormField(
                       controller: _descriptionController,
-                      decoration: InputDecoration(labelText: 'Mô tả'),
+                      decoration: InputDecoration(
+                          labelText: 'Mô tả',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0))),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Bài học có gì hay?';
@@ -92,17 +176,9 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 16),
-                    CheckboxListTile(
-                      title: Text('Chia sẻ với mọi người?'),
-                      value: _isPublic,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _isPublic = value ?? false;
-                        });
-                      },
-                      contentPadding: EdgeInsets.zero,
-                    ),
+                    const SizedBox(height: 16),
+                    const Text('Danh sách từ vựng'),
+                    const SizedBox(height: 16),
                     DropdownSearch<Map<String, String>>.multiSelection(
                       items: (filter, s) async {
                         if (_debounce?.isActive ?? false) _debounce?.cancel();
@@ -126,6 +202,25 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
                           return ListTile(title: Text(item['word']!));
                         },
                       ),
+                      dropdownBuilder: (context, selectedItems) {
+                        return Wrap(
+                          children: selectedItems.map((item) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Chip(
+                                label: Text(item['word']!),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                onDeleted: () {
+                                  selectedItems.remove(item);
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        );
+                      },
                       onChanged: (List<Map<String, String>> items) {
                         setState(() {
                           _selectedWordIds.clear();
@@ -134,7 +229,9 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
+                    const Text('Danh sách câu'),
+                    const SizedBox(height: 16),
                     SentencesInput(
                       onChanged: (List<String> sentences) {
                         setState(() {
@@ -142,14 +239,28 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
                         });
                       },
                     ),
+                    CheckboxListTile(
+                      title: const Text('Chia sẻ với mọi người?'),
+                      value: _isPublic,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _isPublic = value ?? false;
+                        });
+                      },
+                      contentPadding: EdgeInsets.zero,
+                    ),
                   ],
                 ),
               ),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  ),
                   onPressed: submitForm,
-                  child: Text('Create Lesson'),
+                  child: const Text('Tạo bài học'),
                 ),
               ),
             ],
@@ -160,25 +271,29 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
   }
 
   void _createLesson() async {
-    Response response =
-        await _lessonRespository.createPersonLesson(CreatePersonLessonRequest(
-      (b) => b
-        ..name = _titleController.text
-        ..description = _descriptionController.text
-        ..isPublic = _isPublic
-        ..wordIds = ListBuilder<int>(_selectedWordIds)
-        ..sentenceList = ListBuilder<String>(_sentences)
-        ..groupOwnerId = null,
-    ));
+    try {
+      final response =
+          await _lessonRepository.createPersonLesson(CreatePersonLessonRequest(
+        (b) => b
+          ..name = _titleController.text
+          ..description = _descriptionController.text
+          ..isPublic = _isPublic
+          ..wordIds = ListBuilder<int>(_selectedWordIds)
+          ..sentenceList = ListBuilder<String>(_sentences)
+          ..groupOwnerId = null
+          ..imagePath = _imageUrl,
+      ));
 
-    if (response.statusCode == 204) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Lesson created successfully'),
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Failed to create lesson'),
-      ));
+      if (response.statusCode == 204) {
+        showToast("Tạo bài học thành công", "success");
+        Get.back();
+      }
+    } catch (e) {
+      if (e is DioException) {
+        showToast(e.response?.data.message, "error");
+      } else {
+        showToast('An error occurred: $e', 'error');
+      }
     }
   }
 

@@ -48,7 +48,7 @@ class AuthRepository {
     final AuthApi authApi = api.getAuthApi();
     try {
       Response<GetMeResponse> response = await authApi.meApiV1MeGet();
-      return await authApi.meApiV1MeGet();
+      return response;
     } catch (e) {
       return Response(
           statusCode: 500, requestOptions: RequestOptions(path: ''));

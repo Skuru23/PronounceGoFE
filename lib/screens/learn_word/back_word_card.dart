@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class BackWordCard extends StatelessWidget {
-  const BackWordCard(
-      {super.key, required this.word, this.point, required this.error});
+  const BackWordCard({super.key, required this.word, this.result});
   final ProgressWordDetailItem word;
-  final int? point;
-  final List<int> error;
+  final LearnWordResponse? result;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +30,8 @@ class BackWordCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            if (point != null)
-              if (point == 100)
+            if (result != null)
+              if (result?.point == 100)
                 Text(
                   'Perfect!',
                   style: theme.textTheme.titleMedium!.copyWith(
@@ -42,7 +40,7 @@ class BackWordCard extends StatelessWidget {
                 )
               else
                 Text(
-                  'Point: $point',
+                  'Point: ${result?.point}',
                   style: theme.textTheme.titleMedium!.copyWith(
                     color: theme.colorScheme.primary,
                   ),
@@ -60,7 +58,9 @@ class BackWordCard extends StatelessWidget {
         TextSpan(
           text: ipa[i],
           style: theme.textTheme.titleMedium!.copyWith(
-            color: error.contains(i) ? Colors.red : theme.colorScheme.primary,
+            color: (result?.error != null && result!.error.contains(i))
+                ? Colors.red
+                : theme.colorScheme.primary,
             fontFamily: 'RobotoMono',
           ),
         ),

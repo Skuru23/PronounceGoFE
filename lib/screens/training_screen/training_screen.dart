@@ -36,31 +36,39 @@ class _TrainingScreenState extends State<TrainingScreen> {
   void _onSpeechResult(SpeechRecognitionResult result) async {
     if (_speechToText.isNotListening) {
       final WordRepository wordRepository = WordRepository();
-      try {
-        var response =
-            await wordRepository.checkWord(_checkText, result.recognizedWords);
-        if (response.statusCode == 200) {
-          setState(() {
-            _lastWords = result.recognizedWords;
-            _result = "${response.data!.point}%";
-            _ipa = response.data!.ipa;
-            _error = response.data!.error.toList();
-            _checked = true;
-          });
-        }
-      } on Exception catch (e) {
-        print(e);
-      }
+      // try {
+      //   var response =
+      //       await wordRepository.checkWord(_checkText, result.recognizedWords);
+      //   if (response.statusCode == 200) {
+      //     setState(() {
+      //       _lastWords = result.recognizedWords;
+      //       _result = "${response.data!.point}%";
+      //       _ipa = response.data!.ipa;
+      //       _error = response.data!.error.toList();
+      //       _checked = true;
+      //     });
+      //   }
+      // } on Exception catch (e) {
+      //   print(e);
+      // }
+      setState(() {
+        _lastWords = result.recognizedWords;
+        _checked = true;
+      });
     }
     ;
   }
 
   void startCheck() async {
     if (_speechToText.isNotListening) {
-      await _speechToText.listen(
-          localeId: 'en_GB',
-          onResult: _onSpeechResult,
-          listenFor: Duration(seconds: 5));
+      try {
+        await _speechToText.listen(
+            localeId: 'en_GB',
+            onResult: _onSpeechResult,
+            listenFor: Duration(seconds: 5));
+      } catch (e) {
+        print('Error: $e');
+      }
       setState(() {});
     } else {
       await _speechToText.stop();

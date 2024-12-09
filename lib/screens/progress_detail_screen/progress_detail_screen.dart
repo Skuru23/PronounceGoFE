@@ -50,59 +50,61 @@ class ProgressDetailScreenState extends State<ProgressDetailScreen> {
       appBar: AppBar(
         title: Text('Bài học ${progressDetail?.lessonName}'),
       ),
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: theme.secondaryContainer,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: ExpansionTile(
-              title: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: theme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Text(
-                  'Từ vựng',
-                  style: textTheme.headlineSmall,
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: theme.secondaryContainer,
+                borderRadius: BorderRadius.circular(8.0),
               ),
-              children: progressDetail?.words?.map((word) {
-                    return ProgressWordCard(
-                      word: word,
-                      progressId: widget.progressId,
-                    );
-                  }).toList() ??
-                  [],
-            ),
-          ),
-          const SizedBox(height: 16.0),
-          Container(
-            decoration: BoxDecoration(
-              color: theme.secondaryContainer,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: ExpansionTile(
-              title: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: theme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(8.0),
+              child: ExpansionTile(
+                title: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: theme.secondaryContainer,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Text(
+                    'Từ vựng',
+                    style: textTheme.headlineSmall,
+                  ),
                 ),
-                child: Text(
-                  'Câu',
-                  style: textTheme.headlineSmall,
-                ),
+                children: progressDetail?.words?.map((word) {
+                      return ProgressWordCard(
+                        word: word,
+                        progressId: widget.progressId,
+                      );
+                    }).toList() ??
+                    [],
               ),
-              children: progressDetail?.sentences?.map((sentence) {
-                    return ProgressSentenceCard(sentence: sentence);
-                  }).toList() ??
-                  [],
             ),
-          ),
-        ],
+            const SizedBox(height: 16.0),
+            Container(
+              decoration: BoxDecoration(
+                color: theme.secondaryContainer,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: ExpansionTile(
+                title: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: theme.secondaryContainer,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Text(
+                    'Câu',
+                    style: textTheme.headlineSmall,
+                  ),
+                ),
+                children: progressDetail?.sentences?.map((sentence) {
+                      return ProgressSentenceCard(sentence: sentence);
+                    }).toList() ??
+                    [],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

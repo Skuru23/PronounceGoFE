@@ -12,14 +12,15 @@ class LearnRepository {
 
   final LearnApi api = BaseApi.getApi().getLearnApi();
 
-  Future<Response> learnWord(int progressWordId, String speechText) async {
+  Future<Response<LearnWordResponse>> learnWord(
+      int progressWordId, String speechText) async {
     return await api.learnWordApiV1LearnWordsProgressWordIdPost(
       progressWordId: progressWordId,
       learnWordRequest: LearnWordRequest((b) => b..speechText = speechText),
     );
   }
 
-  Future<Response> learnSentence(
+  Future<Response<LearnSentenceResponse>> learnSentence(
       int progressSentenceId, String speechText) async {
     return await api.learnSentenceApiV1LearnSentencesProgressSentenceIdPost(
       progressSentenceId: progressSentenceId,

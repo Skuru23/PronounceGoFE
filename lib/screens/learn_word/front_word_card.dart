@@ -8,10 +8,10 @@ class FrontWordCard extends StatelessWidget {
   const FrontWordCard(
       {super.key,
       required this.word,
-      required this.onFlip,
+      required this.onCheck,
       required this.isListening});
   final ProgressWordDetailItem word;
-  final VoidCallback onFlip;
+  final VoidCallback onCheck;
   final bool isListening;
 
   @override
@@ -60,7 +60,7 @@ class FrontWordCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
                   IconButton(
-                    onPressed: isListening ? () {} : onFlip,
+                    onPressed: isListening ? () {} : onCheck,
                     icon: const Icon(Icons.mic),
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(isListening

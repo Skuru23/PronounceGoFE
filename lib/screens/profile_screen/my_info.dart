@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pronounce_go/screens/training_screen/training_screen.dart';
 
 class MyInfo extends StatelessWidget {
   const MyInfo({super.key});
@@ -10,7 +12,7 @@ class MyInfo extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ClipOval(
+        const ClipOval(
           child: Image(
             image: AssetImage("assets/images/app_icon.png"),
             height: 120,
@@ -18,7 +20,7 @@ class MyInfo extends StatelessWidget {
             fit: BoxFit.fitWidth,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Text(
@@ -26,7 +28,7 @@ class MyInfo extends StatelessWidget {
           style: theme.textTheme.titleSmall,
           textAlign: TextAlign.center,
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Row(
@@ -39,7 +41,12 @@ class MyInfo extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ],
-        )
+        ),
+        ElevatedButton(
+            onPressed: () {
+              Get.to(() => const TrainingScreen());
+            },
+            child: const Text('Training')),
       ],
     ));
   }

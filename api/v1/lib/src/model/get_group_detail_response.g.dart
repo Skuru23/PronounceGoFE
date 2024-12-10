@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_group_item.dart';
+part of 'get_group_detail_response.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$GetGroupItem extends GetGroupItem {
+class _$GetGroupDetailResponse extends GetGroupDetailResponse {
   @override
   final int? id;
   @override
@@ -27,11 +27,14 @@ class _$GetGroupItem extends GetGroupItem {
   final String? imagePath;
   @override
   final bool? isMember;
+  @override
+  final bool? isOwner;
 
-  factory _$GetGroupItem([void Function(GetGroupItemBuilder)? updates]) =>
-      (new GetGroupItemBuilder()..update(updates))._build();
+  factory _$GetGroupDetailResponse(
+          [void Function(GetGroupDetailResponseBuilder)? updates]) =>
+      (new GetGroupDetailResponseBuilder()..update(updates))._build();
 
-  _$GetGroupItem._(
+  _$GetGroupDetailResponse._(
       {this.id,
       this.name,
       this.description,
@@ -41,22 +44,26 @@ class _$GetGroupItem extends GetGroupItem {
       this.totalLesson,
       this.totalLike,
       this.imagePath,
-      this.isMember})
+      this.isMember,
+      this.isOwner})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(creator, r'GetGroupItem', 'creator');
+    BuiltValueNullFieldError.checkNotNull(
+        creator, r'GetGroupDetailResponse', 'creator');
   }
 
   @override
-  GetGroupItem rebuild(void Function(GetGroupItemBuilder) updates) =>
+  GetGroupDetailResponse rebuild(
+          void Function(GetGroupDetailResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  GetGroupItemBuilder toBuilder() => new GetGroupItemBuilder()..replace(this);
+  GetGroupDetailResponseBuilder toBuilder() =>
+      new GetGroupDetailResponseBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GetGroupItem &&
+    return other is GetGroupDetailResponse &&
         id == other.id &&
         name == other.name &&
         description == other.description &&
@@ -66,7 +73,8 @@ class _$GetGroupItem extends GetGroupItem {
         totalLesson == other.totalLesson &&
         totalLike == other.totalLike &&
         imagePath == other.imagePath &&
-        isMember == other.isMember;
+        isMember == other.isMember &&
+        isOwner == other.isOwner;
   }
 
   @override
@@ -82,13 +90,14 @@ class _$GetGroupItem extends GetGroupItem {
     _$hash = $jc(_$hash, totalLike.hashCode);
     _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, isMember.hashCode);
+    _$hash = $jc(_$hash, isOwner.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'GetGroupItem')
+    return (newBuiltValueToStringHelper(r'GetGroupDetailResponse')
           ..add('id', id)
           ..add('name', name)
           ..add('description', description)
@@ -98,14 +107,15 @@ class _$GetGroupItem extends GetGroupItem {
           ..add('totalLesson', totalLesson)
           ..add('totalLike', totalLike)
           ..add('imagePath', imagePath)
-          ..add('isMember', isMember))
+          ..add('isMember', isMember)
+          ..add('isOwner', isOwner))
         .toString();
   }
 }
 
-class GetGroupItemBuilder
-    implements Builder<GetGroupItem, GetGroupItemBuilder> {
-  _$GetGroupItem? _$v;
+class GetGroupDetailResponseBuilder
+    implements Builder<GetGroupDetailResponse, GetGroupDetailResponseBuilder> {
+  _$GetGroupDetailResponse? _$v;
 
   int? _id;
   int? get id => _$this._id;
@@ -147,11 +157,15 @@ class GetGroupItemBuilder
   bool? get isMember => _$this._isMember;
   set isMember(bool? isMember) => _$this._isMember = isMember;
 
-  GetGroupItemBuilder() {
-    GetGroupItem._defaults(this);
+  bool? _isOwner;
+  bool? get isOwner => _$this._isOwner;
+  set isOwner(bool? isOwner) => _$this._isOwner = isOwner;
+
+  GetGroupDetailResponseBuilder() {
+    GetGroupDetailResponse._defaults(this);
   }
 
-  GetGroupItemBuilder get _$this {
+  GetGroupDetailResponseBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
@@ -164,39 +178,41 @@ class GetGroupItemBuilder
       _totalLike = $v.totalLike;
       _imagePath = $v.imagePath;
       _isMember = $v.isMember;
+      _isOwner = $v.isOwner;
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(GetGroupItem other) {
+  void replace(GetGroupDetailResponse other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$GetGroupItem;
+    _$v = other as _$GetGroupDetailResponse;
   }
 
   @override
-  void update(void Function(GetGroupItemBuilder)? updates) {
+  void update(void Function(GetGroupDetailResponseBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  GetGroupItem build() => _build();
+  GetGroupDetailResponse build() => _build();
 
-  _$GetGroupItem _build() {
+  _$GetGroupDetailResponse _build() {
     final _$result = _$v ??
-        new _$GetGroupItem._(
+        new _$GetGroupDetailResponse._(
             id: id,
             name: name,
             description: description,
             ownerId: ownerId,
             creator: BuiltValueNullFieldError.checkNotNull(
-                creator, r'GetGroupItem', 'creator'),
+                creator, r'GetGroupDetailResponse', 'creator'),
             totalMember: totalMember,
             totalLesson: totalLesson,
             totalLike: totalLike,
             imagePath: imagePath,
-            isMember: isMember);
+            isMember: isMember,
+            isOwner: isOwner);
     replace(_$result);
     return _$result;
   }

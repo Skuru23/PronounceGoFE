@@ -21,12 +21,16 @@ import 'package:pronounce_go_api/src/model/create_person_lesson_request.dart';
 import 'package:pronounce_go_api/src/model/error_response400.dart';
 import 'package:pronounce_go_api/src/model/error_response401.dart';
 import 'package:pronounce_go_api/src/model/error_response403.dart';
+import 'package:pronounce_go_api/src/model/get_group_detail_response.dart';
 import 'package:pronounce_go_api/src/model/get_group_item.dart';
+import 'package:pronounce_go_api/src/model/get_group_members_response.dart';
 import 'package:pronounce_go_api/src/model/get_groups_response.dart';
 import 'package:pronounce_go_api/src/model/get_lesson_detail_response.dart';
 import 'package:pronounce_go_api/src/model/get_me_response.dart';
+import 'package:pronounce_go_api/src/model/group_member_item.dart';
 import 'package:pronounce_go_api/src/model/http_validation_error.dart';
 import 'package:pronounce_go_api/src/model/item_status.dart';
+import 'package:pronounce_go_api/src/model/learn_lesson_response.dart';
 import 'package:pronounce_go_api/src/model/learn_sentence_request.dart';
 import 'package:pronounce_go_api/src/model/learn_sentence_response.dart';
 import 'package:pronounce_go_api/src/model/learn_word_request.dart';
@@ -62,12 +66,16 @@ part 'serializers.g.dart';
   ErrorResponse400,
   ErrorResponse401,
   ErrorResponse403,
+  GetGroupDetailResponse,
   GetGroupItem,
+  GetGroupMembersResponse,
   GetGroupsResponse,
   GetLessonDetailResponse,
   GetMeResponse,
+  GroupMemberItem,
   HTTPValidationError,
   ItemStatus,
+  LearnLessonResponse,
   LearnSentenceRequest,
   LearnSentenceResponse,
   LearnWordRequest,

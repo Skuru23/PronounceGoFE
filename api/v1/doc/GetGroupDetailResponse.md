@@ -1,4 +1,4 @@
-# pronounce_go_api.model.GetGroupItem
+# pronounce_go_api.model.GetGroupDetailResponse
 
 ## Load the model package
 ```dart
@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **totalLike** | **int** |  | [optional] [default to 0]
 **imagePath** | **String** |  | [optional] 
 **isMember** | **bool** |  | [optional] 
+**isOwner** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

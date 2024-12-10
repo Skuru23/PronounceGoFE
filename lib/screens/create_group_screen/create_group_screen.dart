@@ -10,6 +10,10 @@ import 'package:pronounce_go/api/image_repository.dart';
 import 'dart:io'; // Add this import
 
 class CreateGroupScreen extends StatefulWidget {
+  final VoidCallback onGroupCreated;
+
+  CreateGroupScreen({required this.onGroupCreated});
+
   @override
   _CreateGroupScreenState createState() => _CreateGroupScreenState();
 }
@@ -38,7 +42,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     } catch (e) {
       if (e is MissingPluginException) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
               content: Text(
                   'File picker plugin not found. Please ensure it is properly configured.')),
         );
@@ -61,14 +65,14 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to read file bytes')),
+            const SnackBar(content: Text('Failed to read file bytes')),
           );
         }
       }
     } catch (e) {
       if (e is MissingPluginException) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
               content: Text(
                   'File picker plugin not found. Please ensure it is properly configured.')),
         );
@@ -130,6 +134,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           _imageUrl = null;
         });
 
+        widget.onGroupCreated(); // Call the callback function
         Get.back();
       }
     }
@@ -141,7 +146,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tạo giáo phái mới'),
+        title: const Text('Tạo giáo phái mới'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -162,11 +167,11 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16.0),
+                  const SizedBox(width: 16.0),
                   _buildImagePicker(),
                 ],
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextField(
                 controller: descriptionController,
                 decoration: InputDecoration(
@@ -177,15 +182,15 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 ),
                 maxLines: 5,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _submitForm,
-        icon: Icon(Icons.check),
-        label: Text('Tạo'),
+        icon: const Icon(Icons.check),
+        label: const Text('Tạo'),
         backgroundColor: theme.primary,
       ),
     );

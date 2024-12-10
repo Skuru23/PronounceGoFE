@@ -14,12 +14,16 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ErrorResponse400.serializer)
       ..add(ErrorResponse401.serializer)
       ..add(ErrorResponse403.serializer)
+      ..add(GetGroupDetailResponse.serializer)
       ..add(GetGroupItem.serializer)
+      ..add(GetGroupMembersResponse.serializer)
       ..add(GetGroupsResponse.serializer)
       ..add(GetLessonDetailResponse.serializer)
       ..add(GetMeResponse.serializer)
+      ..add(GroupMemberItem.serializer)
       ..add(HTTPValidationError.serializer)
       ..add(ItemStatus.serializer)
+      ..add(LearnLessonResponse.serializer)
       ..add(LearnSentenceRequest.serializer)
       ..add(LearnSentenceResponse.serializer)
       ..add(LearnWordRequest.serializer)
@@ -47,6 +51,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(GetGroupItem)]),
           () => new ListBuilder<GetGroupItem>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(GroupMemberItem)]),
+          () => new ListBuilder<GroupMemberItem>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ListLessonsItem)]),
           () => new ListBuilder<ListLessonsItem>())

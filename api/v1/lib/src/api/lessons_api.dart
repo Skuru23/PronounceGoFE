@@ -14,6 +14,7 @@ import 'package:pronounce_go_api/src/model/error_response401.dart';
 import 'package:pronounce_go_api/src/model/error_response403.dart';
 import 'package:pronounce_go_api/src/model/get_lesson_detail_response.dart';
 import 'package:pronounce_go_api/src/model/http_validation_error.dart';
+import 'package:pronounce_go_api/src/model/learn_lesson_response.dart';
 import 'package:pronounce_go_api/src/model/list_lessons_response.dart';
 import 'package:pronounce_go_api/src/model/update_lesson_request.dart';
 
@@ -193,9 +194,10 @@ class LessonsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future]
+  /// Returns a [Future] containing a [Response] with a [LearnLessonResponse] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> learnLessonApiV1LessonsLessonIdLearnPost({
+  Future<Response<LearnLessonResponse>>
+      learnLessonApiV1LessonsLessonIdLearnPost({
     required int lessonId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -233,7 +235,36 @@ class LessonsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    return _response;
+    LearnLessonResponse? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+              rawResponse,
+              specifiedType: const FullType(LearnLessonResponse),
+            ) as LearnLessonResponse;
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<LearnLessonResponse>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
   }
 
   /// Like Lesson

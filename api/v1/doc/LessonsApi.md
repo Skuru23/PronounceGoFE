@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **learnLessonApiV1LessonsLessonIdLearnPost**
-> learnLessonApiV1LessonsLessonIdLearnPost(lessonId)
+> LearnLessonResponse learnLessonApiV1LessonsLessonIdLearnPost(lessonId)
 
 Learn Lesson
 
@@ -118,7 +118,8 @@ final api = PronounceGoApi().getLessonsApi();
 final int lessonId = 56; // int | 
 
 try {
-    api.learnLessonApiV1LessonsLessonIdLearnPost(lessonId);
+    final response = api.learnLessonApiV1LessonsLessonIdLearnPost(lessonId);
+    print(response);
 } catch on DioException (e) {
     print('Exception when calling LessonsApi->learnLessonApiV1LessonsLessonIdLearnPost: $e\n');
 }
@@ -132,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**LearnLessonResponse**](LearnLessonResponse.md)
 
 ### Authorization
 

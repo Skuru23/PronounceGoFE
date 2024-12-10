@@ -9,15 +9,19 @@ doc/CreatePersonLessonRequest.md
 doc/ErrorResponse400.md
 doc/ErrorResponse401.md
 doc/ErrorResponse403.md
+doc/GetGroupDetailResponse.md
 doc/GetGroupItem.md
+doc/GetGroupMembersResponse.md
 doc/GetGroupsResponse.md
 doc/GetLessonDetailResponse.md
 doc/GetMeResponse.md
+doc/GroupMemberItem.md
 doc/GroupsApi.md
 doc/HTTPValidationError.md
 doc/ImagesApi.md
 doc/ItemStatus.md
 doc/LearnApi.md
+doc/LearnLessonResponse.md
 doc/LearnSentenceRequest.md
 doc/LearnSentenceResponse.md
 doc/LearnWordRequest.md
@@ -30,6 +34,7 @@ doc/ListingProgressItem.md
 doc/ListingProgressResponse.md
 doc/ListingWordResponse.md
 doc/LoginRequest.md
+doc/MembersApi.md
 doc/ProgressApi.md
 doc/ProgressDetailResponse.md
 doc/ProgressSentenceDetailItem.md
@@ -53,6 +58,7 @@ lib/src/api/groups_api.dart
 lib/src/api/images_api.dart
 lib/src/api/learn_api.dart
 lib/src/api/lessons_api.dart
+lib/src/api/members_api.dart
 lib/src/api/progress_api.dart
 lib/src/api/users_api.dart
 lib/src/api/words_api.dart
@@ -71,12 +77,16 @@ lib/src/model/date.dart
 lib/src/model/error_response400.dart
 lib/src/model/error_response401.dart
 lib/src/model/error_response403.dart
+lib/src/model/get_group_detail_response.dart
 lib/src/model/get_group_item.dart
+lib/src/model/get_group_members_response.dart
 lib/src/model/get_groups_response.dart
 lib/src/model/get_lesson_detail_response.dart
 lib/src/model/get_me_response.dart
+lib/src/model/group_member_item.dart
 lib/src/model/http_validation_error.dart
 lib/src/model/item_status.dart
+lib/src/model/learn_lesson_response.dart
 lib/src/model/learn_sentence_request.dart
 lib/src/model/learn_sentence_response.dart
 lib/src/model/learn_word_request.dart
@@ -103,3 +113,4 @@ lib/src/model/word_base.dart
 lib/src/model/word_detail_response.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/members_api_test.dart

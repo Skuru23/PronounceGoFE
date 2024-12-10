@@ -6,9 +6,9 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'get_group_item.g.dart';
+part 'get_group_detail_response.g.dart';
 
-/// GetGroupItem
+/// GetGroupDetailResponse
 ///
 /// Properties:
 /// * [id]
@@ -21,9 +21,10 @@ part 'get_group_item.g.dart';
 /// * [totalLike]
 /// * [imagePath]
 /// * [isMember]
+/// * [isOwner]
 @BuiltValue()
-abstract class GetGroupItem
-    implements Built<GetGroupItem, GetGroupItemBuilder> {
+abstract class GetGroupDetailResponse
+    implements Built<GetGroupDetailResponse, GetGroupDetailResponseBuilder> {
   @BuiltValueField(wireName: r'id')
   int? get id;
 
@@ -54,30 +55,40 @@ abstract class GetGroupItem
   @BuiltValueField(wireName: r'is_member')
   bool? get isMember;
 
-  GetGroupItem._();
+  @BuiltValueField(wireName: r'is_owner')
+  bool? get isOwner;
 
-  factory GetGroupItem([void updates(GetGroupItemBuilder b)]) = _$GetGroupItem;
+  GetGroupDetailResponse._();
+
+  factory GetGroupDetailResponse(
+          [void updates(GetGroupDetailResponseBuilder b)]) =
+      _$GetGroupDetailResponse;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(GetGroupItemBuilder b) => b
+  static void _defaults(GetGroupDetailResponseBuilder b) => b
     ..totalMember = 0
     ..totalLesson = 0
     ..totalLike = 0;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GetGroupItem> get serializer => _$GetGroupItemSerializer();
+  static Serializer<GetGroupDetailResponse> get serializer =>
+      _$GetGroupDetailResponseSerializer();
 }
 
-class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
+class _$GetGroupDetailResponseSerializer
+    implements PrimitiveSerializer<GetGroupDetailResponse> {
   @override
-  final Iterable<Type> types = const [GetGroupItem, _$GetGroupItem];
+  final Iterable<Type> types = const [
+    GetGroupDetailResponse,
+    _$GetGroupDetailResponse
+  ];
 
   @override
-  final String wireName = r'GetGroupItem';
+  final String wireName = r'GetGroupDetailResponse';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    GetGroupItem object, {
+    GetGroupDetailResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     yield r'id';
@@ -148,12 +159,19 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
         specifiedType: const FullType.nullable(bool),
       );
     }
+    if (object.isOwner != null) {
+      yield r'is_owner';
+      yield serializers.serialize(
+        object.isOwner,
+        specifiedType: const FullType.nullable(bool),
+      );
+    }
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    GetGroupItem object, {
+    GetGroupDetailResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object,
@@ -166,7 +184,7 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required GetGroupItemBuilder result,
+    required GetGroupDetailResponseBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -249,6 +267,14 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
           if (valueDes == null) continue;
           result.isMember = valueDes;
           break;
+        case r'is_owner':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(bool),
+          ) as bool?;
+          if (valueDes == null) continue;
+          result.isOwner = valueDes;
+          break;
         default:
           unhandled.add(key);
           unhandled.add(value);
@@ -258,12 +284,12 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
   }
 
   @override
-  GetGroupItem deserialize(
+  GetGroupDetailResponse deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = GetGroupItemBuilder();
+    final result = GetGroupDetailResponseBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

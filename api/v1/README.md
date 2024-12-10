@@ -69,6 +69,9 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**refreshTokenApiV1RefreshTokenGet**](doc/AuthApi.md#refreshtokenapiv1refreshtokenget) | **GET** /api/v1/refresh-token | Refresh Token
 [*AuthApi*](doc/AuthApi.md) | [**signupApiV1SignupPost**](doc/AuthApi.md#signupapiv1signuppost) | **POST** /api/v1/signup | Signup
 [*GroupsApi*](doc/GroupsApi.md) | [**createGroupApiV1GroupsPost**](doc/GroupsApi.md#creategroupapiv1groupspost) | **POST** /api/v1/groups | Create Group
+[*GroupsApi*](doc/GroupsApi.md) | [**getGroupDetailApiV1GroupsGroupIdGet**](doc/GroupsApi.md#getgroupdetailapiv1groupsgroupidget) | **GET** /api/v1/groups/{group_id} | Get Group Detail
+[*GroupsApi*](doc/GroupsApi.md) | [**getGroupMembersApiV1GroupsGroupIdMembersGet**](doc/GroupsApi.md#getgroupmembersapiv1groupsgroupidmembersget) | **GET** /api/v1/groups/{group_id}/members | Get Group Members
+[*GroupsApi*](doc/GroupsApi.md) | [**joinGroupApiV1GroupsGroupIdJoinPatch**](doc/GroupsApi.md#joingroupapiv1groupsgroupidjoinpatch) | **PATCH** /api/v1/groups/{group_id}/join | Join Group
 [*GroupsApi*](doc/GroupsApi.md) | [**listingGroupApiV1GroupsGet**](doc/GroupsApi.md#listinggroupapiv1groupsget) | **GET** /api/v1/groups | Listing Group
 [*ImagesApi*](doc/ImagesApi.md) | [**uploadImageApiV1ImagesUploadPost**](doc/ImagesApi.md#uploadimageapiv1imagesuploadpost) | **POST** /api/v1/images/upload | Upload Image
 [*LearnApi*](doc/LearnApi.md) | [**learnSentenceApiV1LearnSentencesProgressSentenceIdPost**](doc/LearnApi.md#learnsentenceapiv1learnsentencesprogresssentenceidpost) | **POST** /api/v1/learn/sentences/{progress_sentence_id} | Learn Sentence
@@ -80,6 +83,7 @@ Class | Method | HTTP request | Description
 [*LessonsApi*](doc/LessonsApi.md) | [**listingLessonsApiV1LessonsGet**](doc/LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
 [*LessonsApi*](doc/LessonsApi.md) | [**unlikeLessonApiV1LessonsLessonIdUnlikePatch**](doc/LessonsApi.md#unlikelessonapiv1lessonslessonidunlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/unlike | Unlike Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**updateLessonApiV1LessonsLessonIdPut**](doc/LessonsApi.md#updatelessonapiv1lessonslessonidput) | **PUT** /api/v1/lessons/{lesson_id} | Update Lesson
+[*MembersApi*](doc/MembersApi.md) | [**approveMemberApiV1MembersMemberIdApprovePost**](doc/MembersApi.md#approvememberapiv1membersmemberidapprovepost) | **POST** /api/v1/members/{member_id}/approve | Approve Member
 [*ProgressApi*](doc/ProgressApi.md) | [**getProgressDetailApiV1ProgressesProgressIdGet**](doc/ProgressApi.md#getprogressdetailapiv1progressesprogressidget) | **GET** /api/v1/progresses/{progress_id} | Get Progress Detail
 [*ProgressApi*](doc/ProgressApi.md) | [**listingProgressApiV1ProgressesGet**](doc/ProgressApi.md#listingprogressapiv1progressesget) | **GET** /api/v1/progresses | Listing Progress
 [*UsersApi*](doc/UsersApi.md) | [**updateUserApiV1UsersPut**](doc/UsersApi.md#updateuserapiv1usersput) | **PUT** /api/v1/users | Update User
@@ -97,12 +101,16 @@ Class | Method | HTTP request | Description
  - [ErrorResponse400](doc/ErrorResponse400.md)
  - [ErrorResponse401](doc/ErrorResponse401.md)
  - [ErrorResponse403](doc/ErrorResponse403.md)
+ - [GetGroupDetailResponse](doc/GetGroupDetailResponse.md)
  - [GetGroupItem](doc/GetGroupItem.md)
+ - [GetGroupMembersResponse](doc/GetGroupMembersResponse.md)
  - [GetGroupsResponse](doc/GetGroupsResponse.md)
  - [GetLessonDetailResponse](doc/GetLessonDetailResponse.md)
  - [GetMeResponse](doc/GetMeResponse.md)
+ - [GroupMemberItem](doc/GroupMemberItem.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [ItemStatus](doc/ItemStatus.md)
+ - [LearnLessonResponse](doc/LearnLessonResponse.md)
  - [LearnSentenceRequest](doc/LearnSentenceRequest.md)
  - [LearnSentenceResponse](doc/LearnSentenceResponse.md)
  - [LearnWordRequest](doc/LearnWordRequest.md)

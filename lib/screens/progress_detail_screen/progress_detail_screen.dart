@@ -98,7 +98,10 @@ class ProgressDetailScreenState extends State<ProgressDetailScreen> {
                   ),
                 ),
                 children: progressDetail?.sentences?.map((sentence) {
-                      return ProgressSentenceCard(sentence: sentence);
+                      return ProgressSentenceCard(
+                        sentence: sentence,
+                        progressId: widget.progressId,
+                      );
                     }).toList() ??
                     [],
               ),

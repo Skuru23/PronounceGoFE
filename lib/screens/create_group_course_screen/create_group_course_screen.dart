@@ -16,14 +16,16 @@ import 'package:pronounce_go_api/pronounce_go_api.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:built_collection/built_collection.dart';
 
-class CreateCourseScreen extends StatefulWidget {
-  const CreateCourseScreen({super.key});
+class CreateGroupCourseScreen extends StatefulWidget {
+  final int groupId;
+
+  const CreateGroupCourseScreen({super.key, required this.groupId});
 
   @override
-  CreateCourseScreenState createState() => CreateCourseScreenState();
+  CreateGroupCourseScreenState createState() => CreateGroupCourseScreenState();
 }
 
-class CreateCourseScreenState extends State<CreateCourseScreen> {
+class CreateGroupCourseScreenState extends State<CreateGroupCourseScreen> {
   final _formKey = GlobalKey<FormState>();
   final LessonRepository _lessonRepository = LessonRepository();
   final WordRepository _wordRepository = WordRepository();
@@ -280,7 +282,7 @@ class CreateCourseScreenState extends State<CreateCourseScreen> {
           ..isPublic = _isPublic
           ..wordIds = ListBuilder<int>(_selectedWordIds)
           ..sentenceList = ListBuilder<String>(_sentences)
-          ..groupOwnerId = null
+          ..groupOwnerId = widget.groupId
           ..imagePath = _imageUrl,
       ));
 

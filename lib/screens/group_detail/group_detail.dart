@@ -1,28 +1,78 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:pronounce_go/api/group_repository.dart';
 import 'package:pronounce_go/screens/group_courses/group_courses.dart';
 import 'package:pronounce_go/screens/group_members/group_members.dart';
-import 'package:pronounce_go/screens/group_screen/group_screen.dart';
+import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
-class GroupDetail extends StatelessWidget {
-  final GetGroupItem group;
+class GroupDetail extends StatefulWidget {
+  final int groupId;
 
-  const GroupDetail({super.key, required this.group});
+  const GroupDetail({super.key, required this.groupId});
+
+  @override
+  State<GroupDetail> createState() => _GroupDetailState();
+}
+
+class _GroupDetailState extends State<GroupDetail> {
+  GroupRepository groupRepository = GroupRepository();
+  GetGroupDetailResponse? group;
+
+  Future<void> fetchGroup() async {
+    try {
+      final response = await groupRepository.getGroupDetail(widget.groupId);
+      if (response.statusCode == 200) {
+        setState(() {
+          group = response.data;
+        });
+      }
+    } catch (e) {
+      if (e is DioException) {
+        showToast(e.response?.data, 'error');
+      } else {
+        showToast('Error: $e', 'error');
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchGroup();
+  }
+
+  void joinGroup() async {
+    try {
+      final response = await groupRepository.joinGroup(widget.groupId);
+      if (response.statusCode == 204) {
+        showToast('Đã gửi request, hãy chờ xác nhận', 'success');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        showToast(e.response?.data['message'], 'error');
+      } else {
+        showToast('Error: $e', 'error');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(group.name ?? 'No Name'),
+        title: Text(group?.name ?? 'No Name'),
       ),
       body: Column(
         children: [
           Card(
             color: theme.onSecondary,
-            margin: EdgeInsets.all(8.0),
+            margin: const EdgeInsets.all(8.0),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -36,56 +86,41 @@ class GroupDetail extends StatelessWidget {
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: NetworkImage(
-                              "https://i.redd.it/14gnqv8rtl9b1.jpg"), // Assuming group has an imageUrl property
+                          image: NetworkImage(group?.imagePath != null
+                              ? ("${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${group?.imagePath!}")
+                              : "https://i.redd.it/14gnqv8rtl9b1.jpg"),
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
+                  Text(group?.name ?? 'No Name',
+                      style: textTheme.headlineLarge),
+                  const SizedBox(height: 8.0),
                   Text(
-                    group.name ?? 'No Name',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    'Nguời tạo: ${group?.creator}',
+                    style: textTheme.bodyLarge,
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(
-                    'Giáo chủ: ${group.creator ?? 'Unknown Owner'}',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    'Số thành viên: ${group?.totalMember}',
+                    style: textTheme.bodyLarge,
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(
-                    'Giáo đồ: ${group.totalMember}',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
+                    'Khóa học: ${group?.totalLesson}',
+                    style: textTheme.bodyLarge,
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(
-                    'Khóa học: ${group.totalLesson}',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
+                    'Lượt thích: ${group?.totalLike}',
+                    style: textTheme.bodyLarge,
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(
-                    'Lượt thích: ${group.totalLike}',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Giới thiệu: ${group.description}',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
+                    'Giới thiệu: ${group?.description}',
+                    style: textTheme.bodyLarge,
                   ),
                 ],
               ),
@@ -102,7 +137,7 @@ class GroupDetail extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           theme.onPrimary, // Set the color of the button
-                      minimumSize: Size(double.infinity,
+                      minimumSize: const Size(double.infinity,
                           50), // Set the width and height of the button
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
@@ -110,18 +145,23 @@ class GroupDetail extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Get.to(() => GroupCourses());
+                      Get.to(() => GroupCourses(
+                            groupId: widget.groupId,
+                          ));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Listing Group\'s Courses'),
-                        Icon(Icons.arrow_forward),
+                        Text(
+                          'Bài học của nhóm',
+                          style: textTheme.titleMedium,
+                        ),
+                        const Icon(Icons.arrow_forward),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 SizedBox(
                   width: double.infinity,
                   height: 70,
@@ -129,7 +169,7 @@ class GroupDetail extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           theme.onPrimary, // Set the color of the button
-                      minimumSize: Size(double.infinity,
+                      minimumSize: const Size(double.infinity,
                           50), // Set the width and height of the button
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
@@ -137,17 +177,55 @@ class GroupDetail extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Get.to(() => GroupMembersPage());
+                      Get.to(() => GroupMembersPage(
+                            groupId: widget.groupId,
+                          ));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Listing Group\'s Members'),
-                        Icon(Icons.arrow_forward),
+                        Text(
+                          'Danh sách thành viên',
+                          style: textTheme.titleMedium,
+                        ),
+                        const Icon(Icons.arrow_forward),
                       ],
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                if (group?.isMember != null && group!.isMember == false)
+                  SizedBox(
+                    width: double.infinity,
+                    height: 70,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: theme.onPrimary,
+                        backgroundColor:
+                            theme.primary, // Set the color of the button
+                        minimumSize: const Size(double.infinity,
+                            50), // Set the width and height of the button
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              12.0), // Set the border radius
+                        ),
+                      ),
+                      onPressed: joinGroup,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Tham gia nhóm',
+                            style: textTheme.titleMedium
+                                ?.copyWith(color: Colors.white),
+                          ),
+                          const Icon(Icons.group_add, color: Colors.white),
+                        ],
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),

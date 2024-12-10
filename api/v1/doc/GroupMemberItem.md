@@ -1,4 +1,4 @@
-# pronounce_go_api.model.GetGroupItem
+# pronounce_go_api.model.GroupMemberItem
 
 ## Load the model package
 ```dart
@@ -9,15 +9,10 @@ import 'package:pronounce_go_api/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
+**userId** | **int** |  | 
 **name** | **String** |  | 
-**description** | **String** |  | 
-**ownerId** | **int** |  | 
-**creator** | **String** |  | 
-**totalMember** | **int** |  | [optional] [default to 0]
-**totalLesson** | **int** |  | [optional] [default to 0]
-**totalLike** | **int** |  | [optional] [default to 0]
-**imagePath** | **String** |  | [optional] 
-**isMember** | **bool** |  | [optional] 
+**isManager** | **bool** |  | 
+**approvedAt** | [**DateTime**](DateTime.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

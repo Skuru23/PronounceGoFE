@@ -10,19 +10,37 @@ class GroupRepository {
     return _instance;
   }
 
-  final GroupsApi lessonApi = BaseApi.getApi().getGroupsApi();
+  final GroupsApi groupApi = BaseApi.getApi().getGroupsApi();
 
-  Future<Response<GetGroupsResponse>> getGroups() async {
-    return await lessonApi.listingGroupApiV1GroupsGet();
+  Future<Response<GetGroupsResponse>> getGroups(bool? isMember) async {
+    if (isMember != null && isMember) {
+      return await groupApi.listingGroupApiV1GroupsGet(isMember: 'True');
+    } else {
+      return await groupApi.listingGroupApiV1GroupsGet();
+    }
   }
 
   Future<Response> createGroup(String name, String description,
       {String? imageUrl}) async {
-    return await lessonApi.createGroupApiV1GroupsPost(
+    return await groupApi.createGroupApiV1GroupsPost(
       createGroupRequest: CreateGroupRequest((b) => b
         ..name = name
         ..description = description
         ..imagePath = imageUrl),
     );
+  }
+
+  Future<Response<GetGroupDetailResponse>> getGroupDetail(int groupId) async {
+    return await groupApi.getGroupDetailApiV1GroupsGroupIdGet(groupId: groupId);
+  }
+
+  Future<Response> joinGroup(int groupId) async {
+    return await groupApi.joinGroupApiV1GroupsGroupIdJoinPatch(
+        groupId: groupId);
+  }
+
+  Future<Response<GetGroupMembersResponse>> getGroupMembers(int groupId) async {
+    return await groupApi.getGroupMembersApiV1GroupsGroupIdMembersGet(
+        groupId: groupId);
   }
 }

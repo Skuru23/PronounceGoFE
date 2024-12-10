@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +40,6 @@ class _LearnWordCardState extends State<LearnWordCard> {
 
   void startCheck() async {
     if (_speechToText.isNotListening) {
-      print('Start listening');
       await _speechToText.listen(
           localeId: 'en_GB',
           onResult: _onSpeechResult,
@@ -54,7 +51,6 @@ class _LearnWordCardState extends State<LearnWordCard> {
 
   void _onSpeechResult(SpeechRecognitionResult result) async {
     if (_speechToText.isNotListening) {
-      print('Stop listening');
       try {
         var response = await learnRepository.learnWord(
             widget.word.id, result.recognizedWords);

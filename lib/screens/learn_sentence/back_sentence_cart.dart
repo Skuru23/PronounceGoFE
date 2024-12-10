@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class BackSentenceCard extends StatelessWidget {
-  const BackSentenceCard(
-      {super.key,
-      required this.sentence,
-      this.point,
-      required this.error,
-      this.ipa});
-  final LessonSentenceBase sentence;
-  final String? ipa;
-  final int? point;
-  final List<int> error;
+  const BackSentenceCard({
+    super.key,
+    required this.sentence,
+    this.checkResult,
+  });
+  final ProgressSentenceDetailItem sentence;
+  final LearnSentenceResponse? checkResult;
 
   @override
   Widget build(BuildContext context) {
@@ -20,28 +17,28 @@ class BackSentenceCard extends StatelessWidget {
     return Card(
       color: theme.colorScheme.onPrimary,
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              sentence.sentence ?? 'Unknown',
+              sentence.sentence,
               textAlign: TextAlign.center,
               style: theme.textTheme.displaySmall!.copyWith(
                 color: theme.colorScheme.primary,
               ),
             ),
-            SizedBox(height: 20),
-            if (ipa != null)
+            const SizedBox(height: 20),
+            if (checkResult?.ipa != null)
               RichText(
                 text: TextSpan(
-                  children: _buildIpaTextSpans(ipa ?? 'Unknown', theme),
+                  children: _buildIpaTextSpans(checkResult!.ipa, theme),
                 ),
               ),
-            SizedBox(height: 20),
-            if (point != null)
-              if (point == 100)
+            const SizedBox(height: 20),
+            if (checkResult != null)
+              if (checkResult?.point == 100)
                 Text(
                   'Perfect!',
                   style: theme.textTheme.titleMedium!.copyWith(
@@ -50,7 +47,7 @@ class BackSentenceCard extends StatelessWidget {
                 )
               else
                 Text(
-                  'Point: $point',
+                  'Point: ${checkResult?.point}',
                   style: theme.textTheme.titleMedium!.copyWith(
                     color: theme.colorScheme.primary,
                   ),
@@ -68,7 +65,9 @@ class BackSentenceCard extends StatelessWidget {
         TextSpan(
           text: ipa[i],
           style: theme.textTheme.titleMedium!.copyWith(
-            color: error.contains(i) ? Colors.red : theme.colorScheme.primary,
+            color: checkResult?.error.contains(i) == true
+                ? Colors.red
+                : theme.colorScheme.primary,
             fontFamily: 'RobotoMono',
           ),
         ),

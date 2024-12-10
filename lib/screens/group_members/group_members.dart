@@ -1,77 +1,90 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:pronounce_go/api/group_repository.dart';
+import 'package:pronounce_go/util.dart';
+import 'package:pronounce_go/widgets/group_member_card.dart';
+import 'package:pronounce_go_api/pronounce_go_api.dart';
 
-class GroupMember {
-  final String name;
-  final DateTime joinedAt;
-  final bool isManager;
-  final bool isApproved;
+class GroupMembersPage extends StatefulWidget {
+  final int groupId;
 
-  GroupMember({
-    required this.name,
-    required this.joinedAt,
-    required this.isManager,
-    required this.isApproved,
-  });
+  const GroupMembersPage({super.key, required this.groupId});
+
+  @override
+  State<GroupMembersPage> createState() => _GroupMembersPageState();
 }
 
-class GroupMembersPage extends StatelessWidget {
-  final List<GroupMember> members = [
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    GroupMember(name: 'Alice', joinedAt: DateTime.now().subtract(Duration(days: 10)), isManager: true, isApproved: true),
-    GroupMember(name: 'Bob', joinedAt: DateTime.now().subtract(Duration(days: 5)), isManager: false, isApproved: false),
-    GroupMember(name: 'Charlie', joinedAt: DateTime.now().subtract(Duration(days: 2)), isManager: false, isApproved: true),
-    
-  ];
+class _GroupMembersPageState extends State<GroupMembersPage> {
+  GetGroupMembersResponse? groupMembers;
+  GetGroupDetailResponse? group;
+  final GroupRepository groupRepository = GroupRepository();
+
+  Future<void> fetchGroupMembers() async {
+    try {
+      final response = await groupRepository.getGroupMembers(widget.groupId);
+      if (response.statusCode == 200) {
+        setState(() {
+          groupMembers = response.data;
+        });
+      }
+    } catch (e) {
+      if (e is DioException) {
+        showToast(e.response?.data['message'], 'error');
+      } else {
+        showToast('Error: $e', 'error');
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchGroupMembers();
+    fetchGroup();
+  }
+
+  Future<void> fetchGroup() async {
+    try {
+      final response = await groupRepository.getGroupDetail(widget.groupId);
+      if (response.statusCode == 200) {
+        setState(() {
+          group = response.data;
+        });
+      }
+    } catch (e) {
+      if (e is DioException) {
+        showToast(e.response?.data['message'], 'error');
+      } else {
+        showToast('Error: $e', 'error');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Group Members'),
+        title: const Text('Group Members'),
       ),
-      body: ListView.builder(
-        itemCount: members.length,
-        itemBuilder: (context, index) {
-          final member = members[index];
-          return ListTile(
-            title: Text(member.name),
-            subtitle: Text('Joined at: ${member.joinedAt.toLocal()}'),
-            trailing: member.isApproved
-                ? member.isManager
-                    ? Icon(Icons.star, color: Colors.yellow)
-                    : null
-                : ElevatedButton(
-                    onPressed: () {
-                      // Approve member logic here
-                    },
-                    child: Text('Approve'),
-                  ),
-          );
-        },
-      ),
+      body: groupMembers == null
+          ? const Center(child: CircularProgressIndicator())
+          : RefreshIndicator(
+              onRefresh: fetchGroupMembers,
+              child: ListView.builder(
+                itemCount: groupMembers?.data?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final member = groupMembers?.data?[index];
+                  if (member != null) {
+                    return GroupMemberCard(
+                        member: member,
+                        isManager: group?.isOwner ?? false,
+                        refetch: fetchGroupMembers);
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+            ),
     );
   }
 }

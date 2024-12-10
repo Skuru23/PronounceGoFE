@@ -6,8 +6,10 @@ import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class ProgressSentenceCard extends StatelessWidget {
   final ProgressSentenceDetailItem sentence;
+  final int progressId;
 
-  const ProgressSentenceCard({super.key, required this.sentence});
+  const ProgressSentenceCard(
+      {super.key, required this.sentence, required this.progressId});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,11 @@ class ProgressSentenceCard extends StatelessWidget {
       margin: const EdgeInsets.all(8.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(12.0),
-        onTap: () => {Get.to(() => LearnSentenceScreen())},
+        onTap: () => {
+          Get.to(() => LearnSentenceScreen(
+                progressId: progressId,
+              ))
+        },
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/lesson_repository.dart';
+import 'package:pronounce_go/screens/progress_detail_screen/progress_detail_screen.dart';
 import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/sentence_card.dart';
 import 'package:pronounce_go/widgets/word_card.dart';
@@ -68,12 +69,13 @@ class _CourseDetailState extends State<CourseDetail> {
     } else {
       try {
         final response = await lessonRepository.learnLesson(widget.courseId);
-        if (response.statusCode == 204) {
+        if (response.statusCode == 200) {
           showToast('Bắt đầu học bài này', 'success');
+          Get.to(
+              () => ProgressDetailScreen(progressId: response.data.progress));
         }
       } catch (e) {
         if (e is DioException) {
-          print(e.response?.data);
           showToast(e.response?.data['message'] ?? "Error: $e", 'error');
         } else {
           showToast("Error: $e", 'error');

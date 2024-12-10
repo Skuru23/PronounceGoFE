@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'dart:async';
 
-import 'package:get/get.dart';
-import 'package:pronounce_go/screens/word_detail/word_detail_screen.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class FrontSentenceCard extends StatelessWidget {
   const FrontSentenceCard(
       {super.key,
       required this.sentence,
-      required this.onFlip,
-      required this.isLearned,
+      required this.onCheck,
       required this.isListening});
-  final LessonSentenceBase sentence;
-  final VoidCallback onFlip;
-  final bool isLearned;
+  final ProgressSentenceDetailItem sentence;
+  final VoidCallback onCheck;
   final bool isListening;
 
   @override
@@ -24,7 +18,7 @@ class FrontSentenceCard extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Card(
       color: theme.onPrimary,
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Stack(
           children: [
@@ -32,8 +26,12 @@ class FrontSentenceCard extends StatelessWidget {
               top: 8,
               left: 8,
               child: Icon(
-                isLearned ? Icons.check_circle : Icons.circle,
-                color: isLearned ? Colors.green : Colors.grey,
+                sentence.status == ItemStatus.DONE
+                    ? Icons.check_circle
+                    : Icons.circle,
+                color: sentence.status == ItemStatus.DONE
+                    ? Colors.green
+                    : Colors.grey,
               ),
             ),
             Container(
@@ -43,14 +41,14 @@ class FrontSentenceCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    sentence.sentence ?? 'Unknown',
+                    sentence.sentence,
                     textAlign: TextAlign.center,
                     style:
                         textTheme.headlineLarge!.copyWith(color: theme.primary),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   IconButton(
-                    onPressed: isListening ? () {} : onFlip,
+                    onPressed: isListening ? () {} : onCheck,
                     icon: const Icon(Icons.mic),
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(isListening

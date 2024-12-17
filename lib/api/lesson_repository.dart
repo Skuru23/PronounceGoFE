@@ -71,4 +71,11 @@ class LessonRepository {
 
     return response;
   }
+
+  Future<Response<RecommendLessonResponse>> recommendLesson() async {
+    Response<RecommendLessonResponse> response =
+        await lessonApi.recommendLessonsApiV1LessonsRecommendGet();
+
+    return response;
+  }
 }

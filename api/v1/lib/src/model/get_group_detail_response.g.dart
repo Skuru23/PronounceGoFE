@@ -18,13 +18,13 @@ class _$GetGroupDetailResponse extends GetGroupDetailResponse {
   @override
   final String creator;
   @override
+  final String? imagePath;
+  @override
   final int? totalMember;
   @override
   final int? totalLesson;
   @override
   final int? totalLike;
-  @override
-  final String? imagePath;
   @override
   final bool? isMember;
   @override
@@ -40,10 +40,10 @@ class _$GetGroupDetailResponse extends GetGroupDetailResponse {
       this.description,
       this.ownerId,
       required this.creator,
+      this.imagePath,
       this.totalMember,
       this.totalLesson,
       this.totalLike,
-      this.imagePath,
       this.isMember,
       this.isOwner})
       : super._() {
@@ -69,10 +69,10 @@ class _$GetGroupDetailResponse extends GetGroupDetailResponse {
         description == other.description &&
         ownerId == other.ownerId &&
         creator == other.creator &&
+        imagePath == other.imagePath &&
         totalMember == other.totalMember &&
         totalLesson == other.totalLesson &&
         totalLike == other.totalLike &&
-        imagePath == other.imagePath &&
         isMember == other.isMember &&
         isOwner == other.isOwner;
   }
@@ -85,10 +85,10 @@ class _$GetGroupDetailResponse extends GetGroupDetailResponse {
     _$hash = $jc(_$hash, description.hashCode);
     _$hash = $jc(_$hash, ownerId.hashCode);
     _$hash = $jc(_$hash, creator.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, totalMember.hashCode);
     _$hash = $jc(_$hash, totalLesson.hashCode);
     _$hash = $jc(_$hash, totalLike.hashCode);
-    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, isMember.hashCode);
     _$hash = $jc(_$hash, isOwner.hashCode);
     _$hash = $jf(_$hash);
@@ -103,10 +103,10 @@ class _$GetGroupDetailResponse extends GetGroupDetailResponse {
           ..add('description', description)
           ..add('ownerId', ownerId)
           ..add('creator', creator)
+          ..add('imagePath', imagePath)
           ..add('totalMember', totalMember)
           ..add('totalLesson', totalLesson)
           ..add('totalLike', totalLike)
-          ..add('imagePath', imagePath)
           ..add('isMember', isMember)
           ..add('isOwner', isOwner))
         .toString();
@@ -137,6 +137,10 @@ class GetGroupDetailResponseBuilder
   String? get creator => _$this._creator;
   set creator(String? creator) => _$this._creator = creator;
 
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
+
   int? _totalMember;
   int? get totalMember => _$this._totalMember;
   set totalMember(int? totalMember) => _$this._totalMember = totalMember;
@@ -148,10 +152,6 @@ class GetGroupDetailResponseBuilder
   int? _totalLike;
   int? get totalLike => _$this._totalLike;
   set totalLike(int? totalLike) => _$this._totalLike = totalLike;
-
-  String? _imagePath;
-  String? get imagePath => _$this._imagePath;
-  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
 
   bool? _isMember;
   bool? get isMember => _$this._isMember;
@@ -173,10 +173,10 @@ class GetGroupDetailResponseBuilder
       _description = $v.description;
       _ownerId = $v.ownerId;
       _creator = $v.creator;
+      _imagePath = $v.imagePath;
       _totalMember = $v.totalMember;
       _totalLesson = $v.totalLesson;
       _totalLike = $v.totalLike;
-      _imagePath = $v.imagePath;
       _isMember = $v.isMember;
       _isOwner = $v.isOwner;
       _$v = null;
@@ -207,10 +207,10 @@ class GetGroupDetailResponseBuilder
             ownerId: ownerId,
             creator: BuiltValueNullFieldError.checkNotNull(
                 creator, r'GetGroupDetailResponse', 'creator'),
+            imagePath: imagePath,
             totalMember: totalMember,
             totalLesson: totalLesson,
             totalLike: totalLike,
-            imagePath: imagePath,
             isMember: isMember,
             isOwner: isOwner);
     replace(_$result);

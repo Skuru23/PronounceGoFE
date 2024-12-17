@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **description** | **String** |  | 
 **ownerId** | **int** |  | 
 **creator** | **String** |  | 
+**imagePath** | **String** |  | [optional] 
 **totalMember** | **int** |  | [optional] [default to 0]
 **totalLesson** | **int** |  | [optional] [default to 0]
 **totalLike** | **int** |  | [optional] [default to 0]
-**imagePath** | **String** |  | [optional] 
 **isMember** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

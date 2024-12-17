@@ -73,6 +73,7 @@ Class | Method | HTTP request | Description
 [*GroupsApi*](doc/GroupsApi.md) | [**getGroupMembersApiV1GroupsGroupIdMembersGet**](doc/GroupsApi.md#getgroupmembersapiv1groupsgroupidmembersget) | **GET** /api/v1/groups/{group_id}/members | Get Group Members
 [*GroupsApi*](doc/GroupsApi.md) | [**joinGroupApiV1GroupsGroupIdJoinPatch**](doc/GroupsApi.md#joingroupapiv1groupsgroupidjoinpatch) | **PATCH** /api/v1/groups/{group_id}/join | Join Group
 [*GroupsApi*](doc/GroupsApi.md) | [**listingGroupApiV1GroupsGet**](doc/GroupsApi.md#listinggroupapiv1groupsget) | **GET** /api/v1/groups | Listing Group
+[*GroupsApi*](doc/GroupsApi.md) | [**listingTopGroupApiV1GroupsTopGroupsGet**](doc/GroupsApi.md#listingtopgroupapiv1groupstopgroupsget) | **GET** /api/v1/groups/top-groups | Listing Top Group
 [*ImagesApi*](doc/ImagesApi.md) | [**uploadImageApiV1ImagesUploadPost**](doc/ImagesApi.md#uploadimageapiv1imagesuploadpost) | **POST** /api/v1/images/upload | Upload Image
 [*LearnApi*](doc/LearnApi.md) | [**learnSentenceApiV1LearnSentencesProgressSentenceIdPost**](doc/LearnApi.md#learnsentenceapiv1learnsentencesprogresssentenceidpost) | **POST** /api/v1/learn/sentences/{progress_sentence_id} | Learn Sentence
 [*LearnApi*](doc/LearnApi.md) | [**learnWordApiV1LearnWordsProgressWordIdPost**](doc/LearnApi.md#learnwordapiv1learnwordsprogresswordidpost) | **POST** /api/v1/learn/words/{progress_word_id} | Learn Word
@@ -81,11 +82,13 @@ Class | Method | HTTP request | Description
 [*LessonsApi*](doc/LessonsApi.md) | [**learnLessonApiV1LessonsLessonIdLearnPost**](doc/LessonsApi.md#learnlessonapiv1lessonslessonidlearnpost) | **POST** /api/v1/lessons/{lesson_id}/learn | Learn Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**likeLessonApiV1LessonsLessonIdLikePatch**](doc/LessonsApi.md#likelessonapiv1lessonslessonidlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/like | Like Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**listingLessonsApiV1LessonsGet**](doc/LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
+[*LessonsApi*](doc/LessonsApi.md) | [**recommendLessonsApiV1LessonsRecommendGet**](doc/LessonsApi.md#recommendlessonsapiv1lessonsrecommendget) | **GET** /api/v1/lessons/recommend | Recommend Lessons
 [*LessonsApi*](doc/LessonsApi.md) | [**unlikeLessonApiV1LessonsLessonIdUnlikePatch**](doc/LessonsApi.md#unlikelessonapiv1lessonslessonidunlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/unlike | Unlike Lesson
 [*LessonsApi*](doc/LessonsApi.md) | [**updateLessonApiV1LessonsLessonIdPut**](doc/LessonsApi.md#updatelessonapiv1lessonslessonidput) | **PUT** /api/v1/lessons/{lesson_id} | Update Lesson
 [*MembersApi*](doc/MembersApi.md) | [**approveMemberApiV1MembersMemberIdApprovePost**](doc/MembersApi.md#approvememberapiv1membersmemberidapprovepost) | **POST** /api/v1/members/{member_id}/approve | Approve Member
 [*ProgressApi*](doc/ProgressApi.md) | [**getProgressDetailApiV1ProgressesProgressIdGet**](doc/ProgressApi.md#getprogressdetailapiv1progressesprogressidget) | **GET** /api/v1/progresses/{progress_id} | Get Progress Detail
 [*ProgressApi*](doc/ProgressApi.md) | [**listingProgressApiV1ProgressesGet**](doc/ProgressApi.md#listingprogressapiv1progressesget) | **GET** /api/v1/progresses | Listing Progress
+[*UsersApi*](doc/UsersApi.md) | [**getUserApiV1UsersGet**](doc/UsersApi.md#getuserapiv1usersget) | **GET** /api/v1/users | Get User
 [*UsersApi*](doc/UsersApi.md) | [**updateUserApiV1UsersPut**](doc/UsersApi.md#updateuserapiv1usersput) | **PUT** /api/v1/users | Update User
 [*WordsApi*](doc/WordsApi.md) | [**checkPronounceApiV1WordsCheckPost**](doc/WordsApi.md#checkpronounceapiv1wordscheckpost) | **POST** /api/v1/words/check | Check Pronounce
 [*WordsApi*](doc/WordsApi.md) | [**getWordDetailApiV1WordsWordIdGet**](doc/WordsApi.md#getworddetailapiv1wordswordidget) | **GET** /api/v1/words/{word_id} | Get Word Detail
@@ -107,6 +110,7 @@ Class | Method | HTTP request | Description
  - [GetGroupsResponse](doc/GetGroupsResponse.md)
  - [GetLessonDetailResponse](doc/GetLessonDetailResponse.md)
  - [GetMeResponse](doc/GetMeResponse.md)
+ - [GroupBase](doc/GroupBase.md)
  - [GroupMemberItem](doc/GroupMemberItem.md)
  - [HTTPValidationError](doc/HTTPValidationError.md)
  - [ItemStatus](doc/ItemStatus.md)
@@ -115,22 +119,26 @@ Class | Method | HTTP request | Description
  - [LearnSentenceResponse](doc/LearnSentenceResponse.md)
  - [LearnWordRequest](doc/LearnWordRequest.md)
  - [LearnWordResponse](doc/LearnWordResponse.md)
+ - [LessonBase](doc/LessonBase.md)
  - [LessonSentenceBase](doc/LessonSentenceBase.md)
  - [ListLessonsItem](doc/ListLessonsItem.md)
  - [ListLessonsResponse](doc/ListLessonsResponse.md)
  - [ListingProgressItem](doc/ListingProgressItem.md)
  - [ListingProgressResponse](doc/ListingProgressResponse.md)
+ - [ListingTopGroupResponse](doc/ListingTopGroupResponse.md)
  - [ListingWordResponse](doc/ListingWordResponse.md)
  - [LoginRequest](doc/LoginRequest.md)
  - [ProgressDetailResponse](doc/ProgressDetailResponse.md)
  - [ProgressSentenceDetailItem](doc/ProgressSentenceDetailItem.md)
  - [ProgressWordDetailItem](doc/ProgressWordDetailItem.md)
+ - [RecommendLessonResponse](doc/RecommendLessonResponse.md)
  - [RoleCode](doc/RoleCode.md)
  - [SignupRequest](doc/SignupRequest.md)
  - [TokenResponse](doc/TokenResponse.md)
  - [UpdateLessonRequest](doc/UpdateLessonRequest.md)
  - [UpdateUserRequest](doc/UpdateUserRequest.md)
  - [UploadImageResponse](doc/UploadImageResponse.md)
+ - [UserResponse](doc/UserResponse.md)
  - [ValidationError](doc/ValidationError.md)
  - [ValidationErrorLocInner](doc/ValidationErrorLocInner.md)
  - [WordBase](doc/WordBase.md)

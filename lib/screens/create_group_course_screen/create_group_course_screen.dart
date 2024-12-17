@@ -217,6 +217,10 @@ class CreateGroupCourseScreenState extends State<CreateGroupCourseScreen> {
                                 ),
                                 onDeleted: () {
                                   selectedItems.remove(item);
+                                  setState(() {
+                                    _selectedWordIds.addAll(selectedItems
+                                        .map((e) => int.parse(e['id']!)));
+                                  });
                                 },
                               ),
                             );

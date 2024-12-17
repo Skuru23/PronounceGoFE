@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**learnLessonApiV1LessonsLessonIdLearnPost**](LessonsApi.md#learnlessonapiv1lessonslessonidlearnpost) | **POST** /api/v1/lessons/{lesson_id}/learn | Learn Lesson
 [**likeLessonApiV1LessonsLessonIdLikePatch**](LessonsApi.md#likelessonapiv1lessonslessonidlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/like | Like Lesson
 [**listingLessonsApiV1LessonsGet**](LessonsApi.md#listinglessonsapiv1lessonsget) | **GET** /api/v1/lessons | Listing Lessons
+[**recommendLessonsApiV1LessonsRecommendGet**](LessonsApi.md#recommendlessonsapiv1lessonsrecommendget) | **GET** /api/v1/lessons/recommend | Recommend Lessons
 [**unlikeLessonApiV1LessonsLessonIdUnlikePatch**](LessonsApi.md#unlikelessonapiv1lessonslessonidunlikepatch) | **PATCH** /api/v1/lessons/{lesson_id}/unlike | Unlike Lesson
 [**updateLessonApiV1LessonsLessonIdPut**](LessonsApi.md#updatelessonapiv1lessonslessonidput) | **PUT** /api/v1/lessons/{lesson_id} | Update Lesson
 
@@ -225,6 +226,45 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListLessonsResponse**](ListLessonsResponse.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **recommendLessonsApiV1LessonsRecommendGet**
+> RecommendLessonResponse recommendLessonsApiV1LessonsRecommendGet()
+
+Recommend Lessons
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+// TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
+//defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
+
+final api = PronounceGoApi().getLessonsApi();
+
+try {
+    final response = api.recommendLessonsApiV1LessonsRecommendGet();
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling LessonsApi->recommendLessonsApiV1LessonsRecommendGet: $e\n');
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**RecommendLessonResponse**](RecommendLessonResponse.md)
 
 ### Authorization
 

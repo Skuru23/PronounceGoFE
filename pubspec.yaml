@@ -54,6 +54,7 @@ dependencies:
   file_picker: ^8.1.4
   flutter_riverpod: ^2.6.1
   built_collection: ^5.1.1
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +94,7 @@ flutter:
     - assets/images/splash_icon.png
     - assets/images/splash_image.png
     - assets/images/app_icon.png
+    - assets/images/icon.png
     - .env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

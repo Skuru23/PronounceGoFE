@@ -50,6 +50,16 @@ class SentencesInputState extends State<SentencesInput> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0))),
                     onChanged: (value) => _notifyParent(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Câu không được để trống';
+                      }
+                      if (value.length > 2048) {
+                        return 'Câu không được vượt quá 2048 ký tự';
+                      }
+
+                      return null;
+                    },
                   ),
                 ),
                 IconButton(

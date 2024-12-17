@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pronounce_go/api/lesson_repository.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/screens/my_course_screen/my_course_screen.dart';
 import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/course_card.dart';
@@ -37,7 +39,11 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
       });
       updateSearchQuery(searchQuery);
     } catch (e) {
-      showToast("Error fetching lessons: $e", 'error');
+      if (e is DioException) {
+        dioExceptionHandle(e);
+      } else {
+        showToast('Error: $e', 'error');
+      }
     } finally {
       setState(() {
         isLoading = false;
@@ -58,66 +64,76 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Tìm kiếm bài học',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+      appBar: AppBar(
+        title: const Text('Danh sách bài học'),
+      ),
+      body: Center(
+        child: SizedBox(
+          width: Responsive.isDesktop(context) ? size.width * 0.6 : size.width,
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Tìm kiếm bài học',
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  onChanged: updateSearchQuery,
                 ),
               ),
-              onChanged: updateSearchQuery,
-            ),
-          ),
-          isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      fetchLessons();
-                    },
-                    child: ListView(
-                      children: filteredCourses.map((course) {
-                        return CourseCard(
-                          course: course,
-                          refetch: fetchLessons,
-                        );
-                      }).toList(),
+              isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          fetchLessons();
+                        },
+                        child: ListView(
+                          children: filteredCourses.map((course) {
+                            return CourseCard(
+                              course: course,
+                              refetch: fetchLessons,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MyCourseScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: theme.primary,
+                    foregroundColor: theme.onPrimary,
+                  ),
+                  icon: const Icon(Icons.book, size: 24.0),
+                  label: const SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'Bài học của tôi',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyCourseScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: theme.primary,
-                foregroundColor: theme.onPrimary,
               ),
-              icon: const Icon(Icons.book, size: 24.0),
-              label: const SizedBox(
-                width: double.infinity,
-                child: Text(
-                  'Bài học của tôi',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
-                ),
-              ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 
 class ImagePicker extends StatelessWidget {
   final String? _imageUrl;
@@ -15,8 +16,8 @@ class ImagePicker extends StatelessWidget {
     return GestureDetector(
       onTap: _pickImage,
       child: Container(
-        width: 100,
-        height: 100,
+        width: Responsive.isDesktop(context) ? 200 : 100,
+        height: Responsive.isDesktop(context) ? 200 : 100,
         decoration: BoxDecoration(
           color: Colors.grey[300],
           borderRadius: BorderRadius.circular(8.0),

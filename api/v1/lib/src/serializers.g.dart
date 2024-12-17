@@ -20,6 +20,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GetGroupsResponse.serializer)
       ..add(GetLessonDetailResponse.serializer)
       ..add(GetMeResponse.serializer)
+      ..add(GroupBase.serializer)
       ..add(GroupMemberItem.serializer)
       ..add(HTTPValidationError.serializer)
       ..add(ItemStatus.serializer)
@@ -28,22 +29,26 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(LearnSentenceResponse.serializer)
       ..add(LearnWordRequest.serializer)
       ..add(LearnWordResponse.serializer)
+      ..add(LessonBase.serializer)
       ..add(LessonSentenceBase.serializer)
       ..add(ListLessonsItem.serializer)
       ..add(ListLessonsResponse.serializer)
       ..add(ListingProgressItem.serializer)
       ..add(ListingProgressResponse.serializer)
+      ..add(ListingTopGroupResponse.serializer)
       ..add(ListingWordResponse.serializer)
       ..add(LoginRequest.serializer)
       ..add(ProgressDetailResponse.serializer)
       ..add(ProgressSentenceDetailItem.serializer)
       ..add(ProgressWordDetailItem.serializer)
+      ..add(RecommendLessonResponse.serializer)
       ..add(RoleCode.serializer)
       ..add(SignupRequest.serializer)
       ..add(TokenResponse.serializer)
       ..add(UpdateLessonRequest.serializer)
       ..add(UpdateUserRequest.serializer)
       ..add(UploadImageResponse.serializer)
+      ..add(UserResponse.serializer)
       ..add(ValidationError.serializer)
       ..add(ValidationErrorLocInner.serializer)
       ..add(WordBase.serializer)
@@ -52,8 +57,17 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(GetGroupItem)]),
           () => new ListBuilder<GetGroupItem>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(GroupBase)]),
+          () => new ListBuilder<GroupBase>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(GroupMemberItem)]),
           () => new ListBuilder<GroupMemberItem>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(LessonBase)]),
+          () => new ListBuilder<LessonBase>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(LessonBase)]),
+          () => new ListBuilder<LessonBase>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ListLessonsItem)]),
           () => new ListBuilder<ListLessonsItem>())

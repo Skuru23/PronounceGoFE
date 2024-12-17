@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pronounce_go/api/auth_repository.dart';
 import 'package:pronounce_go/api/group_repository.dart';
 import 'package:pronounce_go/screens/create_group_screen/create_group_screen.dart';
 import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/group_card.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyGroupScreen extends StatefulWidget {
   const MyGroupScreen({super.key});
@@ -18,15 +18,17 @@ class MyGroupScreen extends StatefulWidget {
 class _MyCourseScreenState extends State<MyGroupScreen> {
   List<GetGroupItem> groups = [];
   GroupRepository groupRepository = GroupRepository();
-  User? user = AuthRepository().currentUser;
+  int? userId;
 
   Future<void> fetchGroups() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       var response = await groupRepository.getGroups(true);
       if (response.statusCode == 200) {
         setState(() {
           groups.clear();
           groups.addAll(response.data?.data ?? []);
+          int.parse(prefs.getString('userId') ?? '0');
         });
       }
     } catch (e) {
@@ -40,7 +42,6 @@ class _MyCourseScreenState extends State<MyGroupScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchGroups();
   }
@@ -76,8 +77,7 @@ class _MyCourseScreenState extends State<MyGroupScreen> {
                   ),
                 ),
                 children: groups
-                    .where((group) =>
-                        user != null && group.ownerId == int.tryParse(user!.id))
+                    .where((group) => userId != null && group.ownerId == userId)
                     .map((group) {
                   return GroupCard(
                     group: group,
@@ -105,8 +105,7 @@ class _MyCourseScreenState extends State<MyGroupScreen> {
                   ),
                 ),
                 children: groups
-                    .where((group) =>
-                        user != null && group.ownerId != int.tryParse(user!.id))
+                    .where((group) => userId != null && group.ownerId != userId)
                     .map((group) {
                   return GroupCard(
                     group: group,

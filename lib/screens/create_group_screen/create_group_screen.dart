@@ -1,24 +1,25 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/group_repository.dart';
-import 'package:pronounce_go/screens/group_screen/group_screen.dart';
 import 'package:file_picker/file_picker.dart'; // Add this import
 import 'package:pronounce_go/api/image_repository.dart';
-import 'dart:io'; // Add this import
+import 'package:pronounce_go/util.dart';
+// Add this import
 
 class CreateGroupScreen extends StatefulWidget {
   final VoidCallback onGroupCreated;
 
-  CreateGroupScreen({required this.onGroupCreated});
+  const CreateGroupScreen({super.key, required this.onGroupCreated});
 
   @override
-  _CreateGroupScreenState createState() => _CreateGroupScreenState();
+  CreateGroupScreenState createState() => CreateGroupScreenState();
 }
 
-class _CreateGroupScreenState extends State<CreateGroupScreen> {
+class CreateGroupScreenState extends State<CreateGroupScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final GroupRepository groupRepository = GroupRepository();
@@ -41,13 +42,13 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       }
     } catch (e) {
       if (e is MissingPluginException) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text(
-                  'File picker plugin not found. Please ensure it is properly configured.')),
-        );
+        showToast(
+            'File picker plugin not found. Please ensure it is properly configured.',
+            'error');
       } else {
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
     }
   }
@@ -64,20 +65,18 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
             _imageUrl = imageResponse.data.path;
           });
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to read file bytes')),
-          );
+          showToast('Failed to read file bytes', 'error');
         }
       }
     } catch (e) {
       if (e is MissingPluginException) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text(
-                  'File picker plugin not found. Please ensure it is properly configured.')),
-        );
+        showToast(
+            'File picker plugin not found. Please ensure it is properly configured.',
+            'error');
       } else {
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
     }
   }
@@ -102,9 +101,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
           image: _imageUrl != null
               ? DecorationImage(
                   image: NetworkImage(
-                    (dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000') +
-                        "api/v1/" +
-                        _imageUrl!,
+                    "${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${_imageUrl!}",
                   ),
                   fit: BoxFit.cover,
                 )
@@ -118,24 +115,30 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   }
 
   void _submitForm() async {
-    print("Submitting form"); // Debug print
     if (_formKey.currentState!.validate()) {
-      print("Form validated"); // Debug print
-      final res = await groupRepository.createGroup(
-        nameController.text,
-        descriptionController.text,
-        imageUrl: _imageUrl ?? '', // Ensure _imageUrl is not null
-      );
-      print("Group creation response: ${res.statusCode}"); // Debug print
-      if (res.statusCode == 204) {
-        nameController.clear();
-        descriptionController.clear();
-        setState(() {
-          _imageUrl = null;
-        });
+      try {
+        final res = await groupRepository.createGroup(
+          nameController.text,
+          descriptionController.text,
+          imageUrl: _imageUrl ?? '', // Ensure _imageUrl is not null
+        );
 
-        widget.onGroupCreated(); // Call the callback function
-        Get.back();
+        if (res.statusCode == 204) {
+          nameController.clear();
+          descriptionController.clear();
+          setState(() {
+            _imageUrl = null;
+          });
+
+          widget.onGroupCreated(); // Call the callback function
+          Get.back();
+        }
+      } on Exception catch (e) {
+        if (e is DioException) {
+          dioExceptionHandle(e);
+        } else {
+          showToast('Error: $e', 'error');
+        }
       }
     }
   }
@@ -157,7 +160,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: TextField(
+                    child: TextFormField(
                       controller: nameController,
                       decoration: InputDecoration(
                         labelText: 'Tên giáo phái',
@@ -165,6 +168,14 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Tên giáo phái không được để trống';
+                        } else if (value.length > 64) {
+                          return 'Tên giáo phái không được vượt quá 64 ký tự';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const SizedBox(width: 16.0),
@@ -172,7 +183,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                 ],
               ),
               const SizedBox(height: 16.0),
-              TextField(
+              TextFormField(
                 controller: descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Mô tả',
@@ -181,6 +192,14 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   ),
                 ),
                 maxLines: 5,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Mô tả không được để trống';
+                  } else if (value.length > 2048) {
+                    return 'Mô tả không được vượt quá 2048 ký tự';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16.0),
             ],

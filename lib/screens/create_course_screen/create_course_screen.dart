@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:pronounce_go/api/image_repository.dart';
 import 'package:pronounce_go/api/lesson_repository.dart';
 import 'package:pronounce_go/api/word_repository.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/widgets/sentence_input.dart';
 import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/image_picker.dart';
@@ -125,145 +126,166 @@ class CreateCourseScreenState extends State<CreateCourseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tạo 1 bài học mới'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: ListView(
-                  children: [
-                    Row(
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: SizedBox(
+          width: Responsive.isDesktop(context) ? size.width * 0.6 : size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView(
                       children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _titleController,
-                            decoration: InputDecoration(
-                                labelText: 'Tên bài học',
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.0))),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Hãy nhập tên bài học';
-                              }
-                              return null;
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _titleController,
+                                decoration: InputDecoration(
+                                    labelText: 'Tên bài học',
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Hãy nhập tên bài học';
+                                  }
+                                  if (value.length > 64) {
+                                    return 'Tên bài học không được vượt quá 64 ký tự';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            ImagePicker(
+                              imageUrl: _imageUrl,
+                              pickImage: _pickImage,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: _descriptionController,
+                          decoration: InputDecoration(
+                              labelText: 'Mô tả',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0))),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Bài học có gì hay?';
+                            }
+                            if (value.length > 2048) {
+                              return 'Mô tả không được vượt quá 2048 ký tự';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        const Text('Danh sách từ vựng'),
+                        const SizedBox(height: 16),
+                        DropdownSearch<Map<String, String>>.multiSelection(
+                          items: (filter, s) async {
+                            if (_debounce?.isActive ?? false)
+                              _debounce?.cancel();
+                            Completer<List<Map<String, String>>> completer =
+                                Completer();
+                            _debounce = Timer(const Duration(milliseconds: 500),
+                                () async {
+                              List<Map<String, String>> result =
+                                  await _fetchWords(filter);
+                              completer.complete(result);
+                            });
+                            await completer.future;
+                            return completer.future;
+                          },
+                          compareFn: (i, s) => i['id'] == s['id'],
+                          popupProps: PopupPropsMultiSelection.bottomSheet(
+                            bottomSheetProps: BottomSheetProps(
+                                backgroundColor: Colors.blueGrey[50]),
+                            showSearchBox: true,
+                            itemBuilder:
+                                (context, item, isSelected, itemAsString) {
+                              return ListTile(title: Text(item['word']!));
                             },
                           ),
+                          dropdownBuilder: (context, selectedItems) {
+                            return Wrap(
+                              children: selectedItems.map((item) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
+                                  child: Chip(
+                                    label: Text(item['word']!),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                    onDeleted: () {
+                                      selectedItems.remove(item);
+                                      setState(() {
+                                        _selectedWordIds.addAll(selectedItems
+                                            .map((e) => int.parse(e['id']!)));
+                                      });
+                                    },
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          },
+                          onChanged: (List<Map<String, String>> items) {
+                            setState(() {
+                              _selectedWordIds.clear();
+                              _selectedWordIds.addAll(
+                                  items.map((e) => int.parse(e['id']!)));
+                            });
+                          },
                         ),
-                        SizedBox(width: 16),
-                        ImagePicker(
-                          imageUrl: _imageUrl,
-                          pickImage: _pickImage,
+                        const SizedBox(height: 20),
+                        const Text('Danh sách câu'),
+                        const SizedBox(height: 16),
+                        SentencesInput(
+                          onChanged: (List<String> sentences) {
+                            setState(() {
+                              _sentences = sentences;
+                            });
+                          },
+                        ),
+                        CheckboxListTile(
+                          title: const Text('Chia sẻ với mọi người?'),
+                          value: _isPublic,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isPublic = value ?? false;
+                            });
+                          },
+                          contentPadding: EdgeInsets.zero,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(
-                          labelText: 'Mô tả',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0))),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Bài học có gì hay?';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    const Text('Danh sách từ vựng'),
-                    const SizedBox(height: 16),
-                    DropdownSearch<Map<String, String>>.multiSelection(
-                      items: (filter, s) async {
-                        if (_debounce?.isActive ?? false) _debounce?.cancel();
-                        Completer<List<Map<String, String>>> completer =
-                            Completer();
-                        _debounce =
-                            Timer(const Duration(milliseconds: 500), () async {
-                          List<Map<String, String>> result =
-                              await _fetchWords(filter);
-                          completer.complete(result);
-                        });
-                        await completer.future;
-                        return completer.future;
-                      },
-                      compareFn: (i, s) => i['id'] == s['id'],
-                      popupProps: PopupPropsMultiSelection.bottomSheet(
-                        bottomSheetProps: BottomSheetProps(
-                            backgroundColor: Colors.blueGrey[50]),
-                        showSearchBox: true,
-                        itemBuilder: (context, item, isSelected, itemAsString) {
-                          return ListTile(title: Text(item['word']!));
-                        },
-                      ),
-                      dropdownBuilder: (context, selectedItems) {
-                        return Wrap(
-                          children: selectedItems.map((item) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: Chip(
-                                label: Text(item['word']!),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                onDeleted: () {
-                                  selectedItems.remove(item);
-                                },
-                              ),
-                            );
-                          }).toList(),
-                        );
-                      },
-                      onChanged: (List<Map<String, String>> items) {
-                        setState(() {
-                          _selectedWordIds.clear();
-                          _selectedWordIds
-                              .addAll(items.map((e) => int.parse(e['id']!)));
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    const Text('Danh sách câu'),
-                    const SizedBox(height: 16),
-                    SentencesInput(
-                      onChanged: (List<String> sentences) {
-                        setState(() {
-                          _sentences = sentences;
-                        });
-                      },
-                    ),
-                    CheckboxListTile(
-                      title: const Text('Chia sẻ với mọi người?'),
-                      value: _isPublic,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _isPublic = value ?? false;
-                        });
-                      },
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   ),
-                  onPressed: submitForm,
-                  child: const Text('Tạo bài học'),
-                ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      onPressed: submitForm,
+                      child: const Text('Tạo bài học'),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -290,7 +312,7 @@ class CreateCourseScreenState extends State<CreateCourseScreen> {
       }
     } catch (e) {
       if (e is DioException) {
-        showToast(e.response?.data.message, "error");
+        dioExceptionHandle(e);
       } else {
         showToast('An error occurred: $e', 'error');
       }

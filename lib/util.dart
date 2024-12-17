@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -59,5 +60,13 @@ Icon getStatusIcon(ItemStatus status) {
       return const Icon(Icons.autorenew, color: Colors.orange);
     default:
       return const Icon(Icons.circle, color: Colors.grey);
+  }
+}
+
+void dioExceptionHandle(DioException e) {
+  if (e.response?.statusCode == 401) {
+    showToast("Unauthorized", 'error');
+  } else {
+    showToast("Error: ${e.response?.data.message}", 'error');
   }
 }

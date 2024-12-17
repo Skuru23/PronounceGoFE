@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pronounce_go/screens/training_screen/training_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class MyInfo extends StatelessWidget {
-  const MyInfo({super.key});
+  final UserResponse? user;
+  const MyInfo({super.key, this.user});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Expanded(
-        child: Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const ClipOval(
+        ClipOval(
           child: Image(
-            image: AssetImage("assets/images/app_icon.png"),
+            image: NetworkImage(user?.imagePath != null
+                ? ("${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${user?.imagePath!}")
+                : "${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/images/user_icon.webp"),
             height: 120,
             width: 120,
             fit: BoxFit.fitWidth,
@@ -23,31 +25,40 @@ class MyInfo extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Text(
-          "Huy Truong",
-          style: theme.textTheme.titleSmall,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.location_pin),
-            Text(
-              "Hanoi",
-              style: theme.textTheme.bodySmall,
-              textAlign: TextAlign.center,
+        Container(
+          width: 300,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.secondaryContainer,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(
+                  user?.name ?? "",
+                  style: theme.textTheme.titleSmall,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.location_pin),
+                    Text(
+                      user?.address ?? "",
+                      style: theme.textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-        ElevatedButton(
-            onPressed: () {
-              Get.to(() => const TrainingScreen());
-            },
-            child: const Text('Training')),
       ],
-    ));
+    );
   }
 }

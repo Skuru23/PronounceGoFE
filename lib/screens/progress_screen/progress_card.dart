@@ -23,8 +23,10 @@ class ProgressCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(lesson.lessonName ?? 'Lesson Name',
-                    style: textTheme.headlineSmall),
+                Expanded(
+                  child: Text(lesson.lessonName ?? 'Lesson Name',
+                      style: textTheme.headlineSmall),
+                ),
                 TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: theme.inversePrimary,
@@ -42,26 +44,42 @@ class ProgressCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 20.0,
-              child: LiquidLinearProgressIndicator(
-                value:
-                    lesson.finishPercent! / 100, // Set the progress value here
-                valueColor: AlwaysStoppedAnimation(theme.primary),
-                backgroundColor: theme.onPrimary,
-                borderColor: theme.primary,
-                borderWidth: 2.0,
-                borderRadius: 12.0,
-                direction: Axis.horizontal,
-                center: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                        'Từ: ${(lesson.totalWord ?? 0) - (lesson.remainWord ?? 0)}/${lesson.totalWord ?? 0}',
-                        style: TextStyle(color: theme.onSurface)),
-                    const SizedBox(width: 16.0),
-                    Text(
-                        'Câu: ${(lesson.totalSentence ?? 0) - (lesson.remainSentence ?? 0)}/${lesson.totalSentence ?? 0}',
-                        style: TextStyle(color: theme.onSurface)),
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
                   ],
+                ),
+                child: LiquidLinearProgressIndicator(
+                  value: lesson.finishPercent! /
+                      100, // Set the progress value here
+                  valueColor: AlwaysStoppedAnimation(
+                    lesson.finishPercent == 100 ? Colors.green : theme.primary,
+                  ),
+                  backgroundColor: lesson.finishPercent == 100
+                      ? Colors.green
+                      : theme.onPrimary,
+                  borderColor: theme.primary,
+                  borderWidth: 2.0,
+                  borderRadius: 12.0,
+                  direction: Axis.horizontal,
+                  center: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                          'Từ: ${(lesson.totalWord ?? 0) - (lesson.remainWord ?? 0)}/${lesson.totalWord ?? 0}',
+                          style: TextStyle(color: theme.onSurface)),
+                      const SizedBox(width: 16.0),
+                      Text(
+                          'Câu: ${(lesson.totalSentence ?? 0) - (lesson.remainSentence ?? 0)}/${lesson.totalSentence ?? 0}',
+                          style: TextStyle(color: theme.onSurface)),
+                    ],
+                  ),
                 ),
               ),
             ),

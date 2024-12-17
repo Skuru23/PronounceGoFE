@@ -16,10 +16,10 @@ part 'get_group_item.g.dart';
 /// * [description]
 /// * [ownerId]
 /// * [creator]
+/// * [imagePath]
 /// * [totalMember]
 /// * [totalLesson]
 /// * [totalLike]
-/// * [imagePath]
 /// * [isMember]
 @BuiltValue()
 abstract class GetGroupItem
@@ -39,6 +39,9 @@ abstract class GetGroupItem
   @BuiltValueField(wireName: r'creator')
   String get creator;
 
+  @BuiltValueField(wireName: r'image_path')
+  String? get imagePath;
+
   @BuiltValueField(wireName: r'total_member')
   int? get totalMember;
 
@@ -47,9 +50,6 @@ abstract class GetGroupItem
 
   @BuiltValueField(wireName: r'total_like')
   int? get totalLike;
-
-  @BuiltValueField(wireName: r'image_path')
-  String? get imagePath;
 
   @BuiltValueField(wireName: r'is_member')
   bool? get isMember;
@@ -113,6 +113,13 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
       object.creator,
       specifiedType: const FullType(String),
     );
+    if (object.imagePath != null) {
+      yield r'image_path';
+      yield serializers.serialize(
+        object.imagePath,
+        specifiedType: const FullType.nullable(String),
+      );
+    }
     if (object.totalMember != null) {
       yield r'total_member';
       yield serializers.serialize(
@@ -132,13 +139,6 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
       yield serializers.serialize(
         object.totalLike,
         specifiedType: const FullType(int),
-      );
-    }
-    if (object.imagePath != null) {
-      yield r'image_path';
-      yield serializers.serialize(
-        object.imagePath,
-        specifiedType: const FullType.nullable(String),
       );
     }
     if (object.isMember != null) {
@@ -212,6 +212,14 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
           ) as String;
           result.creator = valueDes;
           break;
+        case r'image_path':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.imagePath = valueDes;
+          break;
         case r'total_member':
           final valueDes = serializers.deserialize(
             value,
@@ -232,14 +240,6 @@ class _$GetGroupItemSerializer implements PrimitiveSerializer<GetGroupItem> {
             specifiedType: const FullType(int),
           ) as int;
           result.totalLike = valueDes;
-          break;
-        case r'image_path':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.imagePath = valueDes;
           break;
         case r'is_member':
           final valueDes = serializers.deserialize(

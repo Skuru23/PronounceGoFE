@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pronounce_go/api/base_api.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   AuthRepository._privateConstructor();
@@ -14,19 +15,29 @@ class AuthRepository {
 
   Future<Response<TokenResponse>> login(String email, String password) async {
     final AuthApi authApi = api.getAuthApi();
-    Response<TokenResponse> response = await authApi.loginApiV1LoginPost(
-      loginRequest: LoginRequest((b) => b
-        ..email = email
-        ..password = password),
-    );
+    try {
+      Response<TokenResponse> response = await authApi.loginApiV1LoginPost(
+        loginRequest: LoginRequest((b) => b
+          ..email = email
+          ..password = password),
+      );
 
-    if (response.statusCode == 200 && response.data != null) {
-      final token = response.data!.accessToken;
-      api.setOAuthToken('OAuth2PasswordBearer', token);
-      await _saveUserData();
+      if (response.statusCode == 200 && response.data != null) {
+        final prefs = await SharedPreferences.getInstance();
+        final token = response.data!.accessToken;
+        prefs.setString('token', token);
+        prefs.setString('refreshToken', response.data!.refreshToken);
+        await _saveUserData();
+      }
+
+      return response;
+    } catch (e) {
+      print(e);
+      return Response(
+          statusCode: 500,
+          requestOptions: RequestOptions(path: ''),
+          statusMessage: e.toString());
     }
-
-    return response;
   }
 
   Future<void> _saveUserData() async {
@@ -41,6 +52,14 @@ class AuthRepository {
         phone: response.data!.phone ?? '',
         address: response.data!.address ?? '',
       );
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('userId', currentUser!.id);
+      prefs.setString('userRoleCode', currentUser!.roleCode);
+      prefs.setString('userEmail', currentUser!.email);
+      prefs.setString('userName', currentUser!.name);
+      prefs.setString('userPhone', currentUser!.phone);
+      prefs.setString('userAddress', currentUser!.address);
     }
   }
 
@@ -68,6 +87,25 @@ class AuthRepository {
     );
 
     return response;
+  }
+
+  Future<Response<TokenResponse>> refreshToken(String refreshToken) async {
+    final AuthApi authApi = api.getAuthApi();
+    Response<TokenResponse> response = await authApi
+        .refreshTokenApiV1RefreshTokenGet(refreshToken: refreshToken);
+    return response;
+  }
+
+  Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+    prefs.remove('refreshToken');
+    prefs.remove('userId');
+    prefs.remove('userRoleCode');
+    prefs.remove('userEmail');
+    prefs.remove('userName');
+    prefs.remove('userPhone');
+    prefs.remove('userAddress');
   }
 }
 

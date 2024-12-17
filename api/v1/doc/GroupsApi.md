@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**getGroupMembersApiV1GroupsGroupIdMembersGet**](GroupsApi.md#getgroupmembersapiv1groupsgroupidmembersget) | **GET** /api/v1/groups/{group_id}/members | Get Group Members
 [**joinGroupApiV1GroupsGroupIdJoinPatch**](GroupsApi.md#joingroupapiv1groupsgroupidjoinpatch) | **PATCH** /api/v1/groups/{group_id}/join | Join Group
 [**listingGroupApiV1GroupsGet**](GroupsApi.md#listinggroupapiv1groupsget) | **GET** /api/v1/groups | Listing Group
+[**listingTopGroupApiV1GroupsTopGroupsGet**](GroupsApi.md#listingtopgroupapiv1groupstopgroupsget) | **GET** /api/v1/groups/top-groups | Listing Top Group
 
 
 # **createGroupApiV1GroupsPost**
@@ -225,6 +226,43 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listingTopGroupApiV1GroupsTopGroupsGet**
+> ListingTopGroupResponse listingTopGroupApiV1GroupsTopGroupsGet()
+
+Listing Top Group
+
+### Example
+```dart
+import 'package:pronounce_go_api/api.dart';
+
+final api = PronounceGoApi().getGroupsApi();
+
+try {
+    final response = api.listingTopGroupApiV1GroupsTopGroupsGet();
+    print(response);
+} catch on DioException (e) {
+    print('Exception when calling GroupsApi->listingTopGroupApiV1GroupsTopGroupsGet: $e\n');
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListingTopGroupResponse**](ListingTopGroupResponse.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

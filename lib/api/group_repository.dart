@@ -43,4 +43,8 @@ class GroupRepository {
     return await groupApi.getGroupMembersApiV1GroupsGroupIdMembersGet(
         groupId: groupId);
   }
+
+  Future<Response<ListingTopGroupResponse>> listingTopGroup() async {
+    return await groupApi.listingTopGroupApiV1GroupsTopGroupsGet();
+  }
 }

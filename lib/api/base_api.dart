@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'token_interceptor.dart';
 
 class BaseApi {
   static final BaseApi _instance = BaseApi._internal();
   late final PronounceGoApi api;
-
+  final TokenInterceptor tokenInterceptor = TokenInterceptor();
   factory BaseApi() {
     return _instance;
   }
@@ -18,15 +17,11 @@ class BaseApi {
       connectTimeout: const Duration(milliseconds: 5000),
       receiveTimeout: const Duration(milliseconds: 3000),
     ));
-    TokenInterceptor tokenInterceptor = TokenInterceptor();
+
     api = PronounceGoApi(dio: dio, interceptors: [tokenInterceptor]);
   }
 
   static PronounceGoApi getApi() {
     return _instance.api;
   }
-}
-
-extension on RequestOptions {
-  get dio => null;
 }

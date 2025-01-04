@@ -28,7 +28,7 @@ class _MyCourseScreenState extends State<MyGroupScreen> {
         setState(() {
           groups.clear();
           groups.addAll(response.data?.data ?? []);
-          int.parse(prefs.getString('userId') ?? '0');
+          userId = int.parse(prefs.getString('userId') ?? '0');
         });
       }
     } catch (e) {

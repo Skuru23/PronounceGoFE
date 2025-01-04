@@ -65,6 +65,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Danh sách bài học'),
@@ -118,15 +119,21 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: theme.primary,
                     foregroundColor: theme.onPrimary,
+                    padding: EdgeInsets.all(
+                        Responsive.isMobile(context) ? 8.0 : 16.0),
                   ),
-                  icon: const Icon(Icons.book, size: 24.0),
-                  label: const SizedBox(
+                  icon: Icon(Icons.book,
+                      size: Responsive.isMobile(context) ? 24.0 : 40.0),
+                  label: SizedBox(
                     width: double.infinity,
                     child: Text(
                       'Bài học của tôi',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.w700),
+                      style: Responsive.isMobile(context)
+                          ? textTheme.titleMedium
+                              ?.copyWith(color: theme.onPrimary)
+                          : textTheme.headlineMedium
+                              ?.copyWith(color: theme.onPrimary),
                     ),
                   ),
                 ),

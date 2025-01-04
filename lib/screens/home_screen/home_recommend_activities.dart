@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/screens/course_screen/course_screen.dart';
 import 'package:pronounce_go/screens/create_course_screen/create_course_screen.dart';
 import 'package:pronounce_go/screens/my_group_screen/my_group_screen.dart';
@@ -42,7 +43,8 @@ class HomeRecommendActivities extends StatelessWidget {
                   'Tiếp tục các bài học',
                   Icons.directions_run,
                   LinearGradient(colors: [Colors.purple, Colors.red]),
-                  Colors.purple, onTap: () {
+                  Colors.purple,
+                  context, onTap: () {
                 Get.to(() => const ProgressScreen());
               }),
               _buildActionCard(
@@ -52,7 +54,8 @@ class HomeRecommendActivities extends StatelessWidget {
                   'Check hội xem có gì mới',
                   Icons.local_cafe,
                   LinearGradient(colors: [Colors.red, Colors.teal]),
-                  Colors.red, onTap: () {
+                  Colors.red,
+                  context, onTap: () {
                 Get.to(() => const MyGroupScreen());
               }),
             ],
@@ -68,7 +71,8 @@ class HomeRecommendActivities extends StatelessWidget {
                   'Tìm 1 bài học mới',
                   Icons.book,
                   LinearGradient(colors: [Colors.teal, Colors.blue]),
-                  Colors.teal, onTap: () {
+                  Colors.teal,
+                  context, onTap: () {
                 Get.to(() => const CourseScreen());
               }),
               _buildActionCard(
@@ -78,7 +82,8 @@ class HomeRecommendActivities extends StatelessWidget {
                   'Tạo một bài học mới để luyện tập',
                   Icons.sports_gymnastics,
                   LinearGradient(colors: [Colors.blue, Colors.purple]),
-                  Colors.blue, onTap: () {
+                  Colors.blue,
+                  context, onTap: () {
                 Get.to(() => const CreateCourseScreen());
               }),
             ],
@@ -89,13 +94,22 @@ class HomeRecommendActivities extends StatelessWidget {
     );
   }
 
-  Widget _buildActionCard(Size size, ColorScheme theme, TextTheme textTheme,
-      String title, IconData icon, Gradient gradient, Color shadowColor,
+  Widget _buildActionCard(
+      Size size,
+      ColorScheme theme,
+      TextTheme textTheme,
+      String title,
+      IconData icon,
+      Gradient gradient,
+      Color shadowColor,
+      BuildContext context,
       {Function()? onTap}) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: size.width * 0.45,
+        width:
+            Responsive.isMobile(context) ? size.width * 0.45 : size.width * 0.3,
+        height: 100,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           gradient: gradient,

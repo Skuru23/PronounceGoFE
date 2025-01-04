@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/group_repository.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/util.dart';
 import 'package:pronounce_go/widgets/group_card.dart';
 import 'package:pronounce_go/screens/my_group_screen/my_group_screen.dart';
@@ -67,54 +68,60 @@ class GroupScreenState extends State<GroupScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-
+    final size = MediaQuery.of(context).size;
+    final bool isDesktop = Responsive.isDesktop(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Hội nhóm'),
       ),
       body: RefreshIndicator(
         onRefresh: fetchGroups,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  fillColor: theme.onSecondary,
-                  filled: true,
-                  hintText: 'Tìm kiếm...',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+        child: Center(
+          child: SizedBox(
+            width: isDesktop ? size.width * 0.6 : size.width,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: theme.onSecondary,
+                      filled: true,
+                      hintText: 'Tìm kiếm...',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      prefixIcon: const Icon(Icons.search),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value;
+                      });
+                    },
                   ),
-                  prefixIcon: const Icon(Icons.search),
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    searchQuery = value;
-                  });
-                },
-              ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: groups.length,
+                    itemBuilder: (context, index) {
+                      final group = groups[index];
+                      if (group.name != null &&
+                          group.name!
+                              .toLowerCase()
+                              .contains(searchQuery.toLowerCase())) {
+                        return GroupCard(
+                          group: group,
+                          refetch: fetchGroups,
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: groups.length,
-                itemBuilder: (context, index) {
-                  final group = groups[index];
-                  if (group.name != null &&
-                      group.name!
-                          .toLowerCase()
-                          .contains(searchQuery.toLowerCase())) {
-                    return GroupCard(
-                      group: group,
-                      refetch: fetchGroups,
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/group_repository.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/screens/group_detail/group_detail.dart';
 import 'package:pronounce_go/screens/group_screen/group_screen.dart';
 import 'package:pronounce_go/util.dart';
@@ -73,8 +74,12 @@ class _HomeGroupSliderState extends State<HomeGroupSlider> {
   Widget _buildCarouselSlider(BuiltList<GroupBase> groups, String title) {
     TextTheme textTheme = Theme.of(context).textTheme;
     final theme = Theme.of(context).colorScheme;
+    final bool isDesktop = Responsive.isDesktop(context);
     return Container(
-      color: theme.primaryContainer,
+      decoration: BoxDecoration(
+        borderRadius: isDesktop ? BorderRadius.circular(8.0) : null,
+        color: theme.primaryContainer,
+      ),
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

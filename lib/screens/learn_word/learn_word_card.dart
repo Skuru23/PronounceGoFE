@@ -20,6 +20,7 @@ class LearnWordCard extends StatefulWidget {
 class _LearnWordCardState extends State<LearnWordCard> {
   final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
   final SpeechToText _speechToText = SpeechToText();
+  bool isListening = false;
   final LearnRepository learnRepository = LearnRepository();
   LearnWordResponse? checkResult;
 
@@ -40,12 +41,31 @@ class _LearnWordCardState extends State<LearnWordCard> {
 
   void startCheck() async {
     if (_speechToText.isNotListening) {
+      print('Start listening');
+      setState(() {
+        isListening = true;
+        print('isListening: $isListening'); // Debug print
+      });
       await _speechToText.listen(
           localeId: 'en_GB',
           onResult: _onSpeechResult,
-          listenFor: const Duration(seconds: 5));
+          listenFor: const Duration(seconds: 5),
+          listenOptions: SpeechListenOptions());
+      // Add a timeout to ensure isListening is set to false after 5 seconds
+      Future.delayed(const Duration(seconds: 5), () {
+        if (isListening) {
+          setState(() {
+            isListening = false;
+            print('isListening: $isListening'); // Debug print
+          });
+        }
+      });
     } else {
       await _speechToText.stop();
+      setState(() {
+        isListening = false;
+        print('isListening: $isListening'); // Debug print
+      });
     }
   }
 
@@ -66,6 +86,9 @@ class _LearnWordCardState extends State<LearnWordCard> {
           showToast("Cố gắng lại nào", 'warning');
         }
         cardKey.currentState?.toggleCard();
+        setState(() {
+          isListening = false;
+        });
       } catch (e) {
         if (e is DioException) {
           showToast(e.response?.data['message'], 'error');
@@ -83,7 +106,7 @@ class _LearnWordCardState extends State<LearnWordCard> {
       direction: FlipDirection.HORIZONTAL,
       front: FrontWordCard(
         word: widget.word,
-        isListening: _speechToText.isListening,
+        isListening: isListening,
         onCheck: startCheck,
       ),
       back: BackWordCard(

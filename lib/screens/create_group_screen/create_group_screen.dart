@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:pronounce_go/api/group_repository.dart';
 import 'package:file_picker/file_picker.dart'; // Add this import
 import 'package:pronounce_go/api/image_repository.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/util.dart';
 // Add this import
 
@@ -89,12 +90,12 @@ class CreateGroupScreenState extends State<CreateGroupScreen> {
     }
   }
 
-  Widget _buildImagePicker() {
+  Widget _buildImagePicker(bool isDesktop) {
     return GestureDetector(
       onTap: _pickImage,
       child: Container(
-        width: 100,
-        height: 100,
+        width: isDesktop ? 150 : 100,
+        height: isDesktop ? 150 : 100,
         decoration: BoxDecoration(
           color: Colors.grey[300],
           borderRadius: BorderRadius.circular(8.0),
@@ -146,70 +147,83 @@ class CreateGroupScreenState extends State<CreateGroupScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-
+    final size = MediaQuery.of(context).size;
+    final bool isDesktop = Responsive.isDesktop(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tạo giáo phái mới'),
+        title: const Text('Tạo hội nhóm mới'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Row(
+      body: Center(
+        child: SizedBox(
+          width: isDesktop ? size.width * 0.6 : size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
                 children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: nameController,
-                      decoration: InputDecoration(
-                        labelText: 'Tên giáo phái',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            labelText: 'Tên giáo phái',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Tên giáo phái không được để trống';
+                            } else if (value.length > 64) {
+                              return 'Tên giáo phái không được vượt quá 64 ký tự';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Tên giáo phái không được để trống';
-                        } else if (value.length > 64) {
-                          return 'Tên giáo phái không được vượt quá 64 ký tự';
-                        }
-                        return null;
-                      },
-                    ),
+                      const SizedBox(width: 16.0),
+                      _buildImagePicker(isDesktop),
+                    ],
                   ),
-                  const SizedBox(width: 16.0),
-                  _buildImagePicker(),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: descriptionController,
+                    decoration: InputDecoration(
+                      labelText: 'Mô tả',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    maxLines: 5,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Mô tả không được để trống';
+                      } else if (value.length > 2048) {
+                        return 'Mô tả không được vượt quá 2048 ký tự';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
                 ],
               ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: descriptionController,
-                decoration: InputDecoration(
-                  labelText: 'Mô tả',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                maxLines: 5,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Mô tả không được để trống';
-                  } else if (value.length > 2048) {
-                    return 'Mô tả không được vượt quá 2048 ký tự';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
-            ],
+            ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _submitForm,
-        icon: const Icon(Icons.check),
-        label: const Text('Tạo'),
+        icon: Icon(
+          Icons.check,
+          color: theme.onPrimary,
+        ),
+        label: Text(
+          'Tạo',
+          style: textTheme.titleSmall?.copyWith(color: theme.onPrimary),
+        ),
         backgroundColor: theme.primary,
       ),
     );

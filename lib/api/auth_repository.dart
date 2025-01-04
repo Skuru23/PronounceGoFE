@@ -1,43 +1,45 @@
 import 'package:dio/dio.dart';
-import 'package:pronounce_go/api/base_api.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
-  AuthRepository._privateConstructor();
   static final AuthRepository _instance = AuthRepository._privateConstructor();
   factory AuthRepository() {
     return _instance;
   }
 
-  final PronounceGoApi api = BaseApi.getApi();
+  late final Dio dio;
+  late final PronounceGoApi api;
+
+  AuthRepository._privateConstructor() {
+    dio = Dio(BaseOptions(
+      baseUrl: dotenv.env["API_BASE_URL"] ?? "http://localhost:8000",
+      connectTimeout: const Duration(milliseconds: 5000),
+      receiveTimeout: const Duration(milliseconds: 3000),
+    ));
+    api = PronounceGoApi(dio: dio);
+  }
   User? currentUser;
 
   Future<Response<TokenResponse>> login(String email, String password) async {
     final AuthApi authApi = api.getAuthApi();
-    try {
-      Response<TokenResponse> response = await authApi.loginApiV1LoginPost(
-        loginRequest: LoginRequest((b) => b
-          ..email = email
-          ..password = password),
-      );
+    Response<TokenResponse> response = await authApi.loginApiV1LoginPost(
+      loginRequest: LoginRequest((b) => b
+        ..email = email
+        ..password = password),
+    );
 
-      if (response.statusCode == 200 && response.data != null) {
-        final prefs = await SharedPreferences.getInstance();
-        final token = response.data!.accessToken;
-        prefs.setString('token', token);
-        prefs.setString('refreshToken', response.data!.refreshToken);
-        await _saveUserData();
-      }
-
-      return response;
-    } catch (e) {
-      print(e);
-      return Response(
-          statusCode: 500,
-          requestOptions: RequestOptions(path: ''),
-          statusMessage: e.toString());
+    if (response.statusCode == 200 && response.data != null) {
+      final prefs = await SharedPreferences.getInstance();
+      final token = response.data!.accessToken;
+      api.setOAuthToken('OAuth2PasswordBearer', token);
+      prefs.setString('token', token);
+      prefs.setString('refreshToken', response.data!.refreshToken);
+      await _saveUserData();
     }
+
+    return response;
   }
 
   Future<void> _saveUserData() async {

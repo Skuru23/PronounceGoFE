@@ -16,7 +16,7 @@ class MyInfo extends StatelessWidget {
           child: Image(
             image: NetworkImage(user?.imagePath != null
                 ? ("${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${user?.imagePath!}")
-                : "${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/images/user_icon.webp"),
+                : "${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/images/user_icon.jpg"),
             height: 120,
             width: 120,
             fit: BoxFit.fitWidth,

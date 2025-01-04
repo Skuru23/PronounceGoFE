@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:pronounce_go/api/lesson_repository.dart';
+import 'package:pronounce_go/responsive/responsive.dart';
 import 'package:pronounce_go/screens/course_detail/course_detail.dart';
 import 'package:pronounce_go/screens/course_screen/course_screen.dart';
 import 'package:pronounce_go/util.dart';
@@ -76,9 +77,14 @@ class _HomeLessonSliderState extends State<HomeLessonSlider> {
   Widget _buildCarouselSlider(BuiltList<LessonBase> lessons, String title) {
     TextTheme textTheme = Theme.of(context).textTheme;
     final theme = Theme.of(context).colorScheme;
+    final bool isDesktop = Responsive.isDesktop(context);
+
     return Container(
-      color: theme.primaryContainer,
       padding: const EdgeInsets.symmetric(vertical: 16.0),
+      decoration: BoxDecoration(
+        borderRadius: isDesktop ? BorderRadius.circular(8.0) : null,
+        color: theme.primaryContainer,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

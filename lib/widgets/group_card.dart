@@ -38,7 +38,10 @@ class _GroupCardState extends State<GroupCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final bool isDesktop = Responsive.isDesktop(context);
+    final bool isTablet = Responsive.isTablet(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
     return Card(
       color: theme.onSecondary,
       margin: const EdgeInsets.all(8.0),
@@ -47,89 +50,96 @@ class _GroupCardState extends State<GroupCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(8.0),
-                    image: DecorationImage(
-                      image: NetworkImage(widget.group.imagePath != null
-                          ? ("${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${widget.group.imagePath!}")
-                          : "https://i.redd.it/14gnqv8rtl9b1.jpg"), // Assuming group has an imageUrl property
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            Container(
+              width: isDesktop ? 100 : 60,
+              height: isDesktop ? 100 : 60,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(8.0),
+                image: DecorationImage(
+                  image: NetworkImage(widget.group.imagePath != null
+                      ? ("${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${widget.group.imagePath!}")
+                      : "https://i.redd.it/14gnqv8rtl9b1.jpg"), // Assuming group has an imageUrl property
+                  fit: BoxFit.cover,
                 ),
-                const SizedBox(width: 16.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.group.name ?? 'Unknown Group',
-                      style: textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      'Giáo chủ ${widget.group.creator}',
-                      style: textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 8.0),
-                    Responsive(
-                      mobile: Column(
+              ),
+            ),
+            const SizedBox(width: 16.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.group.name ?? 'Unknown Group',
+                    style: textTheme.titleMedium,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Thành viên: ${widget.group.totalMember}'),
-                          const SizedBox(height: 10),
-                          Text('Khóa học: ${widget.group.totalLesson}'),
-                          const SizedBox(height: 10),
-                          Text('Lượt thích: ${widget.group.totalLike}'),
+                          Text(
+                            'Chủ nhóm ${widget.group.creator}',
+                            style: textTheme.bodySmall,
+                          ),
+                          const SizedBox(height: 8.0),
+                          Responsive(
+                            mobile: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Thành viên: ${widget.group.totalMember}'),
+                                const SizedBox(height: 10),
+                                Text('Khóa học: ${widget.group.totalLesson}'),
+                                const SizedBox(height: 10),
+                                Text('Lượt thích: ${widget.group.totalLike}'),
+                              ],
+                            ),
+                            desktop: Row(
+                              children: [
+                                Text('Thành viên: ${widget.group.totalMember}'),
+                                const SizedBox(width: 10),
+                                Text('Khóa học: ${widget.group.totalLesson}'),
+                                const SizedBox(width: 10),
+                                Text('Lượt thích: ${widget.group.totalLike}'),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                      desktop: Row(
+                      Column(
                         children: [
-                          Text('Thành viên: ${widget.group.totalMember}'),
-                          const SizedBox(width: 10),
-                          Text('Khóa học: ${widget.group.totalLesson}'),
-                          const SizedBox(width: 10),
-                          Text('Lượt thích: ${widget.group.totalLike}'),
+                          if (widget.group.isMember != null)
+                            if (widget.group.isMember == false)
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: theme.primaryContainer,
+                                  minimumSize: const Size(120, 36),
+                                ),
+                                onPressed: joinGroup,
+                                child: const Text('Tham gia'),
+                              ),
+                          const SizedBox(height: 8.0),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: theme.secondaryContainer,
+                              minimumSize: const Size(120, 36),
+                            ),
+                            onPressed: () {
+                              Get.to(
+                                  GroupDetail(groupId: widget.group.id ?? 0));
+                            },
+                            child: const Text('Chi tiết'),
+                          ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                if (widget.group.isMember != null)
-                  if (widget.group.isMember == false)
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: theme
-                            .primaryContainer, // Change the color of the join button
-                        minimumSize: const Size(
-                            120, 36), // Set the width and height of the button
-                      ),
-                      onPressed: joinGroup,
-                      child: const Text('Tham gia'),
-                    ),
-                const SizedBox(height: 8.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: theme
-                        .secondaryContainer, // Change the color of the see group button
-                    minimumSize: const Size(
-                        120, 36), // Set the width and height of the button
+                    ],
                   ),
-                  onPressed: () {
-                    Get.to(GroupDetail(groupId: widget.group.id ?? 0));
-                  },
-                  child: const Text('Chi tiết'),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

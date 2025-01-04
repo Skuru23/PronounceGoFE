@@ -8,8 +8,6 @@ import 'package:pronounce_go/screens/course_detail/course_word_sentence.dart';
 import 'package:pronounce_go/screens/progress_detail_screen/progress_detail_screen.dart';
 import 'package:pronounce_go/screens/progress_screen/progress_screen.dart';
 import 'package:pronounce_go/util.dart';
-import 'package:pronounce_go/widgets/sentence_card.dart';
-import 'package:pronounce_go/widgets/word_card.dart';
 import 'package:pronounce_go_api/pronounce_go_api.dart';
 
 class CourseDetail extends StatefulWidget {

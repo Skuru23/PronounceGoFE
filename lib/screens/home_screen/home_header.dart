@@ -9,21 +9,21 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final bool isDesktop = Responsive.isDesktop(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context).colorScheme;
     return Center(
       child: Column(
         children: [
           Image(
             image: const AssetImage('assets/images/icon.png'),
-            width: Responsive.isDesktop(context)
-                ? MediaQuery.sizeOf(context).height * 0.4
-                : MediaQuery.sizeOf(context).height * 0.2,
-            height: Responsive.isDesktop(context)
-                ? MediaQuery.sizeOf(context).height * 0.4
-                : MediaQuery.sizeOf(context).height * 0.2,
+            width: isDesktop ? size.height * 0.4 : size.height * 0.2,
+            height: isDesktop ? size.height * 0.4 : size.height * 0.2,
           ),
           Text(
             appTagLine,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: isDesktop ? textTheme.bodyLarge : textTheme.bodyMedium,
           ),
           const SizedBox(height: 16),
           ElevatedButton.icon(
@@ -32,9 +32,15 @@ class HomeHeader extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.tertiary,
-                  foregroundColor: Theme.of(context).colorScheme.onTertiary),
-              icon: const Icon(Icons.speaker_sharp),
-              label: const Text('Kiểm tra phát âm ngay'))
+                  foregroundColor: Theme.of(context).colorScheme.onTertiary,
+                  padding: EdgeInsets.all(isDesktop ? 16.0 : 8.0)),
+              icon: Icon(Icons.speaker_sharp, size: isDesktop ? 32 : 24),
+              label: Text(
+                'Kiểm tra phát âm ngay',
+                style: isDesktop
+                    ? textTheme.titleMedium?.copyWith(color: theme.onPrimary)
+                    : textTheme.titleSmall?.copyWith(color: theme.onPrimary),
+              ))
         ],
       ),
     );

@@ -18,6 +18,7 @@ class _LoginFormState extends State<LoginForm> {
   String _email = 'truong@gmail.com';
   String _password = '123456';
   bool _isPasswordVisible = false;
+  final AuthRepository authRepository = AuthRepository();
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
@@ -28,8 +29,7 @@ class _LoginFormState extends State<LoginForm> {
 
   void _loginUser() async {
     try {
-      final AuthRepository authRepository = AuthRepository();
-      var response = await authRepository.login(_email, _password);
+      final response = await authRepository.login(_email, _password);
       if (response.statusCode == 200) Get.to(() => const HomeScreen());
     } catch (e) {
       if (e is DioException) {

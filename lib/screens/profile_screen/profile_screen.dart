@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Image(
                       image: NetworkImage(user?.imagePath != null
                           ? ("${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/${user?.imagePath!}")
-                          : "${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/images/user_icon.webp"),
+                          : "${dotenv.env["API_BASE_URL"] ?? 'http://localhost:8000'}api/v1/images/user_icon.jpg"),
                       height: double.infinity,
                       width: double.infinity,
                       fit: BoxFit.fitWidth,

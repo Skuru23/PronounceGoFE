@@ -19,13 +19,15 @@ This project is a Flutter application. Follow the steps below to set up and run 
    cd PronounceGoFE
    ```
 
-2. Install dependencies:
+2. Create .env
+
+3. Install dependencies:
 
    ```sh
    flutter pub get
    ```
 
-3. Generate API client using OpenAPI Generator:
+4. Generate API client using OpenAPI Generator:
    ```sh
    openapi-generator-cli generate -i path/to/your/openapi.yaml -g dart -o lib/api
    ```

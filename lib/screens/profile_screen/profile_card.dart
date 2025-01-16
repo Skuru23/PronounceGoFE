@@ -23,7 +23,7 @@ class ProfileCard extends StatelessWidget {
       onTap: onClick,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 8),
-        height: 120,
+        height: 130,
         child: Card(
           margin: EdgeInsets.symmetric(horizontal: 10),
           elevation: 5,

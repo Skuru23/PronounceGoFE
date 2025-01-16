@@ -57,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Column(
           children: [
             Expanded(
-              flex: 4,
+              flex: 3,
               child: Stack(
                 children: [
                   Stack(children: [
@@ -80,115 +80,117 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Expanded(
-              flex: 5,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  width: Responsive.isDesktop(context)
-                      ? size.width * 0.6
-                      : size.width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        color: colorTheme.surface,
-                        child: Table(
-                          children: [
-                            TableRow(
-                              children: [
+              flex: 6,
+              child: SingleChildScrollView(
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                    width: Responsive.isDesktop(context)
+                        ? size.width * 0.6
+                        : size.width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          color: colorTheme.surface,
+                          child: Table(
+                            children: [
+                              TableRow(
+                                children: [
+                                  ProfileCard(
+                                    label: 'Tổng số tiến trình',
+                                    number: user?.totalProgress ?? 0,
+                                    onClick: () {
+                                      Get.to(() => const ProgressScreen());
+                                    },
+                                    icon: Icon(
+                                      Icons.featured_play_list,
+                                      color: colorTheme.tertiary,
+                                    ),
+                                  ),
+                                  ProfileCard(
+                                    label: 'Số tiến trình đã hoàn thành',
+                                    number: user?.doneProgress ?? 0,
+                                    onClick: () {
+                                      Get.to(() => const ProgressScreen());
+                                    },
+                                    icon: Icon(
+                                      Icons.playlist_add_check,
+                                      color: colorTheme.tertiary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              TableRow(children: [
                                 ProfileCard(
-                                  label: 'Tổng số tiến trình',
-                                  number: user?.totalProgress ?? 0,
+                                  label: 'Tổng số tiến trình chưa hoàn thành',
+                                  number: user?.remainProgress ?? 0,
                                   onClick: () {
                                     Get.to(() => const ProgressScreen());
                                   },
                                   icon: Icon(
-                                    Icons.featured_play_list,
+                                    Icons.playlist_play,
                                     color: colorTheme.tertiary,
                                   ),
                                 ),
                                 ProfileCard(
-                                  label: 'Số tiến trình đã hoàn thành',
-                                  number: user?.doneProgress ?? 0,
+                                  label: 'Tổng số bài học',
+                                  number: user?.totalLesson ?? 0,
                                   onClick: () {
-                                    Get.to(() => const ProgressScreen());
+                                    Get.to(() => const MyCourseScreen());
                                   },
                                   icon: Icon(
-                                    Icons.playlist_add_check,
+                                    Icons.book,
                                     color: colorTheme.tertiary,
                                   ),
                                 ),
-                              ],
-                            ),
-                            TableRow(children: [
-                              ProfileCard(
-                                label: 'Tổng số tiến trình chưa hoàn thành',
-                                number: user?.remainProgress ?? 0,
-                                onClick: () {
-                                  Get.to(() => const ProgressScreen());
-                                },
-                                icon: Icon(
-                                  Icons.playlist_play,
-                                  color: colorTheme.tertiary,
+                              ]),
+                              TableRow(children: [
+                                ProfileCard(
+                                  label: 'Số group tham gia',
+                                  number: user?.joinedGroup ?? 0,
+                                  onClick: () {
+                                    Get.to(() => const MyGroupScreen());
+                                  },
+                                  icon: Icon(
+                                    Icons.group,
+                                    color: colorTheme.tertiary,
+                                  ),
                                 ),
-                              ),
-                              ProfileCard(
-                                label: 'Tổng số bài học',
-                                number: user?.totalLesson ?? 0,
-                                onClick: () {
-                                  Get.to(() => const MyCourseScreen());
-                                },
-                                icon: Icon(
-                                  Icons.book,
-                                  color: colorTheme.tertiary,
+                                ProfileCard(
+                                  label: 'Chỉnh sửa thông tin',
+                                  onClick: () {
+                                    // Get.to(() => const ProgressScreen());
+                                  },
+                                  icon: Icon(
+                                    Icons.settings,
+                                    color: colorTheme.tertiary,
+                                  ),
                                 ),
-                              ),
-                            ]),
-                            TableRow(children: [
-                              ProfileCard(
-                                label: 'Số group tham gia',
-                                number: user?.joinedGroup ?? 0,
-                                onClick: () {
-                                  Get.to(() => const MyGroupScreen());
-                                },
-                                icon: Icon(
-                                  Icons.group,
-                                  color: colorTheme.tertiary,
-                                ),
-                              ),
-                              ProfileCard(
-                                label: 'Chỉnh sửa thông tin',
-                                onClick: () {
-                                  // Get.to(() => const ProgressScreen());
-                                },
-                                icon: Icon(
-                                  Icons.settings,
-                                  color: colorTheme.tertiary,
-                                ),
-                              ),
-                            ]),
-                          ],
+                              ]),
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              authRepository.logout();
-                              Get.to(() => const WelcomeScreen());
-                            },
-                            style: ButtonStyle(
-                              minimumSize: WidgetStateProperty.all(
-                                  Size(double.infinity, 36)),
-                              backgroundColor:
-                                  WidgetStateProperty.all(colorTheme.primary),
-                              foregroundColor:
-                                  WidgetStateProperty.all(colorTheme.onPrimary),
-                            ),
-                            child: Text("Đăng xuất")),
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                authRepository.logout();
+                                Get.to(() => const WelcomeScreen());
+                              },
+                              style: ButtonStyle(
+                                minimumSize: WidgetStateProperty.all(
+                                    Size(double.infinity, 36)),
+                                backgroundColor:
+                                    WidgetStateProperty.all(colorTheme.primary),
+                                foregroundColor: WidgetStateProperty.all(
+                                    colorTheme.onPrimary),
+                              ),
+                              child: Text("Đăng xuất")),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

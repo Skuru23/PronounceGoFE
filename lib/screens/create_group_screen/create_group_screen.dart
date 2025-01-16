@@ -169,16 +169,16 @@ class CreateGroupScreenState extends State<CreateGroupScreen> {
                         child: TextFormField(
                           controller: nameController,
                           decoration: InputDecoration(
-                            labelText: 'Tên giáo phái',
+                            labelText: 'Tên nhóm',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Tên giáo phái không được để trống';
+                              return 'Tên nhóm không được để trống';
                             } else if (value.length > 64) {
-                              return 'Tên giáo phái không được vượt quá 64 ký tự';
+                              return 'Tên nhóm không được vượt quá 64 ký tự';
                             }
                             return null;
                           },
